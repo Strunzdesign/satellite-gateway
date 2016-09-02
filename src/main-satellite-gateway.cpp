@@ -25,6 +25,8 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include <boost/program_options.hpp>
+#include "ConfigurationServer/ConfigurationServerHandler.h"
+#include "GatewayClient/GatewayClientHandler.h"
 #include "HdlcdClient/HdlcdClientHandlerCollection.h"
 
 int main(int argc, char* argv[]) {
@@ -34,9 +36,9 @@ int main(int argc, char* argv[]) {
         l_Description.add_options()
             ("help,h",    "produce this help message")
             ("version,v", "show version information")
-            ("cport,cp",  boost::program_options::value<uint16_t>(),
+            ("port,p",    boost::program_options::value<uint16_t>(),
                           "the TCP port to accept control connections on")
-            ("hport,hp",  boost::program_options::value<uint16_t>(),
+            ("daemon,d",  boost::program_options::value<uint16_t>(),
                           "the TCP port of the HDLC daemon at localhost")
             ("trace,t",   "each relayed packet is dissected and printed")
         ;
@@ -56,18 +58,13 @@ int main(int argc, char* argv[]) {
             return 1;
         } // if
                 
-        if (!l_VariablesMap.count("cport")) {
+        if (!l_VariablesMap.count("port")) {
             std::cout << "you have to specify the TCP listener port to accept control connections on" << std::endl;
             return 1;
         } // if
         
-        if (!l_VariablesMap.count("hport")) {
+        if (!l_VariablesMap.count("daemon")) {
             std::cout << "you have to specify the TCP listener port of the HDLC daemon at localhost" << std::endl;
-            return 1;
-        } // if
-
-        if (!l_VariablesMap.count("connect")) {
-            std::cout << "you have to specify at least one device to connect to!" << std::endl;
             return 1;
         } // if
         
@@ -78,25 +75,22 @@ int main(int argc, char* argv[]) {
         l_Signals.add(SIGTERM);
         l_Signals.async_wait([&l_IoService](boost::system::error_code, int){ l_IoService.stop(); });
 
-        //ToolHandlerCollection l_ToolHandlerCollection;
-        HdlcdClientHandlerCollection l_HdlcdClientHandlerCollection(l_IoService);
-        //ToolAcceptor l_ToolAcceptor(l_IoService, l_VariablesMap["cport"].as<uint16_t>(), l_ToolHandlerCollection);
-        
-        /*
-        // Routing entity
-        Routing l_Routing(l_ToolHandlerCollection, l_HdlcdClientHandlerCollection, l_VariablesMap.count("trace"));
-        l_ToolHandlerCollection.RegisterRoutingEntity(&l_Routing);
-        l_HdlcdClientHandlerCollection.RegisterRoutingEntity(&l_Routing);
-        */
-        
-        // Create HDLCd client entities
-        auto l_DestSpecifiers(l_VariablesMap["connect"].as<std::vector<std::string>>());
-        for (auto l_DestSpecifier = l_DestSpecifiers.begin(); l_DestSpecifier != l_DestSpecifiers.end(); ++l_DestSpecifier) {
-            l_HdlcdClientHandlerCollection.CreateHdlcdClientHandler("localhost", "10001", "/dev/ttyUSB0");
-        } // for
-        
+        // Create and initialize components
+        auto l_ConfigurationServerHandler   = std::make_shared<ConfigurationServerHandler>(l_IoService);
+        auto l_GatewayClientHandler         = std::make_shared<GatewayClientHandler>(l_IoService);
+        auto l_HdlcdClientHandlerCollection = std::make_shared<HdlcdClientHandlerCollection>(l_IoService);
+        l_ConfigurationServerHandler->Initialize(l_GatewayClientHandler, l_HdlcdClientHandlerCollection);
+        l_GatewayClientHandler->Initialize(l_ConfigurationServerHandler, l_HdlcdClientHandlerCollection);
+        l_HdlcdClientHandlerCollection->Initialize(l_ConfigurationServerHandler, l_GatewayClientHandler);
+                
         // Start event processing
         l_IoService.run();
+        
+        // Shutdown
+        l_ConfigurationServerHandler->Reset();
+        l_GatewayClientHandler->Reset();
+        l_HdlcdClientHandlerCollection->Reset();
+        
     } catch (std::exception& a_Error) {
         std::cerr << "Exception: " << a_Error.what() << "\n";
         return 1;

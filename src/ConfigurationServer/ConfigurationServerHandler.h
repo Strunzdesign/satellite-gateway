@@ -1,5 +1,5 @@
 /**
- * \file      GatewayClientHandler.h
+ * \file      ConfigurationServerHandler.h
  * \brief     
  * \author    Florian Evers, florian-evers@gmx.de
  * \copyright GNU Public License version 3.
@@ -21,34 +21,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GATEWAY_CLIENT_HANDLER_H
-#define GATEWAY_CLIENT_HANDLER_H
+#ifndef CONFIGURATION_SERVER_HANDLER_H
+#define CONFIGURATION_SERVER_HANDLER_H
 
 #include <memory>
 #include <boost/asio.hpp>
-class ConfigurationServerHandler;
+class GatewayClientHandler;
 class HdlcdClientHandlerCollection;
 
-class GatewayClientHandler {
+class ConfigurationServerHandler {
 public:
     // CTOR, initializer, and resetter
-    GatewayClientHandler(boost::asio::io_service& a_IOService);
-    void Initialize(std::shared_ptr<ConfigurationServerHandler> a_ConfigurationServerHandler,
+    ConfigurationServerHandler(boost::asio::io_service& a_IOService);
+    void Initialize(std::shared_ptr<GatewayClientHandler> a_GatewayClientHandler,
                     std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
     void Reset();
     
-    // Methods to be called by a configuration server entity
-    void Connect(uint32_t a_ReferenceNbr);
-    void Disconnect();
+    // Methods to be called by a gateway client entity
+    void GatewayClientCreated     (uint32_t a_ReferenceNbr);
+    void GatewayClientDestroyed   (uint32_t a_ReferenceNbr);
+    void GatewayClientConnected   (uint32_t a_ReferenceNbr);
+    void GatewayClientDisconnected(uint32_t a_ReferenceNbr);
+    void GatewayClientError       (uint32_t a_ReferenceNbr, uint32_t a_ErrorCode);
     
     // Methods to be called by a HDLCd client entity
-    void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);
-    
+    void HdlcdClientCreated    (uint16_t a_SerialPortNbr);
+    void HdlcdClientDestroyed  (uint16_t a_SerialPortNbr);
+    void HdlcdClientDeviceFound(uint16_t a_SerialPortNbr);
+    void HdlcdClientDeviceLost (uint16_t a_SerialPortNbr);
+    void HdlcdClientNewStatus  (uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive);
+    void HdlcdClientError      (uint16_t a_SerialPortNbr, uint32_t a_ErrorCode);
+
 private:
     // Members
     boost::asio::io_service& m_IOService;
-    std::shared_ptr<ConfigurationServerHandler> m_ConfigurationServerHandler;
+    std::shared_ptr<GatewayClientHandler> m_GatewayClientHandler;
     std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
 };
 
-#endif // GATEWAY_CLIENT_HANDLER_H
+#endif // CONFIGURATION_SERVER_HANDLER_H

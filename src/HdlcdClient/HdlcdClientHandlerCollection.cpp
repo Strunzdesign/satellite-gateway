@@ -22,21 +22,43 @@
  */
 
 #include "HdlcdClientHandlerCollection.h"
+#include "../ConfigurationServer/ConfigurationServerHandler.h"
+#include "../GatewayClient/GatewayClientHandler.h"
 #include "HdlcdClientHandler.h"
 #include <assert.h>
 
 HdlcdClientHandlerCollection::HdlcdClientHandlerCollection(boost::asio::io_service& a_IOService): m_IOService(a_IOService) {
 }
 
-
-void HdlcdClientHandlerCollection::CreateHdlcdClientHandler(const std::string& a_DestinationName, const std::string& a_TcpPort, const std::string& a_SerialPortName) {
-    // Create new HDLCd client entity
-    auto l_NewClientHandler = std::make_shared<HdlcdClientHandler>(m_IOService, a_DestinationName, a_TcpPort, a_SerialPortName);
-    m_HdlcdClientHandlerVector.push_back(l_NewClientHandler);
+void HdlcdClientHandlerCollection::Initialize(std::shared_ptr<ConfigurationServerHandler> a_ConfigurationServerHandler,
+                                              std::shared_ptr<GatewayClientHandler> a_GatewayClientHandler) {
+    // Checks
+    assert(a_ConfigurationServerHandler);
+    assert(a_GatewayClientHandler);
+    m_ConfigurationServerHandler = a_ConfigurationServerHandler;
+    m_GatewayClientHandler = a_GatewayClientHandler;
 }
 
-void HdlcdClientHandlerCollection::Send(const HdlcdPacketData& a_HdlcdPacketData, std::function<void()> a_OnSendDoneCallback) {
+void HdlcdClientHandlerCollection::Reset() {
+    // Drop all shared pointers
+    m_ConfigurationServerHandler.reset();
+    m_GatewayClientHandler.reset();
     for (auto l_HdlcdClientHandlerIterator = m_HdlcdClientHandlerVector.begin(); l_HdlcdClientHandlerIterator != m_HdlcdClientHandlerVector.end(); ++l_HdlcdClientHandlerIterator) {
-        (*l_HdlcdClientHandlerIterator)->Send(a_HdlcdPacketData);
+        (*l_HdlcdClientHandlerIterator).reset();
     } // for
+}
+
+void HdlcdClientHandlerCollection::CreateHdlcdClient (uint16_t a_SerialPortNbr) {
+}
+
+void HdlcdClientHandlerCollection::DestroyHdlcdClient(uint16_t a_SerialPortNbr) {
+}
+
+void HdlcdClientHandlerCollection::SuspendHdlcdClient(uint16_t a_SerialPortNbr) {
+}
+
+void HdlcdClientHandlerCollection::ResumeHdlcdClient (uint16_t a_SerialPortNbr) {
+}
+
+void HdlcdClientHandlerCollection::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer) {
 }

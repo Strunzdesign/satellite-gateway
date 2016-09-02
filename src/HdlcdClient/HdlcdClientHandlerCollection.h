@@ -29,18 +29,33 @@
 #include <string>
 #include <boost/asio.hpp>
 #include "HdlcdPacketData.h"
+class ConfigurationServerHandler;
+class GatewayClientHandler;
 class HdlcdClientHandler;
 
 class HdlcdClientHandlerCollection {
 public:
+    // CTOR, initializer, and resetter
     HdlcdClientHandlerCollection(boost::asio::io_service& a_IOService);
-    void CreateHdlcdClientHandler(const std::string& a_DestinationName, const std::string& a_TcpPort, const std::string& a_SerialPortName);
-
-    void Send(const HdlcdPacketData& a_HdlcdPacketData, std::function<void()> a_OnSendDoneCallback = std::function<void()>());
+    void Initialize(std::shared_ptr<ConfigurationServerHandler> a_ConfigurationServerHandler,
+                    std::shared_ptr<GatewayClientHandler> a_GatewayClientHandler);
+    void Reset();
+    
+    // Methods to be called by a configuration server entity
+    void CreateHdlcdClient (uint16_t a_SerialPortNbr);
+    void DestroyHdlcdClient(uint16_t a_SerialPortNbr);
+    void SuspendHdlcdClient(uint16_t a_SerialPortNbr);
+    void ResumeHdlcdClient (uint16_t a_SerialPortNbr);
+    
+    // Methods to be called by a gateway client entity
+    void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);
     
 private:
     // Members
     boost::asio::io_service& m_IOService;
+    std::shared_ptr<ConfigurationServerHandler> m_ConfigurationServerHandler;
+    std::shared_ptr<GatewayClientHandler> m_GatewayClientHandler;
+    
     std::vector<std::shared_ptr<HdlcdClientHandler>> m_HdlcdClientHandlerVector;
 };
 

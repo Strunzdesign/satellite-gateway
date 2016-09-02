@@ -1,5 +1,5 @@
 /**
- * \file      HdlcdClientHandler.cpp
+ * \file      GatewayClientHandler.cpp
  * \brief     
  * \author    Florian Evers, florian-evers@gmx.de
  * \copyright GNU Public License version 3.
@@ -21,42 +21,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "HdlcdClientHandler.h"
-#include "HdlcdAccessClient.h"
-#include "SnetServiceMessage.h"
+#include "GatewayClientHandler.h"
+#include "../ConfigurationServer/ConfigurationServerHandler.h"
+#include "../HdlcdClient/HdlcdClientHandlerCollection.h"
 #include <assert.h>
 
-HdlcdClientHandler::HdlcdClientHandler(boost::asio::io_service& a_IOService, const std::string& a_DestinationName, const std::string& a_TcpPort, const std::string& a_SerialPortName):
-    m_IOService(a_IOService), m_DestinationName(a_DestinationName), m_TcpPort(a_TcpPort), m_SerialPortName(a_SerialPortName), m_Resolver(a_IOService), m_ConnectionRetryTimer(a_IOService) {
-    ResolveDestination();
+GatewayClientHandler::GatewayClientHandler(boost::asio::io_service& a_IOService): m_IOService(a_IOService) {
 }
 
-void HdlcdClientHandler::Send(const HdlcdPacketData& a_HdlcdPacketData, std::function<void()> a_OnSendDoneCallback) {
-    // TODO: check what happens if this is currently not connected, or will be deletet. Starvation?
-    m_HdlcdAccessClient->Send(a_HdlcdPacketData, a_OnSendDoneCallback);
+void GatewayClientHandler::Initialize(std::shared_ptr<ConfigurationServerHandler> a_ConfigurationServerHandler,
+                                      std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection) {
+    // Checks
+    assert(a_ConfigurationServerHandler);
+    assert(a_HdlcdClientHandlerCollection);
+    m_ConfigurationServerHandler = a_ConfigurationServerHandler;    
+    m_HdlcdClientHandlerCollection = a_HdlcdClientHandlerCollection;
 }
 
-void HdlcdClientHandler::ResolveDestination() {
-    m_Resolver.async_resolve({m_DestinationName, m_TcpPort}, [this](const boost::system::error_code& a_ErrorCode, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator) {
-        // Start the HDLCd Access Client
-        m_HdlcdAccessClient = std::make_shared<HdlcdAccessClient>(m_IOService, a_EndpointIterator, m_SerialPortName, 0x01);
-        
-        // On any error, restart after a short delay
-        m_HdlcdAccessClient->SetOnClosedCallback([this](){
-            m_ConnectionRetryTimer.expires_from_now(boost::posix_time::seconds(2));
-            m_ConnectionRetryTimer.async_wait([this](const boost::system::error_code& a_ErrorCode) {
-                if (!a_ErrorCode) {
-                    // Reestablish the connection to the HDLC Daemon
-                    ResolveDestination();
-                } // if
-            }); // async_wait
-        }); // SetOnClosedCallback
-        
-        m_HdlcdAccessClient->SetOnDataCallback([this](const HdlcdPacketData& a_PacketData){
-            SnetServiceMessage l_ServiceMessage;
-            if (l_ServiceMessage.Deserialize(a_PacketData.GetData())) {
-//                m_pRouting->RouteSnetPacket(&l_ServiceMessage);
-            } // if
-        }); // SetOnDataCallback
-    }); // async_resolve
+void GatewayClientHandler::Reset() {
+    // Drop all shared pointers
+    m_ConfigurationServerHandler.reset();
+    m_HdlcdClientHandlerCollection.reset();
 }
+
+void GatewayClientHandler::Connect(uint32_t a_ReferenceNbr) {
+}
+
+void GatewayClientHandler::Disconnect() {
+}
+
+void GatewayClientHandler::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer) {
+}
+    
