@@ -25,8 +25,8 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include <boost/program_options.hpp>
-#include "ConfigurationServer/ConfigurationServerHandler.h"
-#include "GatewayClient/GatewayClientHandler.h"
+#include "ConfigServer/ConfigServerHandlerCollection.h"
+#include "GatewayClient/GatewayClientHandlerCollection.h"
 #include "HdlcdClient/HdlcdClientHandlerCollection.h"
 
 int main(int argc, char* argv[]) {
@@ -76,20 +76,20 @@ int main(int argc, char* argv[]) {
         l_Signals.async_wait([&l_IoService](boost::system::error_code, int){ l_IoService.stop(); });
 
         // Create and initialize components
-        auto l_ConfigurationServerHandler   = std::make_shared<ConfigurationServerHandler>(l_IoService);
-        auto l_GatewayClientHandler         = std::make_shared<GatewayClientHandler>(l_IoService);
-        auto l_HdlcdClientHandlerCollection = std::make_shared<HdlcdClientHandlerCollection>(l_IoService);
-        l_ConfigurationServerHandler->Initialize(l_GatewayClientHandler, l_HdlcdClientHandlerCollection);
-        l_GatewayClientHandler->Initialize(l_ConfigurationServerHandler, l_HdlcdClientHandlerCollection);
-        l_HdlcdClientHandlerCollection->Initialize(l_ConfigurationServerHandler, l_GatewayClientHandler);
+        auto l_ConfigServerHandlerCollection  = std::make_shared<ConfigServerHandlerCollection>(l_IoService);
+        auto l_GatewayClientHandlerCollection = std::make_shared<GatewayClientHandlerCollection>(l_IoService);
+        auto l_HdlcdClientHandlerCollection   = std::make_shared<HdlcdClientHandlerCollection>(l_IoService);
+        l_ConfigServerHandlerCollection->Initialize (l_GatewayClientHandlerCollection, l_HdlcdClientHandlerCollection);
+        l_GatewayClientHandlerCollection->Initialize(l_ConfigServerHandlerCollection, l_HdlcdClientHandlerCollection);
+        l_HdlcdClientHandlerCollection->Initialize  (l_ConfigServerHandlerCollection, l_GatewayClientHandlerCollection);
                 
         // Start event processing
         l_IoService.run();
         
         // Shutdown
-        l_ConfigurationServerHandler->Reset();
-        l_GatewayClientHandler->Reset();
-        l_HdlcdClientHandlerCollection->Reset();
+        l_ConfigServerHandlerCollection->SystemShutdown();
+        l_GatewayClientHandlerCollection->SystemShutdown();
+        l_HdlcdClientHandlerCollection->SystemShutdown();
         
     } catch (std::exception& a_Error) {
         std::cerr << "Exception: " << a_Error.what() << "\n";

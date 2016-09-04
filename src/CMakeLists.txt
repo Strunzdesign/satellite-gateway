@@ -8,10 +8,12 @@ find_package(Threads)
 
 add_executable(satellite-gateway
 main-satellite-gateway.cpp
-ConfigurationServer/ConfigurationServer.cpp
-ConfigurationServer/ConfigurationServerHandler.cpp
+ConfigServer/ConfigServer.cpp
+ConfigServer/ConfigServerHandler.cpp
+ConfigServer/ConfigServerHandlerCollection.cpp
 GatewayClient/GatewayClient.cpp
 GatewayClient/GatewayClientHandler.cpp
+GatewayClient/GatewayClientHandlerCollection.cpp
 HdlcdClient/HdlcdClientHandler.cpp
 HdlcdClient/HdlcdClientHandlerCollection.cpp
 )

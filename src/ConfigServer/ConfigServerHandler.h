@@ -1,5 +1,5 @@
 /**
- * \file      ConfigurationServerHandler.h
+ * \file      ConfigServerHandler.h
  * \brief     
  * \author    Florian Evers, florian-evers@gmx.de
  * \copyright GNU Public License version 3.
@@ -21,21 +21,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CONFIGURATION_SERVER_HANDLER_H
-#define CONFIGURATION_SERVER_HANDLER_H
+#ifndef CONFIG_SERVER_HANDLER_H
+#define CONFIG_SERVER_HANDLER_H
 
 #include <memory>
 #include <boost/asio.hpp>
-class GatewayClientHandler;
+class GatewayClientHandlerCollection;
 class HdlcdClientHandlerCollection;
 
-class ConfigurationServerHandler {
+class ConfigServerHandler {
 public:
     // CTOR, initializer, and resetter
-    ConfigurationServerHandler(boost::asio::io_service& a_IOService);
-    void Initialize(std::shared_ptr<GatewayClientHandler> a_GatewayClientHandler,
-                    std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
-    void Reset();
+    ConfigServerHandler(boost::asio::io_service& a_IOService, std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection,
+                        std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
+    void SystemShutdown();
     
     // Methods to be called by a gateway client entity
     void GatewayClientCreated     (uint32_t a_ReferenceNbr);
@@ -55,8 +54,8 @@ public:
 private:
     // Members
     boost::asio::io_service& m_IOService;
-    std::shared_ptr<GatewayClientHandler> m_GatewayClientHandler;
+    std::shared_ptr<GatewayClientHandlerCollection> m_GatewayClientHandlerCollection;
     std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
 };
 
-#endif // CONFIGURATION_SERVER_HANDLER_H
+#endif // CONFIG_SERVER_HANDLER_H

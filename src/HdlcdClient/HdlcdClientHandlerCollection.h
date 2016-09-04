@@ -29,19 +29,20 @@
 #include <string>
 #include <boost/asio.hpp>
 #include "HdlcdPacketData.h"
-class ConfigurationServerHandler;
-class GatewayClientHandler;
+class ConfigServerHandlerCollection;
+class GatewayClientHandlerCollection;
 class HdlcdClientHandler;
 
 class HdlcdClientHandlerCollection {
 public:
     // CTOR, initializer, and resetter
     HdlcdClientHandlerCollection(boost::asio::io_service& a_IOService);
-    void Initialize(std::shared_ptr<ConfigurationServerHandler> a_ConfigurationServerHandler,
-                    std::shared_ptr<GatewayClientHandler> a_GatewayClientHandler);
-    void Reset();
+    void Initialize(std::shared_ptr<ConfigServerHandlerCollection>  a_ConfigServerHandlerCollection,
+                    std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection);
+    void SystemShutdown();
     
     // Methods to be called by a configuration server entity
+    void CleanAll();
     void CreateHdlcdClient (uint16_t a_SerialPortNbr);
     void DestroyHdlcdClient(uint16_t a_SerialPortNbr);
     void SuspendHdlcdClient(uint16_t a_SerialPortNbr);
@@ -53,9 +54,10 @@ public:
 private:
     // Members
     boost::asio::io_service& m_IOService;
-    std::shared_ptr<ConfigurationServerHandler> m_ConfigurationServerHandler;
-    std::shared_ptr<GatewayClientHandler> m_GatewayClientHandler;
+    std::shared_ptr<ConfigServerHandlerCollection>  m_ConfigServerHandlerCollection;
+    std::shared_ptr<GatewayClientHandlerCollection> m_GatewayClientHandlerCollection;
     
+    // The list of HDLCd client handler entities
     std::vector<std::shared_ptr<HdlcdClientHandler>> m_HdlcdClientHandlerVector;
 };
 

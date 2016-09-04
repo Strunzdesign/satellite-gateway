@@ -22,34 +22,61 @@
  */
 
 #include "GatewayClientHandler.h"
-#include "../ConfigurationServer/ConfigurationServerHandler.h"
+#include "GatewayClient.h"
+#include "../ConfigServer/ConfigServerHandlerCollection.h"
 #include "../HdlcdClient/HdlcdClientHandlerCollection.h"
 #include <assert.h>
 
-GatewayClientHandler::GatewayClientHandler(boost::asio::io_service& a_IOService): m_IOService(a_IOService) {
-}
-
-void GatewayClientHandler::Initialize(std::shared_ptr<ConfigurationServerHandler> a_ConfigurationServerHandler,
-                                      std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection) {
+GatewayClientHandler::GatewayClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
+                                           std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection):
+                                           m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection), m_HdlcdClientHandlerCollection(a_HdlcdClientHandlerCollection) {
     // Checks
-    assert(a_ConfigurationServerHandler);
-    assert(a_HdlcdClientHandlerCollection);
-    m_ConfigurationServerHandler = a_ConfigurationServerHandler;    
-    m_HdlcdClientHandlerCollection = a_HdlcdClientHandlerCollection;
+    assert(m_ConfigServerHandlerCollection);
+    assert(m_HdlcdClientHandlerCollection);
 }
 
 void GatewayClientHandler::Reset() {
     // Drop all shared pointers
-    m_ConfigurationServerHandler.reset();
+    m_ConfigServerHandlerCollection.reset();
     m_HdlcdClientHandlerCollection.reset();
 }
 
-void GatewayClientHandler::Connect(uint32_t a_ReferenceNbr) {
+void GatewayClientHandler::CleanAll() {
+    // If a gateway client already exists it must be destoyed
+    if (m_GatewayClient) {
+        m_GatewayClient->Close();
+    } // if
 }
 
-void GatewayClientHandler::Disconnect() {
+void GatewayClientHandler::Connect(uint32_t a_ReferenceNbr) {
+    // If a gateway client already exists, it must be destoyed first
+    if (m_GatewayClient) {
+        m_GatewayClient->Close();
+    } // if
+    
+    // Create a new gateway client entity
+    m_GatewayClient = std::make_shared<GatewayClient>(m_IOService, m_ConfigServerHandlerCollection, m_HdlcdClientHandlerCollection, a_ReferenceNbr);
+}
+
+void GatewayClientHandler::Disconnect(uint32_t a_ReferenceNbr) {
+    // Drop the current client entity
+    if (m_GatewayClient) {
+        if (m_GatewayClient->GetReferenceNbr() == a_ReferenceNbr) {
+            m_GatewayClient->Close();
+            m_GatewayClient.reset();
+        } else {
+            // Error: the reference number does not match!
+            m_ConfigServerHandlerCollection->GatewayClientError(a_ReferenceNbr, 0x00);
+        } // else
+    } else {
+        // Error: there was no gateway client identity
+        m_ConfigServerHandlerCollection->GatewayClientError(a_ReferenceNbr, 0x00);
+    } // else
 }
 
 void GatewayClientHandler::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer) {
+    // Deliver the packet to the gateway client entity
+    if (m_GatewayClient) {
+        m_GatewayClient->SendPacket(a_SerialPortNbr, a_Buffer);
+    } // if
 }
-    

@@ -1,5 +1,5 @@
 /**
- * \file      GatewayClient.h
+ * \file      GatewayClientHandlerCollection.h
  * \brief     
  * \author    Florian Evers, florian-evers@gmx.de
  * \copyright GNU Public License version 3.
@@ -21,31 +21,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GATEWAY_CLIENT_H
-#define GATEWAY_CLIENT_H
+#ifndef GATEWAY_CLIENT_HANDLER_COLLECTION_H
+#define GATEWAY_CLIENT_HANDLER_COLLECTION_H
 
 #include <memory>
 #include <boost/asio.hpp>
 class ConfigServerHandlerCollection;
 class HdlcdClientHandlerCollection;
+class GatewayClientHandler;
 
-class GatewayClient {
+class GatewayClientHandlerCollection {
 public:
-    // CTOR
-    GatewayClient(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                  std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint32_t a_ReferenceNbr);
-    void Close();
-    uint32_t GetReferenceNbr() const { return m_ReferenceNbr; }
-
+    // CTOR, initializer, and resetter
+    GatewayClientHandlerCollection(boost::asio::io_service& a_IOService);
+    void Initialize(std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
+                    std::shared_ptr<HdlcdClientHandlerCollection>  a_HdlcdClientHandlerCollection);
+    void SystemShutdown();
+    
+    // Methods to be called by a configuration server entity
+    void CleanAll();
+    void Connect(uint32_t a_ReferenceNbr);
+    void Disconnect(uint32_t a_ReferenceNbr);
+    
     // Methods to be called by a HDLCd client entity
     void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);
-    
+
 private:
     // Members
     boost::asio::io_service& m_IOService;
     std::shared_ptr<ConfigServerHandlerCollection> m_ConfigServerHandlerCollection;
-    std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
-    uint32_t m_ReferenceNbr;
+    std::shared_ptr<HdlcdClientHandlerCollection>  m_HdlcdClientHandlerCollection;
+    
+    // The gateway client handler entity
+    std::shared_ptr<GatewayClientHandler> m_GatewayClientHandler;
 };
 
-#endif // GATEWAY_CLIENT_H
+#endif // GATEWAY_CLIENT_HANDLER_COLLECTION_H

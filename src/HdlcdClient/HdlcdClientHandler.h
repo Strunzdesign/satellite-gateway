@@ -29,11 +29,14 @@
 #include <string>
 #include <boost/asio.hpp>
 #include "HdlcdPacketData.h"
+class ConfigServerHandlerCollection;
+class GatewayClientHandlerCollection;
 class HdlcdClient;
 
 class HdlcdClientHandler {
 public:
-    HdlcdClientHandler(boost::asio::io_service& a_IOService, const std::string& a_DestinationName, const std::string& a_TcpPort, const std::string& a_SerialPortName);
+    HdlcdClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
+                       std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection, const std::string& a_DestinationName, const std::string& a_TcpPort, const std::string& a_SerialPortName);
     void Send(const HdlcdPacketData& a_HdlcdPacketData, std::function<void()> a_OnSendDoneCallback = std::function<void()>());
     
 private:
@@ -42,6 +45,9 @@ private:
     
     // Members
     boost::asio::io_service& m_IOService;
+    std::shared_ptr<ConfigServerHandlerCollection>  m_ConfigServerHandlerCollection;
+    std::shared_ptr<GatewayClientHandlerCollection> m_GatewayClientHandlerCollection;
+    
     const std::string m_DestinationName;
     const std::string m_TcpPort;
     const std::string m_SerialPortName;

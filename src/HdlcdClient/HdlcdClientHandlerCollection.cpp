@@ -22,33 +22,36 @@
  */
 
 #include "HdlcdClientHandlerCollection.h"
-#include "../ConfigurationServer/ConfigurationServerHandler.h"
-#include "../GatewayClient/GatewayClientHandler.h"
+#include "../ConfigServer/ConfigServerHandlerCollection.h"
+#include "../GatewayClient/GatewayClientHandlerCollection.h"
 #include "HdlcdClientHandler.h"
 #include <assert.h>
 
 HdlcdClientHandlerCollection::HdlcdClientHandlerCollection(boost::asio::io_service& a_IOService): m_IOService(a_IOService) {
 }
 
-void HdlcdClientHandlerCollection::Initialize(std::shared_ptr<ConfigurationServerHandler> a_ConfigurationServerHandler,
-                                              std::shared_ptr<GatewayClientHandler> a_GatewayClientHandler) {
+void HdlcdClientHandlerCollection::Initialize(std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
+                                              std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection) {
     // Checks
-    assert(a_ConfigurationServerHandler);
-    assert(a_GatewayClientHandler);
-    m_ConfigurationServerHandler = a_ConfigurationServerHandler;
-    m_GatewayClientHandler = a_GatewayClientHandler;
+    assert(a_ConfigServerHandlerCollection);
+    assert(a_GatewayClientHandlerCollection);
+    m_ConfigServerHandlerCollection = a_ConfigServerHandlerCollection;
+    m_GatewayClientHandlerCollection = a_GatewayClientHandlerCollection;
 }
 
-void HdlcdClientHandlerCollection::Reset() {
+void HdlcdClientHandlerCollection::SystemShutdown() {
     // Drop all shared pointers
-    m_ConfigurationServerHandler.reset();
-    m_GatewayClientHandler.reset();
+    m_ConfigServerHandlerCollection.reset();
+    m_GatewayClientHandlerCollection.reset();
     for (auto l_HdlcdClientHandlerIterator = m_HdlcdClientHandlerVector.begin(); l_HdlcdClientHandlerIterator != m_HdlcdClientHandlerVector.end(); ++l_HdlcdClientHandlerIterator) {
         (*l_HdlcdClientHandlerIterator).reset();
     } // for
 }
 
-void HdlcdClientHandlerCollection::CreateHdlcdClient (uint16_t a_SerialPortNbr) {
+void HdlcdClientHandlerCollection::CleanAll() {
+}
+
+void HdlcdClientHandlerCollection::CreateHdlcdClient(uint16_t a_SerialPortNbr) {
 }
 
 void HdlcdClientHandlerCollection::DestroyHdlcdClient(uint16_t a_SerialPortNbr) {
@@ -57,7 +60,7 @@ void HdlcdClientHandlerCollection::DestroyHdlcdClient(uint16_t a_SerialPortNbr) 
 void HdlcdClientHandlerCollection::SuspendHdlcdClient(uint16_t a_SerialPortNbr) {
 }
 
-void HdlcdClientHandlerCollection::ResumeHdlcdClient (uint16_t a_SerialPortNbr) {
+void HdlcdClientHandlerCollection::ResumeHdlcdClient(uint16_t a_SerialPortNbr) {
 }
 
 void HdlcdClientHandlerCollection::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer) {

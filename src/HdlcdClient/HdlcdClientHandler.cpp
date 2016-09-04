@@ -26,8 +26,16 @@
 #include "SnetServiceMessage.h"
 #include <assert.h>
 
-HdlcdClientHandler::HdlcdClientHandler(boost::asio::io_service& a_IOService, const std::string& a_DestinationName, const std::string& a_TcpPort, const std::string& a_SerialPortName):
-    m_IOService(a_IOService), m_DestinationName(a_DestinationName), m_TcpPort(a_TcpPort), m_SerialPortName(a_SerialPortName), m_Resolver(a_IOService), m_ConnectionRetryTimer(a_IOService) {
+HdlcdClientHandler::HdlcdClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
+                                       std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection, const std::string& a_DestinationName,
+                                       const std::string& a_TcpPort, const std::string& a_SerialPortName): m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection),
+                                       m_GatewayClientHandlerCollection(a_GatewayClientHandlerCollection), m_DestinationName(a_DestinationName), m_TcpPort(a_TcpPort),
+                                       m_SerialPortName(a_SerialPortName), m_Resolver(a_IOService), m_ConnectionRetryTimer(a_IOService) {
+    // Checks
+    assert(m_ConfigServerHandlerCollection);
+    assert(m_GatewayClientHandlerCollection);
+                                           
+    // Trigger activity
     ResolveDestination();
 }
 
