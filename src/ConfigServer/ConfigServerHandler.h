@@ -28,13 +28,16 @@
 #include <boost/asio.hpp>
 class GatewayClientHandlerCollection;
 class HdlcdClientHandlerCollection;
+class ConfigFrame;
+class ConfigServer;
 
 class ConfigServerHandler {
 public:
     // CTOR, initializer, and resetter
     ConfigServerHandler(boost::asio::io_service& a_IOService, std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection,
                         std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
-    void SystemShutdown();
+    void Close();
+    void ConfigFrameReceived(std::shared_ptr<ConfigFrame> a_ConfigFrame);
     
     // Methods to be called by a gateway client entity
     void GatewayClientCreated     (uint32_t a_ReferenceNbr);
@@ -56,6 +59,9 @@ private:
     boost::asio::io_service& m_IOService;
     std::shared_ptr<GatewayClientHandlerCollection> m_GatewayClientHandlerCollection;
     std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
+    
+    // One config server handler is responsible for one config server object
+    std::shared_ptr<ConfigServer> m_ConfigServer;
 };
 
 #endif // CONFIG_SERVER_HANDLER_H

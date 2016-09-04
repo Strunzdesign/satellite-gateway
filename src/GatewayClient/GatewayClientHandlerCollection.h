@@ -26,6 +26,7 @@
 
 #include <memory>
 #include <boost/asio.hpp>
+#include <string>
 class ConfigServerHandlerCollection;
 class HdlcdClientHandlerCollection;
 class GatewayClientHandler;
@@ -39,9 +40,9 @@ public:
     void SystemShutdown();
     
     // Methods to be called by a configuration server entity
-    void CleanAll();
-    void Connect(uint32_t a_ReferenceNbr);
-    void Disconnect(uint32_t a_ReferenceNbr);
+    void CleanAll();    
+    void CreateClient (uint32_t a_ReferenceNbr, std::string a_RemoteAddress, uint16_t a_RemotePortNbr);
+    void DestroyClient(uint32_t a_ReferenceNbr);
     
     // Methods to be called by a HDLCd client entity
     void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);

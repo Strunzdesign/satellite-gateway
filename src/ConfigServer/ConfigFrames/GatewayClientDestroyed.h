@@ -1,5 +1,5 @@
 /**
- * \file      GatewayClient.h
+ * \file      GatewayClientDestroyed.h
  * \brief     
  * \author    Florian Evers, florian-evers@gmx.de
  * \copyright GNU Public License version 3.
@@ -21,29 +21,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GATEWAY_CLIENT_H
-#define GATEWAY_CLIENT_H
+#ifndef GATEWAY_CLIENT_DESTROYED_H
+#define GATEWAY_CLIENT_DESTROYED_H
 
-#include <memory>
-#include <boost/asio.hpp>
-class ConfigServerHandlerCollection;
-class HdlcdClientHandlerCollection;
+#include "ConfigFrame.h"
 
-class GatewayClient {
+class GatewayClientDestroyed: public ConfigFrame {
 public:
-    // CTOR
-    GatewayClient(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                  std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
-    void Close();
-
-    // Methods to be called by a HDLCd client entity
-    void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);
+    // DTOR and creator
+    GatewayClientDestroyed(){}
+    ~GatewayClientDestroyed(){}
+    static std::shared_ptr<GatewayClientDestroyed> Create(uint32_t a_ReferenceNbr) {
+        auto l_GatewayClientDestroyed = std::make_shared<GatewayClientDestroyed>();
+        l_GatewayClientDestroyed->m_ReferenceNbr = a_ReferenceNbr;
+        return l_GatewayClientDestroyed;
+    }
+    
+    uint16_t GetReferenceNbr() const { return m_ReferenceNbr; }
     
 private:
+    // Methods
+    E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_GATEWAY_CLIENT_DESTROYED; }
+    
     // Members
-    boost::asio::io_service& m_IOService;
-    std::shared_ptr<ConfigServerHandlerCollection> m_ConfigServerHandlerCollection;
-    std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
+    uint32_t m_ReferenceNbr;
 };
 
-#endif // GATEWAY_CLIENT_H
+#endif // GATEWAY_CLIENT_DESTROYED_H

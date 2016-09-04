@@ -1,5 +1,5 @@
 /**
- * \file      GatewayClient.h
+ * \file      GatewayClientError.h
  * \brief     
  * \author    Florian Evers, florian-evers@gmx.de
  * \copyright GNU Public License version 3.
@@ -21,29 +21,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GATEWAY_CLIENT_H
-#define GATEWAY_CLIENT_H
+#ifndef GATEWAY_CLIENT_ERROR_H
+#define GATEWAY_CLIENT_ERROR_H
 
-#include <memory>
-#include <boost/asio.hpp>
-class ConfigServerHandlerCollection;
-class HdlcdClientHandlerCollection;
+#include "ConfigFrame.h"
 
-class GatewayClient {
+class GatewayClientError: public ConfigFrame {
 public:
-    // CTOR
-    GatewayClient(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                  std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
-    void Close();
-
-    // Methods to be called by a HDLCd client entity
-    void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);
+    // DTOR and creator
+    GatewayClientError(){}
+    ~GatewayClientError(){}
+    static std::shared_ptr<GatewayClientError> Create(uint32_t a_ReferenceNbr, uint32_t a_ErrorCode) {
+        auto l_GatewayClientError = std::make_shared<GatewayClientError>();
+        l_GatewayClientError->m_ReferenceNbr = a_ReferenceNbr;
+        l_GatewayClientError->m_ErrorCode = a_ErrorCode;
+        return l_GatewayClientError;
+    }
     
 private:
+    // Methods
+    E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_GATEWAY_CLIENT_ERROR; }
+    
     // Members
-    boost::asio::io_service& m_IOService;
-    std::shared_ptr<ConfigServerHandlerCollection> m_ConfigServerHandlerCollection;
-    std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
+    uint32_t m_ReferenceNbr;
+    uint32_t m_ErrorCode;
 };
 
-#endif // GATEWAY_CLIENT_H
+#endif // GATEWAY_CLIENT_ERROR_H

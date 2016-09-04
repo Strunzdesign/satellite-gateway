@@ -1,5 +1,5 @@
 /**
- * \file      GatewayClient.h
+ * \file      HdlcdClientCleanup.h
  * \brief     
  * \author    Florian Evers, florian-evers@gmx.de
  * \copyright GNU Public License version 3.
@@ -21,29 +21,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GATEWAY_CLIENT_H
-#define GATEWAY_CLIENT_H
+#ifndef HDLCD_CLIENT_CLEANUP_H
+#define HDLCD_CLIENT_CLEANUP_H
 
-#include <memory>
-#include <boost/asio.hpp>
-class ConfigServerHandlerCollection;
-class HdlcdClientHandlerCollection;
+#include "ConfigFrame.h"
 
-class GatewayClient {
+class HdlcdClientCleanup: public ConfigFrame {
 public:
-    // CTOR
-    GatewayClient(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                  std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
-    void Close();
-
-    // Methods to be called by a HDLCd client entity
-    void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);
+    // DTOR and creator
+    HdlcdClientCleanup(){}
+    ~HdlcdClientCleanup(){}
+    static std::shared_ptr<HdlcdClientCleanup> Create() {
+        auto l_HdlcdClientCleanup = std::make_shared<HdlcdClientCleanup>();
+        return l_HdlcdClientCleanup;
+    }
     
 private:
-    // Members
-    boost::asio::io_service& m_IOService;
-    std::shared_ptr<ConfigServerHandlerCollection> m_ConfigServerHandlerCollection;
-    std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
+    // Methods
+    E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_CLEANUP; }
 };
 
-#endif // GATEWAY_CLIENT_H
+#endif // HDLCD_CLIENT_CLEANUP_H

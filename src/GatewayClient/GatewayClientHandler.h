@@ -26,6 +26,7 @@
 
 #include <memory>
 #include <boost/asio.hpp>
+#include <string>
 class ConfigServerHandlerCollection;
 class HdlcdClientHandlerCollection;
 class GatewayClient;
@@ -34,13 +35,10 @@ class GatewayClientHandler {
 public:
     // CTOR, initializer, and resetter
     GatewayClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                         std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
-    void Reset();
-    
-    // Methods to be called by a configuration server entity
-    void CleanAll();
-    void Connect   (uint32_t a_ReferenceNbr);
-    void Disconnect(uint32_t a_ReferenceNbr);
+                         std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint32_t a_ReferenceNbr,
+                         std::string a_RemoteAddress, uint16_t a_RemotePortNbr);
+    void Close();
+    uint32_t GetReferenceNbr() const { return m_ReferenceNbr; }
     
     // Methods to be called by a HDLCd client entity
     void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);
@@ -50,9 +48,11 @@ private:
     boost::asio::io_service& m_IOService;
     std::shared_ptr<ConfigServerHandlerCollection> m_ConfigServerHandlerCollection;
     std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
-    
-    // Only one gateway client at a time is supported
+    std::string m_RemoteAddress;
+    uint16_t m_RemotePortNbr;
+
     std::shared_ptr<GatewayClient> m_GatewayClient;
+    uint32_t m_ReferenceNbr;
 };
 
 #endif // GATEWAY_CLIENT_HANDLER_H

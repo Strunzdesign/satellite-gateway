@@ -27,9 +27,9 @@
 #include <assert.h>
 
 GatewayClient::GatewayClient(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                             std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint32_t a_ReferenceNbr):
+                             std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection):
                              m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection),
-                             m_HdlcdClientHandlerCollection(a_HdlcdClientHandlerCollection), m_ReferenceNbr(a_ReferenceNbr) {
+                             m_HdlcdClientHandlerCollection(a_HdlcdClientHandlerCollection) {
     // Checks
     assert(m_ConfigServerHandlerCollection);
     assert(m_HdlcdClientHandlerCollection);

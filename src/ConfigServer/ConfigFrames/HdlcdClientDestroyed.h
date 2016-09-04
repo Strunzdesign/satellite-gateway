@@ -1,5 +1,5 @@
 /**
- * \file      GatewayClient.h
+ * \file      HdlcdClientDestroyed.h
  * \brief     
  * \author    Florian Evers, florian-evers@gmx.de
  * \copyright GNU Public License version 3.
@@ -21,29 +21,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GATEWAY_CLIENT_H
-#define GATEWAY_CLIENT_H
+#ifndef HDLCD_CLIENT_DESTROYED_H
+#define HDLCD_CLIENT_DESTROYED_H
 
-#include <memory>
-#include <boost/asio.hpp>
-class ConfigServerHandlerCollection;
-class HdlcdClientHandlerCollection;
+#include "ConfigFrame.h"
 
-class GatewayClient {
+class HdlcdClientDestroyed: public ConfigFrame {
 public:
-    // CTOR
-    GatewayClient(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                  std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
-    void Close();
-
-    // Methods to be called by a HDLCd client entity
-    void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);
+    // DTOR and creator
+    HdlcdClientDestroyed(){}
+    ~HdlcdClientDestroyed(){}
+    static std::shared_ptr<HdlcdClientDestroyed> Create(uint16_t a_SerialPortNbr) {
+        auto l_HdlcdClientDestroyed = std::make_shared<HdlcdClientDestroyed>();
+        l_HdlcdClientDestroyed->m_SerialPortNbr = a_SerialPortNbr;
+        return l_HdlcdClientDestroyed;
+    }
+    
+    // Getter
+    uint16_t GetSerialPortNbr() const { return m_SerialPortNbr; }
     
 private:
+    // Methods
+    E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_DESTROYED; }
+    
     // Members
-    boost::asio::io_service& m_IOService;
-    std::shared_ptr<ConfigServerHandlerCollection> m_ConfigServerHandlerCollection;
-    std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
+    uint16_t m_SerialPortNbr;
 };
 
-#endif // GATEWAY_CLIENT_H
+#endif // HDLCD_CLIENT_DESTROYED_H

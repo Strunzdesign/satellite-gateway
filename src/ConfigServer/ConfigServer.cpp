@@ -24,6 +24,7 @@
 #include "ConfigServer.h"
 #include "../GatewayClient/GatewayClientHandlerCollection.h"
 #include "../HdlcdClient/HdlcdClientHandlerCollection.h"
+#include "ConfigFrames/ConfigFrame.h"
 #include <assert.h>
 
 ConfigServer::ConfigServer(boost::asio::io_service& a_IOService): m_IOService(a_IOService) {
@@ -38,37 +39,15 @@ void ConfigServer::Initialize(std::shared_ptr<GatewayClientHandlerCollection> a_
 }
 
 void ConfigServer::Close() {
+    // Drop all shared pointers
+    m_OnControlPacketCallback = NULL;
+    m_GatewayClientHandlerCollection.reset();
+    m_HdlcdClientHandlerCollection.reset();
 }
 
-void ConfigServer::GatewayClientCreated(uint32_t a_ReferenceNbr) {
+void ConfigServer::SendControlPacket(std::shared_ptr<ConfigFrame> a_ConfigFrame) {
 }
 
-void ConfigServer::GatewayClientDestroyed(uint32_t a_ReferenceNbr) {
-}
-
-void ConfigServer::GatewayClientConnected(uint32_t a_ReferenceNbr) {
-}
-
-void ConfigServer::GatewayClientDisconnected(uint32_t a_ReferenceNbr) {
-}
-
-void ConfigServer::GatewayClientError(uint32_t a_ReferenceNbr, uint32_t a_ErrorCode) {
-}
-
-void ConfigServer::HdlcdClientCreated(uint16_t a_SerialPortNbr) {
-}
-
-void ConfigServer::HdlcdClientDestroyed(uint16_t a_SerialPortNbr) {
-}
-
-void ConfigServer::HdlcdClientDeviceFound(uint16_t a_SerialPortNbr) {
-}
-
-void ConfigServer::HdlcdClientDeviceLost(uint16_t a_SerialPortNbr) {
-}
-
-void ConfigServer::HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive) {
-}
-
-void ConfigServer::HdlcdClientError(uint16_t a_SerialPortNbr, uint32_t a_ErrorCode) {
+void ConfigServer::SendOnControlPacketCallback(std::function<void()> a_OnControlPacketCallback) {
+    m_OnControlPacketCallback = a_OnControlPacketCallback;
 }

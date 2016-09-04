@@ -28,6 +28,7 @@
 #include <boost/asio.hpp>
 class GatewayClientHandlerCollection;
 class HdlcdClientHandlerCollection;
+class ConfigFrame;
 
 class ConfigServer {
 public:
@@ -37,26 +38,16 @@ public:
                     std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
     void Close();
     
-    // Methods to be called by a gateway client entity
-    void GatewayClientCreated     (uint32_t a_ReferenceNbr);
-    void GatewayClientDestroyed   (uint32_t a_ReferenceNbr);
-    void GatewayClientConnected   (uint32_t a_ReferenceNbr);
-    void GatewayClientDisconnected(uint32_t a_ReferenceNbr);
-    void GatewayClientError       (uint32_t a_ReferenceNbr, uint32_t a_ErrorCode);
-    
-    // Methods to be called by a HDLCd client entity
-    void HdlcdClientCreated    (uint16_t a_SerialPortNbr);
-    void HdlcdClientDestroyed  (uint16_t a_SerialPortNbr);
-    void HdlcdClientDeviceFound(uint16_t a_SerialPortNbr);
-    void HdlcdClientDeviceLost (uint16_t a_SerialPortNbr);
-    void HdlcdClientNewStatus  (uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive);
-    void HdlcdClientError      (uint16_t a_SerialPortNbr, uint32_t a_ErrorCode);
+    void SendControlPacket(std::shared_ptr<ConfigFrame> a_ConfigFrame);
+    void SendOnControlPacketCallback(std::function<void()> a_OnControlPacketCallback = std::function<void()>());
 
 private:
     // Members
     boost::asio::io_service& m_IOService;
     std::shared_ptr<GatewayClientHandlerCollection> m_GatewayClientHandlerCollection;
     std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
+    
+    std::function<void()> m_OnControlPacketCallback;
 };
 
 #endif // CONFIG_SERVER_H

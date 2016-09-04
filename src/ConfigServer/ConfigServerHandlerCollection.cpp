@@ -39,37 +39,89 @@ void ConfigServerHandlerCollection::Initialize(std::shared_ptr<GatewayClientHand
 }
 
 void ConfigServerHandlerCollection::SystemShutdown() {
+    // Drop all shared pointers
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->Close();
+        m_ConfigServerHandler.reset();
+    } // if
+
+    m_GatewayClientHandlerCollection.reset();
+    m_HdlcdClientHandlerCollection.reset();
 }
 
 void ConfigServerHandlerCollection::GatewayClientCreated(uint32_t a_ReferenceNbr) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->GatewayClientCreated(a_ReferenceNbr);
+    } // if
 }
 
 void ConfigServerHandlerCollection::GatewayClientDestroyed(uint32_t a_ReferenceNbr) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->GatewayClientDestroyed(a_ReferenceNbr);
+    } // if
 }
 
 void ConfigServerHandlerCollection::GatewayClientConnected(uint32_t a_ReferenceNbr) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->GatewayClientConnected(a_ReferenceNbr);
+    } // if
 }
 
 void ConfigServerHandlerCollection::GatewayClientDisconnected(uint32_t a_ReferenceNbr) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->GatewayClientDisconnected(a_ReferenceNbr);
+    } // if
 }
 
 void ConfigServerHandlerCollection::GatewayClientError(uint32_t a_ReferenceNbr, uint32_t a_ErrorCode) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->GatewayClientError(a_ReferenceNbr, a_ErrorCode);
+    } // if
 }
 
 void ConfigServerHandlerCollection::HdlcdClientCreated(uint16_t a_SerialPortNbr) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->HdlcdClientCreated(a_SerialPortNbr);
+    } // if
 }
 
 void ConfigServerHandlerCollection::HdlcdClientDestroyed(uint16_t a_SerialPortNbr) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->HdlcdClientDestroyed(a_SerialPortNbr);
+    } // if
 }
 
 void ConfigServerHandlerCollection::HdlcdClientDeviceFound(uint16_t a_SerialPortNbr) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->HdlcdClientDeviceFound(a_SerialPortNbr);
+    } // if
 }
 
 void ConfigServerHandlerCollection::HdlcdClientDeviceLost(uint16_t a_SerialPortNbr) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->HdlcdClientDeviceLost(a_SerialPortNbr);
+    } // if
 }
 
 void ConfigServerHandlerCollection::HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->HdlcdClientNewStatus(a_SerialPortNbr, a_bIsResumed, a_bIsAlive);
+    } // if
 }
 
 void ConfigServerHandlerCollection::HdlcdClientError(uint16_t a_SerialPortNbr, uint32_t a_ErrorCode) {
+    // There is only one config server handler entity
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->HdlcdClientError(a_SerialPortNbr, a_ErrorCode);
+    } // if
 }

@@ -39,16 +39,58 @@ void GatewayClientHandlerCollection::Initialize(std::shared_ptr<ConfigServerHand
 }
 
 void GatewayClientHandlerCollection::SystemShutdown() {
+    // Silently remove the previous gateway client
+    if (m_GatewayClientHandler) {
+        m_GatewayClientHandler->Close();
+        m_GatewayClientHandler.reset();
+    } // if
+    
+    // Drop all shared pointers
+    m_ConfigServerHandlerCollection.reset();
+    m_HdlcdClientHandlerCollection.reset();
 }
 
 void GatewayClientHandlerCollection::CleanAll() {
+    // Silently remove the previous gateway client
+    if (m_GatewayClientHandler) {
+        m_GatewayClientHandler->Close();
+        m_GatewayClientHandler.reset();
+    } // if
 }
 
-void GatewayClientHandlerCollection::Connect(uint32_t a_ReferenceNbr) {
+void GatewayClientHandlerCollection::CreateClient(uint32_t a_ReferenceNbr, std::string a_RemoteAddress, uint16_t a_RemotePortNbr) {
+    if (m_GatewayClientHandler) {
+        // There was already a client entity! Replace it.
+        m_ConfigServerHandlerCollection->GatewayClientError(a_ReferenceNbr, 0x00);
+        m_ConfigServerHandlerCollection->GatewayClientDestroyed(m_GatewayClientHandler->GetReferenceNbr());
+        m_GatewayClientHandler->Close();
+        m_GatewayClientHandler.reset();
+    } // if
+    
+    // Create new entity
+    m_GatewayClientHandler = std::make_shared<GatewayClientHandler>(m_IOService, m_ConfigServerHandlerCollection, m_HdlcdClientHandlerCollection,
+                                                                    a_ReferenceNbr, a_RemoteAddress, a_RemotePortNbr);
+    m_ConfigServerHandlerCollection->GatewayClientCreated(a_ReferenceNbr);
 }
 
-void GatewayClientHandlerCollection::Disconnect(uint32_t a_ReferenceNbr) {
+void GatewayClientHandlerCollection::DestroyClient(uint32_t a_ReferenceNbr) {
+    if (m_GatewayClientHandler) {
+        if (m_GatewayClientHandler->GetReferenceNbr() == a_ReferenceNbr) {
+            m_ConfigServerHandlerCollection->GatewayClientDestroyed(a_ReferenceNbr);
+            m_GatewayClientHandler->Close();
+            m_GatewayClientHandler.reset();
+        } else {
+            // The reference number did not match!
+            m_ConfigServerHandlerCollection->GatewayClientError(a_ReferenceNbr, 0x00);
+        } // else
+    } else {
+        // There was no client entity!
+        m_ConfigServerHandlerCollection->GatewayClientError(a_ReferenceNbr, 0x00);
+    } // else
 }
 
 void GatewayClientHandlerCollection::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer) {
+    if (m_GatewayClientHandler) {
+        m_GatewayClientHandler->SendPacket(a_SerialPortNbr, a_Buffer);
+    } // if
 }
