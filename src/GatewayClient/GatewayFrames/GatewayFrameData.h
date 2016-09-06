@@ -1,5 +1,5 @@
 /**
- * \file      HdlcdClientDeviceLost.h
+ * \file      GatewayFrameData..h
  * \brief     
  * \author    Florian Evers, florian-evers@gmx.de
  * \copyright GNU Public License version 3.
@@ -21,31 +21,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef HDLCD_CLIENT_DEVICE_LOST_H
-#define HDLCD_CLIENT_DEVICE_LOST_H
+#ifndef GATEWAY_FRAME_DATA_H
+#define GATEWAY_FRAME_DATA_H
 
-#include "ConfigFrame.h"
+#include "GatewayFrame.h"
 
-class HdlcdClientDeviceLost: public ConfigFrame {
+class GatewayFrameData: public GatewayFrame {
 public:
     // DTOR and creator
-    HdlcdClientDeviceLost(){}
-    ~HdlcdClientDeviceLost(){}
-    static std::shared_ptr<HdlcdClientDeviceLost> Create(uint16_t a_SerialPortNbr) {
-        auto l_HdlcdClientDeviceLost = std::make_shared<HdlcdClientDeviceLost>();
-        l_HdlcdClientDeviceLost->m_SerialPortNbr = a_SerialPortNbr;
-        return l_HdlcdClientDeviceLost;
+    GatewayFrameData(){}
+    ~GatewayFrameData(){}
+    static std::shared_ptr<GatewayFrameData> Create(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Payload) {
+        auto l_GatewayFrameData = std::make_shared<GatewayFrameData>();
+        l_GatewayFrameData->m_SerialPortNbr = a_SerialPortNbr;
+        l_GatewayFrameData->m_Payload = std::move(a_Payload);
+        return l_GatewayFrameData;
     }
     
     // Getter
     uint16_t GetSerialPortNbr() const { return m_SerialPortNbr; }
+    const std::vector<unsigned char>& GetPayload() const { return m_Payload; }
     
 private:
     // Methods
-    E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_DEVICE_LOST; }
+    E_GATEWAY_FRAME GetGatewayFrameType() const { return GATEWAY_FRAME_DATA; }
     
     // Members
     uint16_t m_SerialPortNbr;
+    std::vector<unsigned char> m_Payload;
 };
 
-#endif // HDLCD_CLIENT_DEVICE_LOST_H
+#endif // GATEWAY_FRAME_DATA_H

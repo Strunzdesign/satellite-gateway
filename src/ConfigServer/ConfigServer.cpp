@@ -40,14 +40,14 @@ void ConfigServer::Initialize(std::shared_ptr<GatewayClientHandlerCollection> a_
 
 void ConfigServer::Close() {
     // Drop all shared pointers
-    m_OnControlPacketCallback = NULL;
+    m_OnConfigFrameCallback = NULL;
     m_GatewayClientHandlerCollection.reset();
     m_HdlcdClientHandlerCollection.reset();
 }
 
-void ConfigServer::SendControlPacket(std::shared_ptr<ConfigFrame> a_ConfigFrame) {
+void ConfigServer::SendConfigFrame(std::shared_ptr<ConfigFrame> a_ConfigFrame) {
 }
 
-void ConfigServer::SendOnControlPacketCallback(std::function<void()> a_OnControlPacketCallback) {
-    m_OnControlPacketCallback = a_OnControlPacketCallback;
+void ConfigServer::SetOnConfigFrameCallback(std::function<void()> a_OnConfigFrameCallback) {
+    m_OnConfigFrameCallback = a_OnConfigFrameCallback;
 }

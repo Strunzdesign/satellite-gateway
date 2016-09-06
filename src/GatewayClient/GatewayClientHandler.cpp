@@ -25,6 +25,7 @@
 #include "GatewayClient.h"
 #include "../ConfigServer/ConfigServerHandlerCollection.h"
 #include "../HdlcdClient/HdlcdClientHandlerCollection.h"
+#include "GatewayFrames/GatewayFrameData.h"
 #include <assert.h>
 
 GatewayClientHandler::GatewayClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
@@ -49,9 +50,25 @@ void GatewayClientHandler::Close() {
     m_HdlcdClientHandlerCollection.reset();
 }
 
-void GatewayClientHandler::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer) {
+void GatewayClientHandler::GatewayFrameReceived(const std::shared_ptr<GatewayFrame> &a_GatewayFrame) {
+    // Dispatch
+    assert(a_GatewayFrame);
+    switch (a_GatewayFrame->GetGatewayFrameType()) {
+        case GATEWAY_FRAME_DATA: {
+            auto l_GatewayFrameData = std::dynamic_pointer_cast<GatewayFrameData>(a_GatewayFrame);
+            m_HdlcdClientHandlerCollection->SendPacket(l_GatewayFrameData->GetSerialPortNbr(), l_GatewayFrameData->GetPayload());
+            break;
+        }
+        case GATEWAY_FRAME_UNKNOWN:
+        default:
+            // Ignore
+            break;
+    } // switch
+}
+
+void GatewayClientHandler::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Payload) {
     // Deliver the packet to the gateway client entity
     if (m_GatewayClient) {
-        m_GatewayClient->SendPacket(a_SerialPortNbr, a_Buffer);
+        m_GatewayClient->SendGatewayFrame(GatewayFrameData::Create(a_SerialPortNbr, a_Payload));
     } // if
 }

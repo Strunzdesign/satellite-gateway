@@ -26,6 +26,7 @@
 
 #include <memory>
 #include <vector>
+#include <map>
 #include <string>
 #include <boost/asio.hpp>
 #include "HdlcdPacketData.h"
@@ -43,13 +44,13 @@ public:
     
     // Methods to be called by a configuration server entity
     void CleanAll();
-    void CreateHdlcdClient (uint16_t a_SerialPortNbr);
+    void CreateHdlcdClient (const std::string &a_DestinationName, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr);
     void DestroyHdlcdClient(uint16_t a_SerialPortNbr);
     void SuspendHdlcdClient(uint16_t a_SerialPortNbr);
     void ResumeHdlcdClient (uint16_t a_SerialPortNbr);
     
     // Methods to be called by a gateway client entity
-    void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);
+    void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Payload);
     
 private:
     // Members
@@ -57,8 +58,8 @@ private:
     std::shared_ptr<ConfigServerHandlerCollection>  m_ConfigServerHandlerCollection;
     std::shared_ptr<GatewayClientHandlerCollection> m_GatewayClientHandlerCollection;
     
-    // The list of HDLCd client handler entities
-    std::vector<std::shared_ptr<HdlcdClientHandler>> m_HdlcdClientHandlerVector;
+    // The map of HDLCd client handler entities
+    std::map<uint16_t, std::shared_ptr<HdlcdClientHandler>> m_HdlcdClientHandlerMap;
 };
 
 #endif // HDLCD_CLIENT_HANDLER_COLLECTION_H

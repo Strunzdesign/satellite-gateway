@@ -28,7 +28,6 @@
 #include <vector>
 #include <string>
 #include <boost/asio.hpp>
-#include "HdlcdPacketData.h"
 class ConfigServerHandlerCollection;
 class GatewayClientHandlerCollection;
 class HdlcdClient;
@@ -36,8 +35,11 @@ class HdlcdClient;
 class HdlcdClientHandler {
 public:
     HdlcdClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                       std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection, const std::string& a_DestinationName, const std::string& a_TcpPort, const std::string& a_SerialPortName);
-    void Send(const HdlcdPacketData& a_HdlcdPacketData, std::function<void()> a_OnSendDoneCallback = std::function<void()>());
+                       std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection, const std::string& a_DestinationName, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr);
+    void Close();
+    void Suspend();
+    void Resume();
+    void SendPacket(const std::vector<unsigned char> &a_Payload);
     
 private:
     // Helpers
@@ -49,8 +51,8 @@ private:
     std::shared_ptr<GatewayClientHandlerCollection> m_GatewayClientHandlerCollection;
     
     const std::string m_DestinationName;
-    const std::string m_TcpPort;
-    const std::string m_SerialPortName;
+    const uint16_t m_TcpPortNbr;
+    const uint16_t m_SerialPortNbr;
     
     // Resolver
     boost::asio::ip::tcp::resolver m_Resolver;
@@ -58,6 +60,9 @@ private:
     
     // The connection to the HDLC Daemon
     std::shared_ptr<HdlcdClient> m_HdlcdClient;
+    
+    // Flags
+    bool m_bSuspendSerialPort;
 };
 
 #endif // HDLCD_CLIENT_HANDLER_H

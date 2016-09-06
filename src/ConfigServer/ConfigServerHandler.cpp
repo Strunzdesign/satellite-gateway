@@ -36,8 +36,6 @@
 #include "ConfigFrames/HdlcdClientCreated.h"
 #include "ConfigFrames/HdlcdClientDestroy.h"
 #include "ConfigFrames/HdlcdClientDestroyed.h"
-#include "ConfigFrames/HdlcdClientDeviceFound.h"
-#include "ConfigFrames/HdlcdClientDeviceLost.h"
 #include "ConfigFrames/HdlcdClientNewStatus.h"
 #include "ConfigFrames/HdlcdClientSuspend.h"
 #include "ConfigFrames/HdlcdClientResume.h"
@@ -52,7 +50,7 @@ ConfigServerHandler::ConfigServerHandler(boost::asio::io_service& a_IOService, s
     assert(a_HdlcdClientHandlerCollection);
 }
 
-void ConfigServerHandler::ConfigFrameReceived(std::shared_ptr<ConfigFrame> a_ConfigFrame) {
+void ConfigServerHandler::ConfigFrameReceived(const std::shared_ptr<ConfigFrame> &a_ConfigFrame) {
     // Dispatch
     assert(a_ConfigFrame);
     switch (a_ConfigFrame->GetConfigFrameType()) {
@@ -78,7 +76,7 @@ void ConfigServerHandler::ConfigFrameReceived(std::shared_ptr<ConfigFrame> a_Con
         }
         case CONFIG_FRAME_HDLCD_CLIENT_CREATE: {
             auto l_HdlcdClientCreate = std::dynamic_pointer_cast<HdlcdClientCreate>(a_ConfigFrame);
-            m_HdlcdClientHandlerCollection->CreateHdlcdClient(l_HdlcdClientCreate->GetSerialPortNbr());
+            m_HdlcdClientHandlerCollection->CreateHdlcdClient(l_HdlcdClientCreate->GetDestinationName(), l_HdlcdClientCreate->GetTcpPortNbr(), l_HdlcdClientCreate->GetSerialPortNbr());
             break;
         }
         case CONFIG_FRAME_HDLCD_CLIENT_DESTROY: {
@@ -103,8 +101,6 @@ void ConfigServerHandler::ConfigFrameReceived(std::shared_ptr<ConfigFrame> a_Con
         case CONFIG_FRAME_GATEWAY_CLIENT_CONNECTED:
         case CONFIG_FRAME_GATEWAY_CLIENT_DISCONNECTED:
         case CONFIG_FRAME_HDLCD_CLIENT_DESTROYED:
-        case CONFIG_FRAME_HDLCD_CLIENT_DEVICE_FOUND:
-        case CONFIG_FRAME_HDLCD_CLIENT_DEVICE_LOST:
         case CONFIG_FRAME_HDLCD_CLIENT_NEW_STATUS:
         default:
             // Ignore
@@ -126,76 +122,62 @@ void ConfigServerHandler::Close() {
 void ConfigServerHandler::GatewayClientCreated(uint32_t a_ReferenceNbr) {
     if (m_ConfigServer) {
         // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(GatewayClientCreated::Create(a_ReferenceNbr));
+        m_ConfigServer->SendConfigFrame(GatewayClientCreated::Create(a_ReferenceNbr));
     } // if
 }
 
 void ConfigServerHandler::GatewayClientDestroyed(uint32_t a_ReferenceNbr) {
     if (m_ConfigServer) {
         // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(GatewayClientDestroyed::Create(a_ReferenceNbr));
+        m_ConfigServer->SendConfigFrame(GatewayClientDestroyed::Create(a_ReferenceNbr));
     } // if
 }
 
 void ConfigServerHandler::GatewayClientConnected(uint32_t a_ReferenceNbr) {
     if (m_ConfigServer) {
         // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(GatewayClientConnected::Create(a_ReferenceNbr));
+        m_ConfigServer->SendConfigFrame(GatewayClientConnected::Create(a_ReferenceNbr));
     } // if
 }
 
 void ConfigServerHandler::GatewayClientDisconnected(uint32_t a_ReferenceNbr) {
     if (m_ConfigServer) {
         // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(GatewayClientDisconnected::Create(a_ReferenceNbr));
+        m_ConfigServer->SendConfigFrame(GatewayClientDisconnected::Create(a_ReferenceNbr));
     } // if
 }
 
 void ConfigServerHandler::GatewayClientError(uint32_t a_ReferenceNbr, uint32_t a_ErrorCode) {
     if (m_ConfigServer) {
         // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(GatewayClientError::Create(a_ReferenceNbr, a_ErrorCode));
+        m_ConfigServer->SendConfigFrame(GatewayClientError::Create(a_ReferenceNbr, a_ErrorCode));
     } // if
 }
 
 void ConfigServerHandler::HdlcdClientCreated(uint16_t a_SerialPortNbr) {
     if (m_ConfigServer) {
         // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(HdlcdClientCreated::Create(a_SerialPortNbr));
+        m_ConfigServer->SendConfigFrame(HdlcdClientCreated::Create(a_SerialPortNbr));
     } // if
 }
 
 void ConfigServerHandler::HdlcdClientDestroyed(uint16_t a_SerialPortNbr) {
     if (m_ConfigServer) {
         // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(HdlcdClientDestroyed::Create(a_SerialPortNbr));
-    } // if
-}
-
-void ConfigServerHandler::HdlcdClientDeviceFound(uint16_t a_SerialPortNbr) {
-    if (m_ConfigServer) {
-        // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(HdlcdClientDeviceFound::Create(a_SerialPortNbr));
-    } // if
-}
-
-void ConfigServerHandler::HdlcdClientDeviceLost(uint16_t a_SerialPortNbr) {
-    if (m_ConfigServer) {
-        // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(HdlcdClientDeviceLost::Create(a_SerialPortNbr));
+        m_ConfigServer->SendConfigFrame(HdlcdClientDestroyed::Create(a_SerialPortNbr));
     } // if
 }
 
 void ConfigServerHandler::HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive) {
     if (m_ConfigServer) {
         // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(HdlcdClientNewStatus::Create(a_SerialPortNbr, a_bIsResumed, a_bIsAlive));
+        m_ConfigServer->SendConfigFrame(HdlcdClientNewStatus::Create(a_SerialPortNbr, a_bIsResumed, a_bIsAlive));
     } // if
 }
 
 void ConfigServerHandler::HdlcdClientError(uint16_t a_SerialPortNbr, uint32_t a_ErrorCode) {
     if (m_ConfigServer) {
         // Prepare and send control packet
-        m_ConfigServer->SendControlPacket(HdlcdClientError::Create(a_SerialPortNbr, a_ErrorCode));
+        m_ConfigServer->SendConfigFrame(HdlcdClientError::Create(a_SerialPortNbr, a_ErrorCode));
     } // if
 }

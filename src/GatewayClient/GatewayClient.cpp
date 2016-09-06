@@ -24,6 +24,7 @@
 #include "GatewayClient.h"
 #include "../ConfigServer/ConfigServerHandlerCollection.h"
 #include "../HdlcdClient/HdlcdClientHandlerCollection.h"
+#include "GatewayFrames/GatewayFrame.h"
 #include <assert.h>
 
 GatewayClient::GatewayClient(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
@@ -38,5 +39,5 @@ GatewayClient::GatewayClient(boost::asio::io_service& a_IOService, std::shared_p
 void GatewayClient::Close() {
 }
 
-void GatewayClient::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer) {
+void GatewayClient::SendGatewayFrame(std::shared_ptr<GatewayFrame> a_GatewayFrame) {
 }

@@ -98,20 +98,6 @@ void ConfigServerHandlerCollection::HdlcdClientDestroyed(uint16_t a_SerialPortNb
     } // if
 }
 
-void ConfigServerHandlerCollection::HdlcdClientDeviceFound(uint16_t a_SerialPortNbr) {
-    // There is only one config server handler entity
-    if (m_ConfigServerHandler) {
-        m_ConfigServerHandler->HdlcdClientDeviceFound(a_SerialPortNbr);
-    } // if
-}
-
-void ConfigServerHandlerCollection::HdlcdClientDeviceLost(uint16_t a_SerialPortNbr) {
-    // There is only one config server handler entity
-    if (m_ConfigServerHandler) {
-        m_ConfigServerHandler->HdlcdClientDeviceLost(a_SerialPortNbr);
-    } // if
-}
-
 void ConfigServerHandlerCollection::HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive) {
     // There is only one config server handler entity
     if (m_ConfigServerHandler) {

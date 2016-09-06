@@ -25,19 +25,24 @@
 #define HDLCD_CLIENT_CREATE_H
 
 #include "ConfigFrame.h"
+#include <string>
 
 class HdlcdClientCreate: public ConfigFrame {
 public:
     // DTOR and creator
     HdlcdClientCreate(){}
     ~HdlcdClientCreate(){}
-    static std::shared_ptr<HdlcdClientCreate> Create(uint16_t a_SerialPortNbr) {
+    static std::shared_ptr<HdlcdClientCreate> Create(const std::string &a_DestinationName, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr) {
         auto l_HdlcdClientCreate = std::make_shared<HdlcdClientCreate>();
-        l_HdlcdClientCreate->m_SerialPortNbr = a_SerialPortNbr;
+        l_HdlcdClientCreate->m_DestinationName = a_DestinationName;
+        l_HdlcdClientCreate->m_TcpPortNbr      = a_TcpPortNbr;
+        l_HdlcdClientCreate->m_SerialPortNbr   = a_SerialPortNbr;
         return l_HdlcdClientCreate;
     }
     
     // Getter
+    const std::string& GetDestinationName() const { return m_DestinationName; }
+    uint16_t GetTcpPortNbr() const { return m_TcpPortNbr; }
     uint16_t GetSerialPortNbr() const { return m_SerialPortNbr; }
     
 private:
@@ -45,6 +50,8 @@ private:
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_CREATE; }
     
     // Members
+    std::string m_DestinationName;
+    uint16_t m_TcpPortNbr;
     uint16_t m_SerialPortNbr;
 };
 

@@ -38,8 +38,8 @@ public:
                     std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
     void Close();
     
-    void SendControlPacket(std::shared_ptr<ConfigFrame> a_ConfigFrame);
-    void SendOnControlPacketCallback(std::function<void()> a_OnControlPacketCallback = std::function<void()>());
+    void SendConfigFrame(std::shared_ptr<ConfigFrame> a_ConfigFrame);
+    void SetOnConfigFrameCallback(std::function<void()> a_OnConfigFrameCallback = std::function<void()>());
 
 private:
     // Members
@@ -47,7 +47,7 @@ private:
     std::shared_ptr<GatewayClientHandlerCollection> m_GatewayClientHandlerCollection;
     std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
     
-    std::function<void()> m_OnControlPacketCallback;
+    std::function<void()> m_OnConfigFrameCallback;
 };
 
 #endif // CONFIG_SERVER_H

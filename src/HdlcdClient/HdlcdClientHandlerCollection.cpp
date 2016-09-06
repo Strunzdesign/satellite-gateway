@@ -30,7 +30,7 @@
 HdlcdClientHandlerCollection::HdlcdClientHandlerCollection(boost::asio::io_service& a_IOService): m_IOService(a_IOService) {
 }
 
-void HdlcdClientHandlerCollection::Initialize(std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
+void HdlcdClientHandlerCollection::Initialize(std::shared_ptr<ConfigServerHandlerCollection>  a_ConfigServerHandlerCollection,
                                               std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection) {
     // Checks
     assert(a_ConfigServerHandlerCollection);
@@ -43,25 +43,86 @@ void HdlcdClientHandlerCollection::SystemShutdown() {
     // Drop all shared pointers
     m_ConfigServerHandlerCollection.reset();
     m_GatewayClientHandlerCollection.reset();
-    for (auto l_HdlcdClientHandlerIterator = m_HdlcdClientHandlerVector.begin(); l_HdlcdClientHandlerIterator != m_HdlcdClientHandlerVector.end(); ++l_HdlcdClientHandlerIterator) {
-        (*l_HdlcdClientHandlerIterator).reset();
+    for (auto l_HandlerIterator = m_HdlcdClientHandlerMap.begin(); l_HandlerIterator != m_HdlcdClientHandlerMap.end(); ++l_HandlerIterator) {
+        auto& l_Handler = l_HandlerIterator->second;
+        l_Handler->Close();
+        l_Handler.reset();
     } // for
 }
 
 void HdlcdClientHandlerCollection::CleanAll() {
+    // Silently remove all previous hdlcd client entites
+    for (auto l_HandlerIterator = m_HdlcdClientHandlerMap.begin(); l_HandlerIterator != m_HdlcdClientHandlerMap.end(); ++l_HandlerIterator) {
+        auto& l_Handler = l_HandlerIterator->second;
+        l_Handler->Close();
+        l_Handler.reset();
+    } // for
 }
 
-void HdlcdClientHandlerCollection::CreateHdlcdClient(uint16_t a_SerialPortNbr) {
+void HdlcdClientHandlerCollection::CreateHdlcdClient(const std::string &a_DestinationName, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr) {
+    // First check whether there is already a client handler for the specified serial port
+    if (m_HdlcdClientHandlerMap.find(a_SerialPortNbr) == m_HdlcdClientHandlerMap.end()) {
+        // The element did not exist yet, create it
+        auto l_NewHdlcdClientHandler = std::make_shared<HdlcdClientHandler>(m_IOService, m_ConfigServerHandlerCollection, m_GatewayClientHandlerCollection,
+                                                                            a_DestinationName, a_TcpPortNbr, a_SerialPortNbr);
+        m_HdlcdClientHandlerMap[a_SerialPortNbr] = l_NewHdlcdClientHandler;
+    } else {
+        // The client handler already existed
+        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, 0x00);
+    } // else
+    
+    // Deliver the "created" message in each case
+    m_ConfigServerHandlerCollection->HdlcdClientCreated(a_SerialPortNbr);
 }
 
 void HdlcdClientHandlerCollection::DestroyHdlcdClient(uint16_t a_SerialPortNbr) {
+    // First check whether there is a client handler for the specified serial port
+    auto l_HandlerIterator = m_HdlcdClientHandlerMap.find(a_SerialPortNbr);
+    if (l_HandlerIterator == m_HdlcdClientHandlerMap.end()) {
+        // The element did not exist
+        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, 0x00);
+    } else {
+        // The client handler exists
+        l_HandlerIterator->second->Close();
+        l_HandlerIterator->second.reset();
+        m_HdlcdClientHandlerMap.erase(l_HandlerIterator);
+    } // else
+    
+    // Deliver the "destroyed" message in each case
+    m_ConfigServerHandlerCollection->HdlcdClientDestroyed(a_SerialPortNbr);
 }
 
 void HdlcdClientHandlerCollection::SuspendHdlcdClient(uint16_t a_SerialPortNbr) {
+    // First check whether there is a client handler for the specified serial port
+    auto l_HandlerIterator = m_HdlcdClientHandlerMap.find(a_SerialPortNbr);
+    if (l_HandlerIterator == m_HdlcdClientHandlerMap.end()) {
+        // The element did not exist
+        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, 0x00);
+    } else {
+        // The client handler exists
+        l_HandlerIterator->second->Suspend();
+    } // else
 }
 
 void HdlcdClientHandlerCollection::ResumeHdlcdClient(uint16_t a_SerialPortNbr) {
+    // First check whether there is a client handler for the specified serial port
+    auto l_HandlerIterator = m_HdlcdClientHandlerMap.find(a_SerialPortNbr);
+    if (l_HandlerIterator == m_HdlcdClientHandlerMap.end()) {
+        // The element did not exist
+        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, 0x00);
+    } else {
+        // The client handler exists
+        l_HandlerIterator->second->Resume();
+    } // else
 }
 
-void HdlcdClientHandlerCollection::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer) {
+void HdlcdClientHandlerCollection::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Payload) {
+    // First check whether there is a client handler for the specified serial port
+    auto l_HandlerIterator = m_HdlcdClientHandlerMap.find(a_SerialPortNbr);
+    if (l_HandlerIterator != m_HdlcdClientHandlerMap.end()) {
+        // The client handler exists
+        l_HandlerIterator->second->SendPacket(a_Payload);
+    } else {
+        // Do not emit an error message... may be useful, but may also clutter the logs
+    } // else
 }

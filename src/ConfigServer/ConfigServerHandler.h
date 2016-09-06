@@ -37,7 +37,7 @@ public:
     ConfigServerHandler(boost::asio::io_service& a_IOService, std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection,
                         std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
     void Close();
-    void ConfigFrameReceived(std::shared_ptr<ConfigFrame> a_ConfigFrame);
+    void ConfigFrameReceived(const std::shared_ptr<ConfigFrame> &a_ConfigFrame);
     
     // Methods to be called by a gateway client entity
     void GatewayClientCreated     (uint32_t a_ReferenceNbr);
@@ -49,8 +49,6 @@ public:
     // Methods to be called by a HDLCd client entity
     void HdlcdClientCreated    (uint16_t a_SerialPortNbr);
     void HdlcdClientDestroyed  (uint16_t a_SerialPortNbr);
-    void HdlcdClientDeviceFound(uint16_t a_SerialPortNbr);
-    void HdlcdClientDeviceLost (uint16_t a_SerialPortNbr);
     void HdlcdClientNewStatus  (uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive);
     void HdlcdClientError      (uint16_t a_SerialPortNbr, uint32_t a_ErrorCode);
 

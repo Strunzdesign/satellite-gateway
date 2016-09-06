@@ -29,6 +29,7 @@
 #include <string>
 class ConfigServerHandlerCollection;
 class HdlcdClientHandlerCollection;
+class GatewayFrame;
 class GatewayClient;
 
 class GatewayClientHandler {
@@ -39,9 +40,10 @@ public:
                          std::string a_RemoteAddress, uint16_t a_RemotePortNbr);
     void Close();
     uint32_t GetReferenceNbr() const { return m_ReferenceNbr; }
+    void GatewayFrameReceived(const std::shared_ptr<GatewayFrame> &a_GatewayFrame);
     
     // Methods to be called by a HDLCd client entity
-    void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);
+    void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Payload);
     
 private:
     // Members

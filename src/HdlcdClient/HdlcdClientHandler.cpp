@@ -22,32 +22,71 @@
  */
 
 #include "HdlcdClientHandler.h"
+#include "../ConfigServer/ConfigServerHandlerCollection.h"
+#include "../GatewayClient/GatewayClientHandlerCollection.h"
 #include "HdlcdClient.h"
-#include "SnetServiceMessage.h"
 #include <assert.h>
 
 HdlcdClientHandler::HdlcdClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
                                        std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection, const std::string& a_DestinationName,
-                                       const std::string& a_TcpPort, const std::string& a_SerialPortName): m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection),
-                                       m_GatewayClientHandlerCollection(a_GatewayClientHandlerCollection), m_DestinationName(a_DestinationName), m_TcpPort(a_TcpPort),
-                                       m_SerialPortName(a_SerialPortName), m_Resolver(a_IOService), m_ConnectionRetryTimer(a_IOService) {
+                                       uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr): m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection),
+                                       m_GatewayClientHandlerCollection(a_GatewayClientHandlerCollection), m_DestinationName(a_DestinationName), m_TcpPortNbr(a_TcpPortNbr),
+                                       m_SerialPortNbr(a_SerialPortNbr), m_Resolver(a_IOService), m_ConnectionRetryTimer(a_IOService) {
     // Checks
     assert(m_ConfigServerHandlerCollection);
     assert(m_GatewayClientHandlerCollection);
                                            
     // Trigger activity
+    m_bSuspendSerialPort = false;
     ResolveDestination();
 }
 
-void HdlcdClientHandler::Send(const HdlcdPacketData& a_HdlcdPacketData, std::function<void()> a_OnSendDoneCallback) {
-    // TODO: check what happens if this is currently not connected, or will be deletet. Starvation?
-    m_HdlcdClient->Send(a_HdlcdPacketData, a_OnSendDoneCallback);
+void HdlcdClientHandler::Close() {
+    // Drop all shared pointers
+    m_ConfigServerHandlerCollection.reset();
+    m_GatewayClientHandlerCollection.reset();
+}
+
+void HdlcdClientHandler::Suspend() {
+    // Send a control packet to the HDLC daemon to suspend the serial device
+    m_bSuspendSerialPort = true;
+    if (m_HdlcdClient) {
+        // No problem if sent multiple times
+        m_HdlcdClient->Send(std::move(HdlcdPacketCtrl::CreatePortStatusRequest(true)));
+    } // if
+}
+
+void HdlcdClientHandler::Resume() {
+    // Send a control packet to the HDLC daemon to resume the serial device
+    m_bSuspendSerialPort = false;
+    if (m_HdlcdClient) {
+        // No problem if sent multiple times
+        m_HdlcdClient->Send(std::move(HdlcdPacketCtrl::CreatePortStatusRequest(false)));
+    } // if
+}
+
+void HdlcdClientHandler::SendPacket(const std::vector<unsigned char> &a_Payload) {
+    // Send a data packet to the HDLC daemon to deliver the payload via an HDLC I-frame
+    if ((m_HdlcdClient) && (!m_bSuspendSerialPort)) {
+        // Deliver
+        m_HdlcdClient->Send(std::move(HdlcdPacketData::CreatePacket(a_Payload, true)));
+    } else {
+        // Drop silently
+    } // else
 }
 
 void HdlcdClientHandler::ResolveDestination() {
-    m_Resolver.async_resolve({m_DestinationName, m_TcpPort}, [this](const boost::system::error_code& a_ErrorCode, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator) {
+    std::stringstream l_OStream;
+    l_OStream << m_TcpPortNbr;
+    m_Resolver.async_resolve({m_DestinationName, l_OStream.str()}, [this](const boost::system::error_code& a_ErrorCode, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator) {
         // Start the HDLCd access client
-        m_HdlcdClient = std::make_shared<HdlcdClient>(m_IOService, a_EndpointIterator, m_SerialPortName, 0x01);
+        std::stringstream l_OStream;
+        l_OStream << "/dev/ttyUSB" << m_SerialPortNbr;
+        m_HdlcdClient = std::make_shared<HdlcdClient>(m_IOService, a_EndpointIterator, l_OStream.str(), 0x01);
+        if (m_bSuspendSerialPort) {
+            // Immediately send a serial porst suspend request message to the HDLC daemon
+            m_HdlcdClient->Send(std::move(HdlcdPacketCtrl::CreatePortStatusRequest(true)));
+        } // if
         
         // On any error, restart after a short delay
         m_HdlcdClient->SetOnClosedCallback([this](){
@@ -60,11 +99,17 @@ void HdlcdClientHandler::ResolveDestination() {
             }); // async_wait
         }); // SetOnClosedCallback
         
-        m_HdlcdClient->SetOnDataCallback([this](const HdlcdPacketData& a_PacketData){
-            SnetServiceMessage l_ServiceMessage;
-            if (l_ServiceMessage.Deserialize(a_PacketData.GetData())) {
-//                m_pRouting->RouteSnetPacket(&l_ServiceMessage);
-            } // if
+        m_HdlcdClient->SetOnDataCallback([this](const HdlcdPacketData& a_PacketData) {
+            // Deliver the payload
+            m_GatewayClientHandlerCollection->SendPacket(m_SerialPortNbr, a_PacketData.GetData());
         }); // SetOnDataCallback
+        
+        m_HdlcdClient->SetOnCtrlCallback([this](const HdlcdPacketCtrl& a_PacketCtrl) {
+            if (a_PacketCtrl.GetPacketType() == HdlcdPacketCtrl::CTRL_TYPE_PORT_STATUS) {
+                // Update the state of the serial port
+                m_ConfigServerHandlerCollection->HdlcdClientNewStatus(m_SerialPortNbr, (!a_PacketCtrl.GetIsLockedBySelf() || !a_PacketCtrl.GetIsLockedByOthers()),
+                                                                      a_PacketCtrl.GetIsAlive());
+            } // if
+        }); // SetOnCtrlCallback
     }); // async_resolve
 }

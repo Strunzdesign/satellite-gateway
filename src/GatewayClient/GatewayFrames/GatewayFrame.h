@@ -1,5 +1,5 @@
 /**
- * \file      HdlcdClientDeviceFound.h
+ * \file      GatewayFrame.h
  * \brief     
  * \author    Florian Evers, florian-evers@gmx.de
  * \copyright GNU Public License version 3.
@@ -21,31 +21,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef HDLCD_CLIENT_DEVICE_FOUND_H
-#define HDLCD_CLIENT_DEVICE_FOUND_H
+#ifndef GATEWAY_FRAME_H
+#define GATEWAY_FRAME_H
 
-#include "ConfigFrame.h"
+typedef enum {
+    GATEWAY_FRAME_UNKNOWN = 0x00,
+    GATEWAY_FRAME_DATA    = 0x10
+} E_GATEWAY_FRAME;
 
-class HdlcdClientDeviceFound: public ConfigFrame {
+class GatewayFrame {
 public:
-    // DTOR and creator
-    HdlcdClientDeviceFound(){}
-    ~HdlcdClientDeviceFound(){}
-    static std::shared_ptr<HdlcdClientDeviceFound> Create(uint16_t a_SerialPortNbr) {
-        auto l_HdlcdClientDeviceFound = std::make_shared<HdlcdClientDeviceFound>();
-        l_HdlcdClientDeviceFound->m_SerialPortNbr = a_SerialPortNbr;
-        return l_HdlcdClientDeviceFound;
-    }
+    // CTOR and DTOR
+    GatewayFrame(){}
+    virtual ~GatewayFrame(){} 
     
-    // Getter
-    uint16_t GetSerialPortNbr() const { return m_SerialPortNbr; }
-    
-private:
-    // Methods
-    E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_DEVICE_FOUND; }
-    
-    // Members
-    uint16_t m_SerialPortNbr;
+    virtual E_GATEWAY_FRAME GetGatewayFrameType() const { return GATEWAY_FRAME_UNKNOWN; }
 };
 
-#endif // HDLCD_CLIENT_DEVICE_FOUND_H
+#endif // GATEWAY_FRAME_H
