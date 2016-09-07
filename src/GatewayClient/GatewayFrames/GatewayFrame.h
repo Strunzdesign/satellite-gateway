@@ -36,6 +36,11 @@ public:
     virtual ~GatewayFrame(){} 
     
     virtual E_GATEWAY_FRAME GetGatewayFrameType() const { return GATEWAY_FRAME_UNKNOWN; }
+    
+    // Serializer and deserializer
+    virtual const std::vector<unsigned char> Serialize() const = 0;
+    virtual size_t BytesNeeded() const = 0;
+    virtual bool BytesReceived(const unsigned char *a_ReadBuffer, size_t a_BytesRead) = 0;
 };
 
 #endif // GATEWAY_FRAME_H

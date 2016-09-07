@@ -26,9 +26,9 @@
 
 #include <memory>
 #include <boost/asio.hpp>
+#include "GatewayFrames/GatewayFrame.h"
 class ConfigServerHandlerCollection;
 class HdlcdClientHandlerCollection;
-class GatewayFrame;
 
 class GatewayClient {
 public:
@@ -38,7 +38,7 @@ public:
     void Close();
 
     // Methods to be called by a HDLCd client entity
-    void SendGatewayFrame(std::shared_ptr<GatewayFrame> a_GatewayFrame);
+    void SendGatewayFrame(const GatewayFrame& a_GatewayFrame);
     
 private:
     // Members
