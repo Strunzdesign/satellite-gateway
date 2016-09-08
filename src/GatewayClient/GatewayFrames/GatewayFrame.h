@@ -24,38 +24,16 @@
 #ifndef GATEWAY_FRAME_H
 #define GATEWAY_FRAME_H
 
-#include <vector>
-#include <assert.h>
+#include "Frame.h"
 
 typedef enum {
-    GATEWAY_FRAME_UNKNOWN = 0x00,
-    GATEWAY_FRAME_DATA    = 0x10
+    GATEWAY_FRAME_DATA    = 0x00,
+    GATEWAY_FRAME_UNKNOWN = 0xFF
 } E_GATEWAY_FRAME;
 
-class GatewayFrame {
+class GatewayFrame: public Frame {
 public:
-    // CTOR and DTOR
-    GatewayFrame(): m_BytesRemaining(0) {}
-    virtual ~GatewayFrame(){} 
-    
     virtual E_GATEWAY_FRAME GetGatewayFrameType() const { return GATEWAY_FRAME_UNKNOWN; }
-    
-    // Serializer and deserializer
-    virtual const std::vector<unsigned char> Serialize() const = 0;
-    size_t BytesNeeded() const { return m_BytesRemaining; }
-    virtual bool BytesReceived(const unsigned char *a_ReadBuffer, size_t a_BytesRead) {
-        // Checks
-        assert(m_BytesRemaining);
-        assert(m_BytesRemaining <= a_BytesRead);
-        assert(a_BytesRead);
-        m_Payload.insert(m_Payload.end(), a_ReadBuffer, (a_ReadBuffer + a_BytesRead));
-        m_BytesRemaining -= a_BytesRead;
-        return (m_BytesRemaining != 0); // true: subsequent bytes are required
-    }
-    
-protected:
-    std::vector<unsigned char> m_Payload;
-    size_t m_BytesRemaining;
 };
 
 #endif // GATEWAY_FRAME_H

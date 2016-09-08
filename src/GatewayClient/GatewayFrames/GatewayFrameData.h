@@ -25,6 +25,7 @@
 #define GATEWAY_FRAME_DATA_H
 
 #include "GatewayFrame.h"
+#include <memory>
 
 class GatewayFrameData: public GatewayFrame {
 public:
@@ -66,7 +67,6 @@ private:
     // Serializer and deserializer
     const std::vector<unsigned char> Serialize() const {
         assert(m_eDeserialize == DESERIALIZE_FULL);
-        assert(m_BytesRemaining == 0);
         std::vector<unsigned char> l_Buffer;
         
         // Prepare length field, serial port number, and payload
@@ -80,31 +80,38 @@ private:
     }
         
     bool BytesReceived(const unsigned char *a_ReadBuffer, size_t a_BytesRead) {
-        if (GatewayFrame::BytesReceived(a_ReadBuffer, a_BytesRead)) {
+        if (Frame::BytesReceived(a_ReadBuffer, a_BytesRead)) {
             // Subsequent bytes are required
             return true; // no error (yet)
         } // if
         
-        // All bytes complete
+        // All requested bytes are available
         switch (m_eDeserialize) {
         case DESERIALIZE_HEADER: {
             // Deserialize the header
+            assert(m_Payload.size() == 4);
             m_BytesRemaining = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Payload[0])));
             m_SerialPortNbr  = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Payload[2])));
-            m_eDeserialize   = DESERIALIZE_DATA;
             m_Payload.clear();
             
             // Check length of payload
             if (m_BytesRemaining < 2) {
-                return false; // error!
+                // Error!
+                m_eDeserialize = DESERIALIZE_ERROR;
+                return false;
             } else {
+                m_eDeserialize = DESERIALIZE_DATA;
                 m_BytesRemaining -= 2;
+                if (m_BytesRemaining == 0) {
+                    // An empty data frame?!... Ok...
+                    m_eDeserialize = DESERIALIZE_FULL;
+                } // if
             } // else
 
             break;
         }
         case DESERIALIZE_DATA: {
-            // Read payload complete
+            // Read of payload completed
             m_eDeserialize = DESERIALIZE_FULL;
             break;
         }
@@ -113,15 +120,17 @@ private:
             assert(false);
         } // switch
         
-        return true; // no error, maybe subsequent bytes are required
+        // No error, maybe subsequent bytes are required
+        return true;
     }
     
     // Members
     uint16_t m_SerialPortNbr;
     typedef enum {
-        DESERIALIZE_HEADER = 0,
-        DESERIALIZE_DATA   = 1,
-        DESERIALIZE_FULL   = 2
+        DESERIALIZE_ERROR  = 0,
+        DESERIALIZE_HEADER = 1,
+        DESERIALIZE_DATA   = 2,
+        DESERIALIZE_FULL   = 3
     } E_DESERIALIZE;
     E_DESERIALIZE m_eDeserialize;  
 };
