@@ -44,7 +44,7 @@ public:
     
     // Methods to be called by a configuration server entity
     void CleanAll();
-    void CreateHdlcdClient (const std::string &a_DestinationName, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr);
+    void CreateHdlcdClient (const std::string &a_RemoteAddress, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr);
     void DestroyHdlcdClient(uint16_t a_SerialPortNbr);
     void SuspendHdlcdClient(uint16_t a_SerialPortNbr);
     void ResumeHdlcdClient (uint16_t a_SerialPortNbr);

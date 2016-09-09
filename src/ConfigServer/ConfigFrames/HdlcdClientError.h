@@ -25,30 +25,64 @@
 #define HDLCD_CLIENT_DEVICE_ERROR_H
 
 #include "ConfigFrame.h"
+#include <memory>
 
 class HdlcdClientError: public ConfigFrame {
 public:
-    // DTOR and creator
-    HdlcdClientError(){}
-    ~HdlcdClientError(){}
-    static std::shared_ptr<HdlcdClientError> Create(uint16_t a_SerialPortNbr, uint32_t a_ErrorCode) {
-        auto l_HdlcdClientError = std::make_shared<HdlcdClientError>();
-        l_HdlcdClientError->m_SerialPortNbr = a_SerialPortNbr;
-        l_HdlcdClientError->m_ErrorCode = a_ErrorCode;
+    static HdlcdClientError Create(uint16_t a_SerialPortNbr, uint16_t a_ErrorCode) {
+        HdlcdClientError l_HdlcdClientError;
+        l_HdlcdClientError.m_SerialPortNbr = a_SerialPortNbr;
+        l_HdlcdClientError.m_ErrorCode = a_ErrorCode;
         return l_HdlcdClientError;
     }
-    
+
+    static std::shared_ptr<HdlcdClientError> CreateDeserializedFrame() {
+        auto l_HdlcdClientError(std::shared_ptr<HdlcdClientError>(new HdlcdClientError));
+        l_HdlcdClientError->m_eDeserialize = DESERIALIZE_BODY;
+        l_HdlcdClientError->m_BytesRemaining = 5; // Next: read body including the frame type byte
+        return l_HdlcdClientError;
+    }
+
     // Getter
-    uint16_t GetSerialPortNbr() const { return m_SerialPortNbr; }
-    uint16_t GetErrorCode() const { return m_ErrorCode; }
-    
+    uint16_t GetSerialPortNbr() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_SerialPortNbr;
+    }
+
+    uint16_t GetErrorCode() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_ErrorCode;
+    }
+
 private:
+    // Private CTOR
+    HdlcdClientError(): m_SerialPortNbr(0), m_ErrorCode(0), m_eDeserialize(DESERIALIZE_FULL) {
+    }
+    
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_ERROR; }
-    
+
+    // Serializer
+    const std::vector<unsigned char> Serialize() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        std::vector<unsigned char> l_Buffer;
+        l_Buffer.emplace_back(CONFIG_FRAME_HDLCD_CLIENT_ERROR);
+        l_Buffer.emplace_back((m_SerialPortNbr >> 8) & 0xFF);
+        l_Buffer.emplace_back((m_SerialPortNbr >> 0) & 0xFF);
+        l_Buffer.emplace_back((m_ErrorCode     >> 8) & 0xFF);
+        l_Buffer.emplace_back((m_ErrorCode     >> 0) & 0xFF);
+        return l_Buffer;
+    }
+
     // Members
     uint16_t m_SerialPortNbr;
-    uint32_t m_ErrorCode;
+    uint16_t m_ErrorCode;
+    typedef enum {
+        DESERIALIZE_ERROR = 0,
+        DESERIALIZE_BODY  = 1,
+        DESERIALIZE_FULL  = 2
+    } E_DESERIALIZE;
+    E_DESERIALIZE m_eDeserialize;
 };
 
 #endif // HDLCD_CLIENT_DEVICE_ERROR_H

@@ -35,7 +35,7 @@ class HdlcdClient;
 class HdlcdClientHandler {
 public:
     HdlcdClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                       std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection, const std::string& a_DestinationName, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr);
+                       std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection, const std::string& a_RemoteAddress, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr);
     void Close();
     void Suspend();
     void Resume();
@@ -50,7 +50,7 @@ private:
     std::shared_ptr<ConfigServerHandlerCollection>  m_ConfigServerHandlerCollection;
     std::shared_ptr<GatewayClientHandlerCollection> m_GatewayClientHandlerCollection;
     
-    const std::string m_DestinationName;
+    const std::string m_RemoteAddress;
     const uint16_t m_TcpPortNbr;
     const uint16_t m_SerialPortNbr;
     

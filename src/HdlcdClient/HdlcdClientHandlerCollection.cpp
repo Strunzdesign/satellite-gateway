@@ -59,12 +59,12 @@ void HdlcdClientHandlerCollection::CleanAll() {
     } // for
 }
 
-void HdlcdClientHandlerCollection::CreateHdlcdClient(const std::string &a_DestinationName, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr) {
+void HdlcdClientHandlerCollection::CreateHdlcdClient(const std::string &a_RemoteAddress, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr) {
     // First check whether there is already a client handler for the specified serial port
     if (m_HdlcdClientHandlerMap.find(a_SerialPortNbr) == m_HdlcdClientHandlerMap.end()) {
         // The element did not exist yet, create it
         auto l_NewHdlcdClientHandler = std::make_shared<HdlcdClientHandler>(m_IOService, m_ConfigServerHandlerCollection, m_GatewayClientHandlerCollection,
-                                                                            a_DestinationName, a_TcpPortNbr, a_SerialPortNbr);
+                                                                            a_RemoteAddress, a_TcpPortNbr, a_SerialPortNbr);
         m_HdlcdClientHandlerMap[a_SerialPortNbr] = l_NewHdlcdClientHandler;
     } else {
         // The client handler already existed

@@ -24,7 +24,6 @@
 #include "ConfigServer.h"
 #include "../GatewayClient/GatewayClientHandlerCollection.h"
 #include "../HdlcdClient/HdlcdClientHandlerCollection.h"
-#include "ConfigFrames/ConfigFrame.h"
 #include <assert.h>
 
 ConfigServer::ConfigServer(boost::asio::io_service& a_IOService): m_IOService(a_IOService) {
@@ -45,7 +44,7 @@ void ConfigServer::Close() {
     m_HdlcdClientHandlerCollection.reset();
 }
 
-void ConfigServer::SendConfigFrame(std::shared_ptr<ConfigFrame> a_ConfigFrame) {
+void ConfigServer::SendConfigFrame(const ConfigFrame& a_ConfigFrame) {
 }
 
 void ConfigServer::SetOnConfigFrameCallback(std::function<void()> a_OnConfigFrameCallback) {

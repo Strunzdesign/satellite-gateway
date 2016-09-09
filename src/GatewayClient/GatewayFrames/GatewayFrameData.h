@@ -56,29 +56,28 @@ public:
     
 private:
     // Private CTOR
-    GatewayFrameData() {
-        m_SerialPortNbr = 0;
-        m_eDeserialize = DESERIALIZE_FULL;
+    GatewayFrameData(): m_SerialPortNbr(0), m_eDeserialize(DESERIALIZE_FULL) {
     }
     
     // Internal helpers
     E_GATEWAY_FRAME GetGatewayFrameType() const { return GATEWAY_FRAME_DATA; }
     
-    // Serializer and deserializer
+    // Serializer
     const std::vector<unsigned char> Serialize() const {
         assert(m_eDeserialize == DESERIALIZE_FULL);
         std::vector<unsigned char> l_Buffer;
         
         // Prepare length field, serial port number, and payload
         uint16_t l_NbrOfBytes = (2 + m_Payload.size());
-        l_Buffer.emplace_back((l_NbrOfBytes    >> 8) & 0x00FF);
-        l_Buffer.emplace_back((l_NbrOfBytes    >> 0) & 0x00FF);
-        l_Buffer.emplace_back((m_SerialPortNbr >> 8) & 0x00FF);
-        l_Buffer.emplace_back((m_SerialPortNbr >> 0) & 0x00FF);
+        l_Buffer.emplace_back((l_NbrOfBytes    >> 8) & 0xFF);
+        l_Buffer.emplace_back((l_NbrOfBytes    >> 0) & 0xFF);
+        l_Buffer.emplace_back((m_SerialPortNbr >> 8) & 0xFF);
+        l_Buffer.emplace_back((m_SerialPortNbr >> 0) & 0xFF);
         l_Buffer.insert(l_Buffer.end(), m_Payload.begin(), m_Payload.end());
         return l_Buffer;
     }
-        
+
+    // Deserializer
     bool BytesReceived(const unsigned char *a_ReadBuffer, size_t a_BytesRead) {
         if (Frame::BytesReceived(a_ReadBuffer, a_BytesRead)) {
             // Subsequent bytes are required
@@ -132,7 +131,7 @@ private:
         DESERIALIZE_DATA   = 2,
         DESERIALIZE_FULL   = 3
     } E_DESERIALIZE;
-    E_DESERIALIZE m_eDeserialize;  
+    E_DESERIALIZE m_eDeserialize;
 };
 
 #endif // GATEWAY_FRAME_DATA_H

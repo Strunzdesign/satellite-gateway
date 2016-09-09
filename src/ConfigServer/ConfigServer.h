@@ -26,9 +26,9 @@
 
 #include <memory>
 #include <boost/asio.hpp>
+#include "ConfigFrames/ConfigFrame.h"
 class GatewayClientHandlerCollection;
 class HdlcdClientHandlerCollection;
-class ConfigFrame;
 
 class ConfigServer {
 public:
@@ -38,7 +38,7 @@ public:
                     std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
     void Close();
     
-    void SendConfigFrame(std::shared_ptr<ConfigFrame> a_ConfigFrame);
+    void SendConfigFrame(const ConfigFrame& a_ConfigFrame);
     void SetOnConfigFrameCallback(std::function<void()> a_OnConfigFrameCallback = std::function<void()>());
 
 private:

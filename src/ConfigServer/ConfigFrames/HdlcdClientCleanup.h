@@ -25,20 +25,45 @@
 #define HDLCD_CLIENT_CLEANUP_H
 
 #include "ConfigFrame.h"
+#include <memory>
 
 class HdlcdClientCleanup: public ConfigFrame {
 public:
-    // DTOR and creator
-    HdlcdClientCleanup(){}
-    ~HdlcdClientCleanup(){}
-    static std::shared_ptr<HdlcdClientCleanup> Create() {
-        auto l_HdlcdClientCleanup = std::make_shared<HdlcdClientCleanup>();
+    static HdlcdClientCleanup Create() {
+        HdlcdClientCleanup l_HdlcdClientCleanup;
         return l_HdlcdClientCleanup;
     }
-    
+
+    static std::shared_ptr<HdlcdClientCleanup> CreateDeserializedFrame() {
+        auto l_HdlcdClientCleanup(std::shared_ptr<HdlcdClientCleanup>(new HdlcdClientCleanup));
+        l_HdlcdClientCleanup->m_eDeserialize = DESERIALIZE_BODY;
+        l_HdlcdClientCleanup->m_BytesRemaining = 1; // Next: consume the frame type byte
+        return l_HdlcdClientCleanup;
+    }
+
 private:
+    // Private CTOR
+    HdlcdClientCleanup(): m_eDeserialize(DESERIALIZE_FULL) {
+    }
+
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_CLEANUP; }
+    
+    // Serializer
+    const std::vector<unsigned char> Serialize() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        std::vector<unsigned char> l_Buffer;
+        l_Buffer.emplace_back(CONFIG_FRAME_HDLCD_CLIENT_CLEANUP);
+        return l_Buffer;
+    }
+    
+    // Members
+    typedef enum {
+        DESERIALIZE_ERROR = 0,
+        DESERIALIZE_BODY  = 1,
+        DESERIALIZE_FULL  = 2
+    } E_DESERIALIZE;
+    E_DESERIALIZE m_eDeserialize;
 };
 
 #endif // HDLCD_CLIENT_CLEANUP_H

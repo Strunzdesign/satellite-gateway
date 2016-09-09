@@ -25,26 +25,57 @@
 #define GATEWAY_CLIENT_DESTROY_H
 
 #include "ConfigFrame.h"
+#include <memory>
 
 class GatewayClientDestroy: public ConfigFrame {
 public:
-    // DTOR and creator
-    GatewayClientDestroy(){}
-    ~GatewayClientDestroy(){}
-    static std::shared_ptr<GatewayClientDestroy> Create(uint32_t a_ReferenceNbr) {
-        auto l_GatewayClientDestroy = std::make_shared<GatewayClientDestroy>();
-        l_GatewayClientDestroy->m_ReferenceNbr = a_ReferenceNbr;
+    static GatewayClientDestroy Create(uint32_t a_ReferenceNbr) {
+        GatewayClientDestroy l_GatewayClientDestroy;
+        l_GatewayClientDestroy.m_ReferenceNbr = a_ReferenceNbr;
         return l_GatewayClientDestroy;
     }
-    
-    uint16_t GetReferenceNbr() const { return m_ReferenceNbr; }
-    
+
+    static std::shared_ptr<GatewayClientDestroy> CreateDeserializedFrame() {
+        auto l_GatewayClientDestroy(std::shared_ptr<GatewayClientDestroy>(new GatewayClientDestroy));
+        l_GatewayClientDestroy->m_eDeserialize = DESERIALIZE_BODY;
+        l_GatewayClientDestroy->m_BytesRemaining = 5; // Next: read body including the frame type byte
+        return l_GatewayClientDestroy;
+    }
+
+    // Getter
+    uint16_t GetReferenceNbr() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_ReferenceNbr;
+    }
+
 private:
+    // Private CTOR
+    GatewayClientDestroy(): m_ReferenceNbr(0), m_eDeserialize(DESERIALIZE_FULL) {
+    }
+    
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_GATEWAY_CLIENT_DESTROY; }
     
+    // Serializer
+    const std::vector<unsigned char> Serialize() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        std::vector<unsigned char> l_Buffer;
+        l_Buffer.emplace_back(CONFIG_FRAME_GATEWAY_CLIENT_DESTROY);
+        l_Buffer.emplace_back((m_ReferenceNbr >> 24) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >> 16) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >>  8) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >>  0) & 0xFF);
+        return l_Buffer;
+    }
+    
     // Members
     uint32_t m_ReferenceNbr;
+    typedef enum {
+        DESERIALIZE_ERROR = 0,
+        DESERIALIZE_BODY  = 1,
+        DESERIALIZE_FULL  = 2
+    } E_DESERIALIZE;
+    E_DESERIALIZE m_eDeserialize;
 };
 
 #endif // GATEWAY_CLIENT_DESTROY_H

@@ -25,34 +25,75 @@
 #define HDLCD_CLIENT_CREATE_H
 
 #include "ConfigFrame.h"
+#include <memory>
 #include <string>
 
 class HdlcdClientCreate: public ConfigFrame {
 public:
-    // DTOR and creator
-    HdlcdClientCreate(){}
-    ~HdlcdClientCreate(){}
-    static std::shared_ptr<HdlcdClientCreate> Create(const std::string &a_DestinationName, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr) {
-        auto l_HdlcdClientCreate = std::make_shared<HdlcdClientCreate>();
-        l_HdlcdClientCreate->m_DestinationName = a_DestinationName;
-        l_HdlcdClientCreate->m_TcpPortNbr      = a_TcpPortNbr;
-        l_HdlcdClientCreate->m_SerialPortNbr   = a_SerialPortNbr;
+    static HdlcdClientCreate Create(const std::string &a_RemoteAddress, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr) {
+        HdlcdClientCreate l_HdlcdClientCreate;
+        l_HdlcdClientCreate.m_RemoteAddress = a_RemoteAddress;
+        l_HdlcdClientCreate.m_TcpPortNbr    = a_TcpPortNbr;
+        l_HdlcdClientCreate.m_SerialPortNbr = a_SerialPortNbr;
         return l_HdlcdClientCreate;
     }
-    
+
+    static std::shared_ptr<HdlcdClientCreate> CreateDeserializedFrame() {
+        auto l_HdlcdClientCreate(std::shared_ptr<HdlcdClientCreate>(new HdlcdClientCreate));
+        l_HdlcdClientCreate->m_eDeserialize = DESERIALIZE_HEADER;
+        l_HdlcdClientCreate->m_BytesRemaining = 6; // Next: read the header including the frame type byte
+        return l_HdlcdClientCreate;
+    }
+
     // Getter
-    const std::string& GetDestinationName() const { return m_DestinationName; }
-    uint16_t GetTcpPortNbr() const { return m_TcpPortNbr; }
-    uint16_t GetSerialPortNbr() const { return m_SerialPortNbr; }
-    
+    const std::string& GetRemoteAddress() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_RemoteAddress;
+    }
+
+    uint16_t GetTcpPortNbr() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_TcpPortNbr;
+    }
+
+    uint16_t GetSerialPortNbr() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_SerialPortNbr;
+    }
+
 private:
+    // Private CTOR
+    HdlcdClientCreate(): m_TcpPortNbr(0), m_SerialPortNbr(0), m_eDeserialize(DESERIALIZE_FULL) {
+    }
+
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_CREATE; }
     
+    // Serializer
+    const std::vector<unsigned char> Serialize() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        std::vector<unsigned char> l_Buffer;
+        l_Buffer.emplace_back(CONFIG_FRAME_HDLCD_CLIENT_CREATE);
+        l_Buffer.emplace_back((m_SerialPortNbr >>  8)  & 0xFF);
+        l_Buffer.emplace_back((m_SerialPortNbr >>  0)  & 0xFF);
+        l_Buffer.emplace_back((m_TcpPortNbr    >>  8)  & 0xFF);
+        l_Buffer.emplace_back((m_TcpPortNbr    >>  0)  & 0xFF);
+        l_Buffer.emplace_back((m_RemoteAddress.size()) & 0xFF);
+        l_Buffer.insert(l_Buffer.end(), m_RemoteAddress.data(), (m_RemoteAddress.data() + m_RemoteAddress.size()));
+        return l_Buffer;
+    }
+    
     // Members
-    std::string m_DestinationName;
+    std::string m_RemoteAddress;
     uint16_t m_TcpPortNbr;
     uint16_t m_SerialPortNbr;
+    typedef enum {
+        DESERIALIZE_ERROR  = 0,
+        DESERIALIZE_HEADER = 1,
+        DESERIALIZE_BODY   = 2,
+        DESERIALIZE_FULL   = 3
+    } E_DESERIALIZE;
+    E_DESERIALIZE m_eDeserialize;
 };
 
 #endif // HDLCD_CLIENT_CREATE_H

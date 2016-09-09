@@ -25,27 +25,55 @@
 #define HDLCD_CLIENT_RESUME_H
 
 #include "ConfigFrame.h"
+#include <memory>
 
 class HdlcdClientResume: public ConfigFrame {
 public:
-    // DTOR and creator
-    HdlcdClientResume(){}
-    ~HdlcdClientResume(){}
-    static std::shared_ptr<HdlcdClientResume> Create(uint16_t a_SerialPortNbr) {
-        auto l_HdlcdClientResume = std::make_shared<HdlcdClientResume>();
-        l_HdlcdClientResume->m_SerialPortNbr = a_SerialPortNbr;
+    static HdlcdClientResume Create(uint16_t a_SerialPortNbr) {
+        HdlcdClientResume l_HdlcdClientResume;
+        l_HdlcdClientResume.m_SerialPortNbr = a_SerialPortNbr;
         return l_HdlcdClientResume;
     }
-    
+
+    static std::shared_ptr<HdlcdClientResume> CreateDeserializedFrame() {
+        auto l_HdlcdClientResume(std::shared_ptr<HdlcdClientResume>(new HdlcdClientResume));
+        l_HdlcdClientResume->m_eDeserialize = DESERIALIZE_BODY;
+        l_HdlcdClientResume->m_BytesRemaining = 3; // Next: read body including the frame type byte
+        return l_HdlcdClientResume;
+    }
+
     // Getter
-    uint16_t GetSerialPortNbr() const { return m_SerialPortNbr; }
-    
+    uint16_t GetSerialPortNbr() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_SerialPortNbr;
+    }
+
 private:
+    // Private CTOR
+    HdlcdClientResume(): m_SerialPortNbr(0), m_eDeserialize(DESERIALIZE_FULL) {
+    }
+    
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_RESUME; }
-    
+
+    // Serializer
+    const std::vector<unsigned char> Serialize() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        std::vector<unsigned char> l_Buffer;
+        l_Buffer.emplace_back(CONFIG_FRAME_HDLCD_CLIENT_RESUME);
+        l_Buffer.emplace_back((m_SerialPortNbr >> 8) & 0xFF);
+        l_Buffer.emplace_back((m_SerialPortNbr >> 0) & 0xFF);
+        return l_Buffer;
+    }
+
     // Members
     uint16_t m_SerialPortNbr;
+    typedef enum {
+        DESERIALIZE_ERROR = 0,
+        DESERIALIZE_BODY  = 1,
+        DESERIALIZE_FULL  = 2
+    } E_DESERIALIZE;
+    E_DESERIALIZE m_eDeserialize;
 };
 
 #endif // HDLCD_CLIENT_RESUME_H

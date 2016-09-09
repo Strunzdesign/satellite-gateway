@@ -25,27 +25,55 @@
 #define HDLCD_CLIENT_SUSPEND_H
 
 #include "ConfigFrame.h"
+#include <memory>
 
 class HdlcdClientSuspend: public ConfigFrame {
 public:
-    // DTOR and creator
-    HdlcdClientSuspend(){}
-    ~HdlcdClientSuspend(){}
-    static std::shared_ptr<HdlcdClientSuspend> Create(uint16_t a_SerialPortNbr) {
-        auto l_HdlcdClientSuspend = std::make_shared<HdlcdClientSuspend>();
-        l_HdlcdClientSuspend->m_SerialPortNbr = a_SerialPortNbr;
+    static HdlcdClientSuspend Create(uint16_t a_SerialPortNbr) {
+        HdlcdClientSuspend l_HdlcdClientSuspend;
+        l_HdlcdClientSuspend.m_SerialPortNbr = a_SerialPortNbr;
         return l_HdlcdClientSuspend;
     }
-    
+
+    static std::shared_ptr<HdlcdClientSuspend> CreateDeserializedFrame() {
+        auto l_HdlcdClientSuspend(std::shared_ptr<HdlcdClientSuspend>(new HdlcdClientSuspend));
+        l_HdlcdClientSuspend->m_eDeserialize = DESERIALIZE_BODY;
+        l_HdlcdClientSuspend->m_BytesRemaining = 3; // Next: read body including the frame type byte
+        return l_HdlcdClientSuspend;
+    }
+
     // Getter
-    uint16_t GetSerialPortNbr() const { return m_SerialPortNbr; }
-    
+    uint16_t GetSerialPortNbr() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_SerialPortNbr;
+    }
+
 private:
+    // Private CTOR
+    HdlcdClientSuspend(): m_SerialPortNbr(0), m_eDeserialize(DESERIALIZE_FULL) {
+    }
+
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_SUSPEND; }
     
+    // Serializer
+    const std::vector<unsigned char> Serialize() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        std::vector<unsigned char> l_Buffer;
+        l_Buffer.emplace_back(CONFIG_FRAME_HDLCD_CLIENT_SUSPEND);
+        l_Buffer.emplace_back((m_SerialPortNbr >> 8) & 0xFF);
+        l_Buffer.emplace_back((m_SerialPortNbr >> 0) & 0xFF);
+        return l_Buffer;
+    }
+
     // Members
     uint16_t m_SerialPortNbr;
+    typedef enum {
+        DESERIALIZE_ERROR = 0,
+        DESERIALIZE_BODY  = 1,
+        DESERIALIZE_FULL  = 2
+    } E_DESERIALIZE;
+    E_DESERIALIZE m_eDeserialize;
 };
 
 #endif // HDLCD_CLIENT_SUSPEND_H

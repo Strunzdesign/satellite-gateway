@@ -25,26 +25,66 @@
 #define GATEWAY_CLIENT_ERROR_H
 
 #include "ConfigFrame.h"
+#include <memory>
 
 class GatewayClientError: public ConfigFrame {
 public:
-    // DTOR and creator
-    GatewayClientError(){}
-    ~GatewayClientError(){}
-    static std::shared_ptr<GatewayClientError> Create(uint32_t a_ReferenceNbr, uint32_t a_ErrorCode) {
-        auto l_GatewayClientError = std::make_shared<GatewayClientError>();
-        l_GatewayClientError->m_ReferenceNbr = a_ReferenceNbr;
-        l_GatewayClientError->m_ErrorCode = a_ErrorCode;
+    static GatewayClientError Create(uint32_t a_ReferenceNbr, uint16_t a_ErrorCode) {
+        GatewayClientError l_GatewayClientError;
+        l_GatewayClientError.m_ReferenceNbr = a_ReferenceNbr;
+        l_GatewayClientError.m_ErrorCode = a_ErrorCode;
         return l_GatewayClientError;
     }
-    
+
+    static std::shared_ptr<GatewayClientError> CreateDeserializedFrame() {
+        auto l_GatewayClientError(std::shared_ptr<GatewayClientError>(new GatewayClientError));
+        l_GatewayClientError->m_eDeserialize = DESERIALIZE_BODY;
+        l_GatewayClientError->m_BytesRemaining = 7; // Next: read body including the frame type byte
+        return l_GatewayClientError;
+    }
+
+    // Getter
+    uint16_t GetReferenceNbr() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_ReferenceNbr;
+    }
+
+    uint16_t GetErrorCode() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_ErrorCode;
+    }
+
 private:
+    // Private CTOR
+    GatewayClientError(): m_ReferenceNbr(0), m_ErrorCode(0), m_eDeserialize(DESERIALIZE_FULL) {
+    }
+    
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_GATEWAY_CLIENT_ERROR; }
     
+    // Serializer
+    const std::vector<unsigned char> Serialize() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        std::vector<unsigned char> l_Buffer;
+        l_Buffer.emplace_back(CONFIG_FRAME_GATEWAY_CLIENT_ERROR);
+        l_Buffer.emplace_back((m_ReferenceNbr >> 24) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >> 16) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >>  8) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >>  0) & 0xFF);
+        l_Buffer.emplace_back((m_ErrorCode    >>  8) & 0xFF);
+        l_Buffer.emplace_back((m_ErrorCode    >>  0) & 0xFF);
+        return l_Buffer;
+    }
+    
     // Members
     uint32_t m_ReferenceNbr;
-    uint32_t m_ErrorCode;
+    uint16_t m_ErrorCode;
+    typedef enum {
+        DESERIALIZE_ERROR = 0,
+        DESERIALIZE_BODY  = 1,
+        DESERIALIZE_FULL  = 2
+    } E_DESERIALIZE;
+    E_DESERIALIZE m_eDeserialize;
 };
 
 #endif // GATEWAY_CLIENT_ERROR_H

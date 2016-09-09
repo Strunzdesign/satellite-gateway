@@ -28,9 +28,9 @@
 #include <assert.h>
 
 HdlcdClientHandler::HdlcdClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                                       std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection, const std::string& a_DestinationName,
+                                       std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection, const std::string& a_RemoteAddress,
                                        uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr): m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection),
-                                       m_GatewayClientHandlerCollection(a_GatewayClientHandlerCollection), m_DestinationName(a_DestinationName), m_TcpPortNbr(a_TcpPortNbr),
+                                       m_GatewayClientHandlerCollection(a_GatewayClientHandlerCollection), m_RemoteAddress(a_RemoteAddress), m_TcpPortNbr(a_TcpPortNbr),
                                        m_SerialPortNbr(a_SerialPortNbr), m_Resolver(a_IOService), m_ConnectionRetryTimer(a_IOService) {
     // Checks
     assert(m_ConfigServerHandlerCollection);
@@ -78,7 +78,7 @@ void HdlcdClientHandler::SendPacket(const std::vector<unsigned char> &a_Payload)
 void HdlcdClientHandler::ResolveDestination() {
     std::stringstream l_OStream;
     l_OStream << m_TcpPortNbr;
-    m_Resolver.async_resolve({m_DestinationName, l_OStream.str()}, [this](const boost::system::error_code& a_ErrorCode, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator) {
+    m_Resolver.async_resolve({m_RemoteAddress, l_OStream.str()}, [this](const boost::system::error_code& a_ErrorCode, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator) {
         // Start the HDLCd access client
         std::stringstream l_OStream;
         l_OStream << "/dev/ttyUSB" << m_SerialPortNbr;

@@ -76,7 +76,7 @@ void ConfigServerHandler::ConfigFrameReceived(const std::shared_ptr<ConfigFrame>
         }
         case CONFIG_FRAME_HDLCD_CLIENT_CREATE: {
             auto l_HdlcdClientCreate = std::dynamic_pointer_cast<HdlcdClientCreate>(a_ConfigFrame);
-            m_HdlcdClientHandlerCollection->CreateHdlcdClient(l_HdlcdClientCreate->GetDestinationName(), l_HdlcdClientCreate->GetTcpPortNbr(), l_HdlcdClientCreate->GetSerialPortNbr());
+            m_HdlcdClientHandlerCollection->CreateHdlcdClient(l_HdlcdClientCreate->GetRemoteAddress(), l_HdlcdClientCreate->GetTcpPortNbr(), l_HdlcdClientCreate->GetSerialPortNbr());
             break;
         }
         case CONFIG_FRAME_HDLCD_CLIENT_DESTROY: {
@@ -147,7 +147,7 @@ void ConfigServerHandler::GatewayClientDisconnected(uint32_t a_ReferenceNbr) {
     } // if
 }
 
-void ConfigServerHandler::GatewayClientError(uint32_t a_ReferenceNbr, uint32_t a_ErrorCode) {
+void ConfigServerHandler::GatewayClientError(uint32_t a_ReferenceNbr, uint16_t a_ErrorCode) {
     if (m_ConfigServer) {
         // Prepare and send control packet
         m_ConfigServer->SendConfigFrame(GatewayClientError::Create(a_ReferenceNbr, a_ErrorCode));
@@ -175,7 +175,7 @@ void ConfigServerHandler::HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_
     } // if
 }
 
-void ConfigServerHandler::HdlcdClientError(uint16_t a_SerialPortNbr, uint32_t a_ErrorCode) {
+void ConfigServerHandler::HdlcdClientError(uint16_t a_SerialPortNbr, uint16_t a_ErrorCode) {
     if (m_ConfigServer) {
         // Prepare and send control packet
         m_ConfigServer->SendConfigFrame(HdlcdClientError::Create(a_SerialPortNbr, a_ErrorCode));

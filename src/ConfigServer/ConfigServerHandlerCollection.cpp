@@ -77,7 +77,7 @@ void ConfigServerHandlerCollection::GatewayClientDisconnected(uint32_t a_Referen
     } // if
 }
 
-void ConfigServerHandlerCollection::GatewayClientError(uint32_t a_ReferenceNbr, uint32_t a_ErrorCode) {
+void ConfigServerHandlerCollection::GatewayClientError(uint32_t a_ReferenceNbr, uint16_t a_ErrorCode) {
     // There is only one config server handler entity
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientError(a_ReferenceNbr, a_ErrorCode);
@@ -105,7 +105,7 @@ void ConfigServerHandlerCollection::HdlcdClientNewStatus(uint16_t a_SerialPortNb
     } // if
 }
 
-void ConfigServerHandlerCollection::HdlcdClientError(uint16_t a_SerialPortNbr, uint32_t a_ErrorCode) {
+void ConfigServerHandlerCollection::HdlcdClientError(uint16_t a_SerialPortNbr, uint16_t a_ErrorCode) {
     // There is only one config server handler entity
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->HdlcdClientError(a_SerialPortNbr, a_ErrorCode);

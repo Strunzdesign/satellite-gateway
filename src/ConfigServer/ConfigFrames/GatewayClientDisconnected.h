@@ -25,26 +25,57 @@
 #define GATEWAY_CLIENT_DISCONNECTED_H
 
 #include "ConfigFrame.h"
+#include <memory>
 
 class GatewayClientDisconnected: public ConfigFrame {
 public:
-    // DTOR and creator
-    GatewayClientDisconnected(){}
-    ~GatewayClientDisconnected(){}
-    static std::shared_ptr<GatewayClientDisconnected> Create(uint32_t a_ReferenceNbr) {
-        auto l_GatewayClientDisconnected = std::make_shared<GatewayClientDisconnected>();
-        l_GatewayClientDisconnected->m_ReferenceNbr = a_ReferenceNbr;
+    static GatewayClientDisconnected Create(uint32_t a_ReferenceNbr) {
+        GatewayClientDisconnected l_GatewayClientDisconnected;
+        l_GatewayClientDisconnected.m_ReferenceNbr = a_ReferenceNbr;
         return l_GatewayClientDisconnected;
     }
-    
-    uint16_t GetReferenceNbr() const { return m_ReferenceNbr; }
-    
+
+    static std::shared_ptr<GatewayClientDisconnected> CreateDeserializedFrame() {
+        auto l_GatewayClientDisconnected(std::shared_ptr<GatewayClientDisconnected>(new GatewayClientDisconnected));
+        l_GatewayClientDisconnected->m_eDeserialize = DESERIALIZE_BODY;
+        l_GatewayClientDisconnected->m_BytesRemaining = 5; // Next: read body including the frame type byte
+        return l_GatewayClientDisconnected;
+    }
+
+    // Getter
+    uint16_t GetReferenceNbr() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_ReferenceNbr;
+    }
+
 private:
+    // Private CTOR
+    GatewayClientDisconnected(): m_ReferenceNbr(0), m_eDeserialize(DESERIALIZE_FULL) {
+    }
+
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_GATEWAY_CLIENT_DISCONNECTED; }
-    
+
+    // Serializer
+    const std::vector<unsigned char> Serialize() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        std::vector<unsigned char> l_Buffer;
+        l_Buffer.emplace_back(CONFIG_FRAME_GATEWAY_CLIENT_DISCONNECTED);
+        l_Buffer.emplace_back((m_ReferenceNbr >> 24) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >> 16) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >>  8) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >>  0) & 0xFF);
+        return l_Buffer;
+    }
+
     // Members
     uint32_t m_ReferenceNbr;
+    typedef enum {
+        DESERIALIZE_ERROR = 0,
+        DESERIALIZE_BODY  = 1,
+        DESERIALIZE_FULL  = 2
+    } E_DESERIALIZE;
+    E_DESERIALIZE m_eDeserialize;
 };
 
 #endif // GATEWAY_CLIENT_DISCONNECTED_H

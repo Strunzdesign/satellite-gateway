@@ -43,13 +43,13 @@ public:
     void GatewayClientDestroyed   (uint32_t a_ReferenceNbr);
     void GatewayClientConnected   (uint32_t a_ReferenceNbr);
     void GatewayClientDisconnected(uint32_t a_ReferenceNbr);
-    void GatewayClientError       (uint32_t a_ReferenceNbr, uint32_t a_ErrorCode);
+    void GatewayClientError       (uint32_t a_ReferenceNbr, uint16_t a_ErrorCode);
     
     // Methods to be called by a HDLCd client entity
     void HdlcdClientCreated  (uint16_t a_SerialPortNbr);
     void HdlcdClientDestroyed(uint16_t a_SerialPortNbr);
     void HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive);
-    void HdlcdClientError    (uint16_t a_SerialPortNbr, uint32_t a_ErrorCode);
+    void HdlcdClientError    (uint16_t a_SerialPortNbr, uint16_t a_ErrorCode);
 
 private:
     // Members

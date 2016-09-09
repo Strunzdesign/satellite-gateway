@@ -25,34 +25,77 @@
 #define GATEWAY_CLIENT_CREATE_H
 
 #include "ConfigFrame.h"
+#include <memory>
 #include <string>
 
 class GatewayClientCreate: public ConfigFrame {
 public:
-    // DTOR and creator
-    GatewayClientCreate(){}
-    ~GatewayClientCreate(){}
-    static std::shared_ptr<GatewayClientCreate> Create(uint32_t a_ReferenceNbr, std::string a_RemoteAddress, uint16_t a_RemotePortNbr) {
-        auto l_GatewayClientCreate = std::make_shared<GatewayClientCreate>();
-        l_GatewayClientCreate->m_ReferenceNbr = a_ReferenceNbr;
-        l_GatewayClientCreate->m_RemoteAddress = a_RemoteAddress;
-        l_GatewayClientCreate->m_RemotePortNbr = a_RemotePortNbr;
+    static GatewayClientCreate Create(uint32_t a_ReferenceNbr, std::string a_RemoteAddress, uint16_t a_RemotePortNbr) {
+        GatewayClientCreate l_GatewayClientCreate;
+        l_GatewayClientCreate.m_ReferenceNbr  = a_ReferenceNbr;
+        l_GatewayClientCreate.m_RemoteAddress = a_RemoteAddress;
+        l_GatewayClientCreate.m_RemotePortNbr = a_RemotePortNbr;
         return l_GatewayClientCreate;
     }
-    
+
+    static std::shared_ptr<GatewayClientCreate> CreateDeserializedFrame() {
+        auto l_GatewayClientCreate(std::shared_ptr<GatewayClientCreate>(new GatewayClientCreate));
+        l_GatewayClientCreate->m_eDeserialize = DESERIALIZE_HEADER;
+        l_GatewayClientCreate->m_BytesRemaining = 8; // Next: read the header including the frame type byte
+        return l_GatewayClientCreate;
+    }
+
     // Getter
-    uint16_t GetReferenceNbr() const { return m_ReferenceNbr; }
-    std::string GetRemoteAddress() const { return m_RemoteAddress; }
-    uint16_t GetRemotePortNbr() const { return m_RemotePortNbr; }
-    
+    uint16_t GetReferenceNbr() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_ReferenceNbr;
+    }
+
+    std::string GetRemoteAddress() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_RemoteAddress;
+    }
+
+    uint16_t GetRemotePortNbr() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        return m_RemotePortNbr;
+    }
+
 private:
+    // Private CTOR
+    GatewayClientCreate(): m_ReferenceNbr(0), m_RemotePortNbr(0), m_eDeserialize(DESERIALIZE_FULL) {
+    }
+    
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_GATEWAY_CLIENT_CREATE; }
-    
+
+    // Serializer
+    const std::vector<unsigned char> Serialize() const {
+        assert(m_eDeserialize == DESERIALIZE_FULL);
+        std::vector<unsigned char> l_Buffer;
+        l_Buffer.emplace_back(CONFIG_FRAME_GATEWAY_CLIENT_CREATE);
+        l_Buffer.emplace_back((m_ReferenceNbr  >> 24)  & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr  >> 16)  & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr  >>  8)  & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr  >>  0)  & 0xFF);
+        l_Buffer.emplace_back((m_RemotePortNbr >>  8)  & 0xFF);
+        l_Buffer.emplace_back((m_RemotePortNbr >>  0)  & 0xFF);
+        l_Buffer.emplace_back((m_RemoteAddress.size()) & 0xFF);
+        l_Buffer.insert(l_Buffer.end(), m_RemoteAddress.data(), (m_RemoteAddress.data() + m_RemoteAddress.size()));
+        return l_Buffer;
+    }
+
     // Members
     uint32_t m_ReferenceNbr;
     std::string m_RemoteAddress;
     uint16_t m_RemotePortNbr;
+    typedef enum {
+        DESERIALIZE_ERROR  = 0,
+        DESERIALIZE_HEADER = 1,
+        DESERIALIZE_BODY   = 2,
+        DESERIALIZE_FULL   = 3
+    } E_DESERIALIZE;
+    E_DESERIALIZE m_eDeserialize;
 };
 
 #endif // GATEWAY_CLIENT_CREATE_H

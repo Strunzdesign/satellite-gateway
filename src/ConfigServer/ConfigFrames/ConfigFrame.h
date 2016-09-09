@@ -24,6 +24,8 @@
 #ifndef CONFIG_FRAME_H
 #define CONFIG_FRAME_H
 
+#include "Frame.h"
+
 typedef enum {
     CONFIG_FRAME_UNKNOWN                     = 0x00,
     CONFIG_FRAME_GATEWAY_CLIENT_ERROR        = 0x10,
@@ -46,12 +48,8 @@ typedef enum {
     CONFIG_FRAME_HDLCD_CLIENT_NEW_STATUS     = 0x48
 } E_CONFIG_FRAME;
 
-class ConfigFrame {
+class ConfigFrame: public Frame {
 public:
-    // CTOR and DTOR
-    ConfigFrame(){}
-    virtual ~ConfigFrame(){} 
-    
     virtual E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_UNKNOWN; }
 };
 
