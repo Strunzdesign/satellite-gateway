@@ -45,10 +45,10 @@ private:
     // Private CTOR
     GatewayClientCleanup(): m_eDeserialize(DESERIALIZE_FULL) {
     }
-    
+
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_GATEWAY_CLIENT_CLEANUP; }
-    
+
     // Serializer
     const std::vector<unsigned char> Serialize() const {
         assert(m_eDeserialize == DESERIALIZE_FULL);
@@ -56,7 +56,33 @@ private:
         l_Buffer.emplace_back(CONFIG_FRAME_GATEWAY_CLIENT_CLEANUP);
         return l_Buffer;
     }
-    
+
+    // Deserializer
+    bool BytesReceived(const unsigned char *a_ReadBuffer, size_t a_BytesRead) {
+        if (Frame::BytesReceived(a_ReadBuffer, a_BytesRead)) {
+            // Subsequent bytes are required
+            return true; // no error (yet)
+        } // if
+
+        // All requested bytes are available
+        switch (m_eDeserialize) {
+        case DESERIALIZE_BODY: {
+            // Deserialize the frame type byte
+            assert(m_Payload.size() == 1);
+            assert(m_Payload[0] == CONFIG_FRAME_GATEWAY_CLIENT_CLEANUP);
+            m_eDeserialize = DESERIALIZE_FULL;
+            break;
+        }
+        case DESERIALIZE_ERROR:
+        case DESERIALIZE_FULL:
+        default:
+            assert(false);
+        } // switch
+        
+        // No error, maybe subsequent bytes are required
+        return true;
+    }
+
     // Members
     typedef enum {
         DESERIALIZE_ERROR = 0,

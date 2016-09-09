@@ -40,7 +40,7 @@ public:
     static std::shared_ptr<HdlcdClientNewStatus> CreateDeserializedFrame() {
         auto l_HdlcdClientNewStatus(std::shared_ptr<HdlcdClientNewStatus>(new HdlcdClientNewStatus));
         l_HdlcdClientNewStatus->m_eDeserialize = DESERIALIZE_BODY;
-        l_HdlcdClientNewStatus->m_BytesRemaining = 5; // Next: read body including the frame type byte
+        l_HdlcdClientNewStatus->m_BytesRemaining = 4; // Next: read body including the frame type byte
         return l_HdlcdClientNewStatus;
     }
 
@@ -64,7 +64,7 @@ private:
     // Private CTOR
     HdlcdClientNewStatus(): m_SerialPortNbr(0), m_bIsResumed(false), m_bIsAlive(false), m_eDeserialize(DESERIALIZE_FULL) {
     }
-    
+
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_HDLCD_CLIENT_NEW_STATUS; }
 
@@ -75,9 +75,47 @@ private:
         l_Buffer.emplace_back(CONFIG_FRAME_HDLCD_CLIENT_NEW_STATUS);
         l_Buffer.emplace_back((m_SerialPortNbr >> 8) & 0xFF);
         l_Buffer.emplace_back((m_SerialPortNbr >> 0) & 0xFF);
-        l_Buffer.emplace_back(m_bIsResumed);
-        l_Buffer.emplace_back(m_bIsAlive);
+        unsigned char l_Control = 0x00;
+        if (m_bIsResumed) {
+            l_Control |= 0x01;
+        } // if
+        
+        if (m_bIsAlive) {
+            l_Control |= 0x02;
+        } // if
+
+        l_Buffer.emplace_back(l_Control);
         return l_Buffer;
+    }
+
+    // Deserializer
+    bool BytesReceived(const unsigned char *a_ReadBuffer, size_t a_BytesRead) {
+        if (Frame::BytesReceived(a_ReadBuffer, a_BytesRead)) {
+            // Subsequent bytes are required
+            return true; // no error (yet)
+        } // if
+
+        // All requested bytes are available
+        switch (m_eDeserialize) {
+        case DESERIALIZE_BODY: {
+            // Deserialize the body including the frame type byte
+            assert(m_Payload.size() == 4);
+            assert(m_Payload[0] == CONFIG_FRAME_HDLCD_CLIENT_NEW_STATUS);
+            m_SerialPortNbr = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Payload[1])));            
+            const unsigned char &l_Status = m_Payload[3];
+            m_bIsResumed = (l_Status & 0x01);
+            m_bIsAlive   = (l_Status & 0x02);
+            m_eDeserialize = DESERIALIZE_FULL;
+            break;
+        }
+        case DESERIALIZE_ERROR:
+        case DESERIALIZE_FULL:
+        default:
+            assert(false);
+        } // switch
+
+        // No error, maybe subsequent bytes are required
+        return true;
     }
 
     // Members

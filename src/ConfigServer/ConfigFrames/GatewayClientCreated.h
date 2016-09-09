@@ -55,7 +55,7 @@ private:
 
     // Methods
     E_CONFIG_FRAME GetConfigFrameType() const { return CONFIG_FRAME_GATEWAY_CLIENT_CREATED; }
-    
+
     // Serializer
     const std::vector<unsigned char> Serialize() const {
         assert(m_eDeserialize == DESERIALIZE_FULL);
@@ -65,7 +65,34 @@ private:
         l_Buffer.emplace_back((m_ReferenceNbr >> 0) & 0xFF);
         return l_Buffer;
     }
-    
+
+    // Deserializer
+    bool BytesReceived(const unsigned char *a_ReadBuffer, size_t a_BytesRead) {
+        if (Frame::BytesReceived(a_ReadBuffer, a_BytesRead)) {
+            // Subsequent bytes are required
+            return true; // no error (yet)
+        } // if
+
+        // All requested bytes are available
+        switch (m_eDeserialize) {
+        case DESERIALIZE_BODY: {
+            // Deserialize the body including the frame type byte
+            assert(m_Payload.size() == 3);
+            assert(m_Payload[0] == CONFIG_FRAME_GATEWAY_CLIENT_CREATED);
+            m_ReferenceNbr = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Payload[1])));
+            m_eDeserialize = DESERIALIZE_FULL;
+            break;
+        }
+        case DESERIALIZE_ERROR:
+        case DESERIALIZE_FULL:
+        default:
+            assert(false);
+        } // switch
+
+        // No error, maybe subsequent bytes are required
+        return true;
+    }
+
     // Members
     uint16_t m_ReferenceNbr;
     typedef enum {

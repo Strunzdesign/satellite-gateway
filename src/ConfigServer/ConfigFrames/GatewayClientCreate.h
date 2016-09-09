@@ -83,6 +83,41 @@ private:
         return l_Buffer;
     }
 
+    // Deserializer
+    bool BytesReceived(const unsigned char *a_ReadBuffer, size_t a_BytesRead) {
+        if (Frame::BytesReceived(a_ReadBuffer, a_BytesRead)) {
+            // Subsequent bytes are required
+            return true; // no error (yet)
+        } // if
+
+        // All requested bytes are available
+        switch (m_eDeserialize) {
+        case DESERIALIZE_HEADER: {
+            // Deserialize the body including the frame type byte
+            assert(m_Payload.size() == 6);
+            assert(m_Payload[0] == CONFIG_FRAME_GATEWAY_CLIENT_CREATE);
+            m_ReferenceNbr   = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Payload[1])));
+            m_RemotePortNbr  = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Payload[3])));
+            m_BytesRemaining = m_Payload[5];
+            m_eDeserialize = DESERIALIZE_BODY;
+            m_Payload.clear();
+            break;
+        }
+        case DESERIALIZE_BODY: {
+            m_RemoteAddress.append(m_Payload.begin(), m_Payload.end());
+            m_eDeserialize = DESERIALIZE_FULL;
+            break;
+        }
+        case DESERIALIZE_ERROR:
+        case DESERIALIZE_FULL:
+        default:
+            assert(false);
+        } // switch
+
+        // No error, maybe subsequent bytes are required
+        return true;
+    }
+
     // Members
     uint16_t m_ReferenceNbr;
     std::string m_RemoteAddress;

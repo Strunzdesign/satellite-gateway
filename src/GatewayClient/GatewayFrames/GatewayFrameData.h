@@ -114,6 +114,7 @@ private:
             m_eDeserialize = DESERIALIZE_FULL;
             break;
         }
+        case DESERIALIZE_ERROR:
         case DESERIALIZE_FULL:
         default:
             assert(false);
