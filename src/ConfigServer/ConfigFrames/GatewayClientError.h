@@ -29,7 +29,7 @@
 
 class GatewayClientError: public ConfigFrame {
 public:
-    static GatewayClientError Create(uint32_t a_ReferenceNbr, uint16_t a_ErrorCode) {
+    static GatewayClientError Create(uint16_t a_ReferenceNbr, uint16_t a_ErrorCode) {
         GatewayClientError l_GatewayClientError;
         l_GatewayClientError.m_ReferenceNbr = a_ReferenceNbr;
         l_GatewayClientError.m_ErrorCode = a_ErrorCode;
@@ -39,7 +39,7 @@ public:
     static std::shared_ptr<GatewayClientError> CreateDeserializedFrame() {
         auto l_GatewayClientError(std::shared_ptr<GatewayClientError>(new GatewayClientError));
         l_GatewayClientError->m_eDeserialize = DESERIALIZE_BODY;
-        l_GatewayClientError->m_BytesRemaining = 7; // Next: read body including the frame type byte
+        l_GatewayClientError->m_BytesRemaining = 5; // Next: read body including the frame type byte
         return l_GatewayClientError;
     }
 
@@ -67,17 +67,15 @@ private:
         assert(m_eDeserialize == DESERIALIZE_FULL);
         std::vector<unsigned char> l_Buffer;
         l_Buffer.emplace_back(CONFIG_FRAME_GATEWAY_CLIENT_ERROR);
-        l_Buffer.emplace_back((m_ReferenceNbr >> 24) & 0xFF);
-        l_Buffer.emplace_back((m_ReferenceNbr >> 16) & 0xFF);
-        l_Buffer.emplace_back((m_ReferenceNbr >>  8) & 0xFF);
-        l_Buffer.emplace_back((m_ReferenceNbr >>  0) & 0xFF);
-        l_Buffer.emplace_back((m_ErrorCode    >>  8) & 0xFF);
-        l_Buffer.emplace_back((m_ErrorCode    >>  0) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >> 8) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >> 0) & 0xFF);
+        l_Buffer.emplace_back((m_ErrorCode    >> 8) & 0xFF);
+        l_Buffer.emplace_back((m_ErrorCode    >> 0) & 0xFF);
         return l_Buffer;
     }
     
     // Members
-    uint32_t m_ReferenceNbr;
+    uint16_t m_ReferenceNbr;
     uint16_t m_ErrorCode;
     typedef enum {
         DESERIALIZE_ERROR = 0,

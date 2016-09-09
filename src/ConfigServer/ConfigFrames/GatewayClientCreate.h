@@ -30,7 +30,7 @@
 
 class GatewayClientCreate: public ConfigFrame {
 public:
-    static GatewayClientCreate Create(uint32_t a_ReferenceNbr, std::string a_RemoteAddress, uint16_t a_RemotePortNbr) {
+    static GatewayClientCreate Create(uint16_t a_ReferenceNbr, std::string a_RemoteAddress, uint16_t a_RemotePortNbr) {
         GatewayClientCreate l_GatewayClientCreate;
         l_GatewayClientCreate.m_ReferenceNbr  = a_ReferenceNbr;
         l_GatewayClientCreate.m_RemoteAddress = a_RemoteAddress;
@@ -41,7 +41,7 @@ public:
     static std::shared_ptr<GatewayClientCreate> CreateDeserializedFrame() {
         auto l_GatewayClientCreate(std::shared_ptr<GatewayClientCreate>(new GatewayClientCreate));
         l_GatewayClientCreate->m_eDeserialize = DESERIALIZE_HEADER;
-        l_GatewayClientCreate->m_BytesRemaining = 8; // Next: read the header including the frame type byte
+        l_GatewayClientCreate->m_BytesRemaining = 6; // Next: read the header including the frame type byte
         return l_GatewayClientCreate;
     }
 
@@ -74,19 +74,17 @@ private:
         assert(m_eDeserialize == DESERIALIZE_FULL);
         std::vector<unsigned char> l_Buffer;
         l_Buffer.emplace_back(CONFIG_FRAME_GATEWAY_CLIENT_CREATE);
-        l_Buffer.emplace_back((m_ReferenceNbr  >> 24)  & 0xFF);
-        l_Buffer.emplace_back((m_ReferenceNbr  >> 16)  & 0xFF);
-        l_Buffer.emplace_back((m_ReferenceNbr  >>  8)  & 0xFF);
-        l_Buffer.emplace_back((m_ReferenceNbr  >>  0)  & 0xFF);
-        l_Buffer.emplace_back((m_RemotePortNbr >>  8)  & 0xFF);
-        l_Buffer.emplace_back((m_RemotePortNbr >>  0)  & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr  >> 8)   & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr  >> 0)   & 0xFF);
+        l_Buffer.emplace_back((m_RemotePortNbr >> 8)   & 0xFF);
+        l_Buffer.emplace_back((m_RemotePortNbr >> 0)   & 0xFF);
         l_Buffer.emplace_back((m_RemoteAddress.size()) & 0xFF);
         l_Buffer.insert(l_Buffer.end(), m_RemoteAddress.data(), (m_RemoteAddress.data() + m_RemoteAddress.size()));
         return l_Buffer;
     }
 
     // Members
-    uint32_t m_ReferenceNbr;
+    uint16_t m_ReferenceNbr;
     std::string m_RemoteAddress;
     uint16_t m_RemotePortNbr;
     typedef enum {

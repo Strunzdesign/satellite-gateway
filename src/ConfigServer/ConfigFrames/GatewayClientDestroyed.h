@@ -29,7 +29,7 @@
 
 class GatewayClientDestroyed: public ConfigFrame {
 public:
-    static GatewayClientDestroyed Create(uint32_t a_ReferenceNbr) {
+    static GatewayClientDestroyed Create(uint16_t a_ReferenceNbr) {
         GatewayClientDestroyed l_GatewayClientDestroyed;
         l_GatewayClientDestroyed.m_ReferenceNbr = a_ReferenceNbr;
         return l_GatewayClientDestroyed;
@@ -38,7 +38,7 @@ public:
     static std::shared_ptr<GatewayClientDestroyed> CreateDeserializedFrame() {
         auto l_GatewayClientDestroyed(std::shared_ptr<GatewayClientDestroyed>(new GatewayClientDestroyed));
         l_GatewayClientDestroyed->m_eDeserialize = DESERIALIZE_BODY;
-        l_GatewayClientDestroyed->m_BytesRemaining = 5; // Next: read body including the frame type byte
+        l_GatewayClientDestroyed->m_BytesRemaining = 3; // Next: read body including the frame type byte
         return l_GatewayClientDestroyed;
     }
 
@@ -61,15 +61,13 @@ private:
         assert(m_eDeserialize == DESERIALIZE_FULL);
         std::vector<unsigned char> l_Buffer;
         l_Buffer.emplace_back(CONFIG_FRAME_GATEWAY_CLIENT_DESTROYED);
-        l_Buffer.emplace_back((m_ReferenceNbr >> 24) & 0xFF);
-        l_Buffer.emplace_back((m_ReferenceNbr >> 16) & 0xFF);
-        l_Buffer.emplace_back((m_ReferenceNbr >>  8) & 0xFF);
-        l_Buffer.emplace_back((m_ReferenceNbr >>  0) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >> 8) & 0xFF);
+        l_Buffer.emplace_back((m_ReferenceNbr >> 0) & 0xFF);
         return l_Buffer;
     }
 
     // Members
-    uint32_t m_ReferenceNbr;
+    uint16_t m_ReferenceNbr;
     typedef enum {
         DESERIALIZE_ERROR = 0,
         DESERIALIZE_BODY  = 1,

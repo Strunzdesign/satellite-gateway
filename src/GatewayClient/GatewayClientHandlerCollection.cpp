@@ -58,7 +58,7 @@ void GatewayClientHandlerCollection::CleanAll() {
     } // if
 }
 
-void GatewayClientHandlerCollection::CreateClient(uint32_t a_ReferenceNbr, std::string a_RemoteAddress, uint16_t a_RemotePortNbr) {
+void GatewayClientHandlerCollection::CreateClient(uint16_t a_ReferenceNbr, std::string a_RemoteAddress, uint16_t a_RemotePortNbr) {
     if (m_GatewayClientHandler) {
         // There was already a client entity! Replace it.
         m_ConfigServerHandlerCollection->GatewayClientError(a_ReferenceNbr, 0x00);
@@ -73,7 +73,7 @@ void GatewayClientHandlerCollection::CreateClient(uint32_t a_ReferenceNbr, std::
     m_ConfigServerHandlerCollection->GatewayClientCreated(a_ReferenceNbr);
 }
 
-void GatewayClientHandlerCollection::DestroyClient(uint32_t a_ReferenceNbr) {
+void GatewayClientHandlerCollection::DestroyClient(uint16_t a_ReferenceNbr) {
     if (m_GatewayClientHandler) {
         if (m_GatewayClientHandler->GetReferenceNbr() == a_ReferenceNbr) {
             m_ConfigServerHandlerCollection->GatewayClientDestroyed(a_ReferenceNbr);

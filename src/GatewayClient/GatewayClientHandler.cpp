@@ -29,7 +29,7 @@
 #include <assert.h>
 
 GatewayClientHandler::GatewayClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                                           std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint32_t a_ReferenceNbr,
+                                           std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint16_t a_ReferenceNbr,
                                            std::string a_RemoteAddress, uint16_t a_RemotePortNbr):
                                            m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection),
                                            m_HdlcdClientHandlerCollection(a_HdlcdClientHandlerCollection), m_ReferenceNbr(a_ReferenceNbr),

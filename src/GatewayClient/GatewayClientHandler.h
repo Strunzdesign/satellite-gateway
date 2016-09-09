@@ -36,10 +36,10 @@ class GatewayClientHandler {
 public:
     // CTOR, initializer, and resetter
     GatewayClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                         std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint32_t a_ReferenceNbr,
+                         std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint16_t a_ReferenceNbr,
                          std::string a_RemoteAddress, uint16_t a_RemotePortNbr);
     void Close();
-    uint32_t GetReferenceNbr() const { return m_ReferenceNbr; }
+    uint16_t GetReferenceNbr() const { return m_ReferenceNbr; }
     void GatewayFrameReceived(const std::shared_ptr<GatewayFrame> &a_GatewayFrame);
     
     // Methods to be called by a HDLCd client entity
@@ -54,7 +54,7 @@ private:
     uint16_t m_RemotePortNbr;
 
     std::shared_ptr<GatewayClient> m_GatewayClient;
-    uint32_t m_ReferenceNbr;
+    uint16_t m_ReferenceNbr;
 };
 
 #endif // GATEWAY_CLIENT_HANDLER_H

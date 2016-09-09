@@ -41,8 +41,8 @@ public:
     
     // Methods to be called by a configuration server entity
     void CleanAll();    
-    void CreateClient (uint32_t a_ReferenceNbr, std::string a_RemoteAddress, uint16_t a_RemotePortNbr);
-    void DestroyClient(uint32_t a_ReferenceNbr);
+    void CreateClient (uint16_t a_ReferenceNbr, std::string a_RemoteAddress, uint16_t a_RemotePortNbr);
+    void DestroyClient(uint16_t a_ReferenceNbr);
     
     // Methods to be called by a HDLCd client entity
     void SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Buffer);

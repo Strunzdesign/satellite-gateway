@@ -49,35 +49,35 @@ void ConfigServerHandlerCollection::SystemShutdown() {
     m_HdlcdClientHandlerCollection.reset();
 }
 
-void ConfigServerHandlerCollection::GatewayClientCreated(uint32_t a_ReferenceNbr) {
+void ConfigServerHandlerCollection::GatewayClientCreated(uint16_t a_ReferenceNbr) {
     // There is only one config server handler entity
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientCreated(a_ReferenceNbr);
     } // if
 }
 
-void ConfigServerHandlerCollection::GatewayClientDestroyed(uint32_t a_ReferenceNbr) {
+void ConfigServerHandlerCollection::GatewayClientDestroyed(uint16_t a_ReferenceNbr) {
     // There is only one config server handler entity
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientDestroyed(a_ReferenceNbr);
     } // if
 }
 
-void ConfigServerHandlerCollection::GatewayClientConnected(uint32_t a_ReferenceNbr) {
+void ConfigServerHandlerCollection::GatewayClientConnected(uint16_t a_ReferenceNbr) {
     // There is only one config server handler entity
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientConnected(a_ReferenceNbr);
     } // if
 }
 
-void ConfigServerHandlerCollection::GatewayClientDisconnected(uint32_t a_ReferenceNbr) {
+void ConfigServerHandlerCollection::GatewayClientDisconnected(uint16_t a_ReferenceNbr) {
     // There is only one config server handler entity
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientDisconnected(a_ReferenceNbr);
     } // if
 }
 
-void ConfigServerHandlerCollection::GatewayClientError(uint32_t a_ReferenceNbr, uint16_t a_ErrorCode) {
+void ConfigServerHandlerCollection::GatewayClientError(uint16_t a_ReferenceNbr, uint16_t a_ErrorCode) {
     // There is only one config server handler entity
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientError(a_ReferenceNbr, a_ErrorCode);

@@ -119,35 +119,35 @@ void ConfigServerHandler::Close() {
     m_HdlcdClientHandlerCollection.reset();
 }
 
-void ConfigServerHandler::GatewayClientCreated(uint32_t a_ReferenceNbr) {
+void ConfigServerHandler::GatewayClientCreated(uint16_t a_ReferenceNbr) {
     if (m_ConfigServer) {
         // Prepare and send control packet
         m_ConfigServer->SendConfigFrame(GatewayClientCreated::Create(a_ReferenceNbr));
     } // if
 }
 
-void ConfigServerHandler::GatewayClientDestroyed(uint32_t a_ReferenceNbr) {
+void ConfigServerHandler::GatewayClientDestroyed(uint16_t a_ReferenceNbr) {
     if (m_ConfigServer) {
         // Prepare and send control packet
         m_ConfigServer->SendConfigFrame(GatewayClientDestroyed::Create(a_ReferenceNbr));
     } // if
 }
 
-void ConfigServerHandler::GatewayClientConnected(uint32_t a_ReferenceNbr) {
+void ConfigServerHandler::GatewayClientConnected(uint16_t a_ReferenceNbr) {
     if (m_ConfigServer) {
         // Prepare and send control packet
         m_ConfigServer->SendConfigFrame(GatewayClientConnected::Create(a_ReferenceNbr));
     } // if
 }
 
-void ConfigServerHandler::GatewayClientDisconnected(uint32_t a_ReferenceNbr) {
+void ConfigServerHandler::GatewayClientDisconnected(uint16_t a_ReferenceNbr) {
     if (m_ConfigServer) {
         // Prepare and send control packet
         m_ConfigServer->SendConfigFrame(GatewayClientDisconnected::Create(a_ReferenceNbr));
     } // if
 }
 
-void ConfigServerHandler::GatewayClientError(uint32_t a_ReferenceNbr, uint16_t a_ErrorCode) {
+void ConfigServerHandler::GatewayClientError(uint16_t a_ReferenceNbr, uint16_t a_ErrorCode) {
     if (m_ConfigServer) {
         // Prepare and send control packet
         m_ConfigServer->SendConfigFrame(GatewayClientError::Create(a_ReferenceNbr, a_ErrorCode));

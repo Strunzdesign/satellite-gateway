@@ -40,11 +40,11 @@ public:
     void ConfigFrameReceived(const std::shared_ptr<ConfigFrame> &a_ConfigFrame);
     
     // Methods to be called by a gateway client entity
-    void GatewayClientCreated     (uint32_t a_ReferenceNbr);
-    void GatewayClientDestroyed   (uint32_t a_ReferenceNbr);
-    void GatewayClientConnected   (uint32_t a_ReferenceNbr);
-    void GatewayClientDisconnected(uint32_t a_ReferenceNbr);
-    void GatewayClientError       (uint32_t a_ReferenceNbr, uint16_t a_ErrorCode);
+    void GatewayClientCreated     (uint16_t a_ReferenceNbr);
+    void GatewayClientDestroyed   (uint16_t a_ReferenceNbr);
+    void GatewayClientConnected   (uint16_t a_ReferenceNbr);
+    void GatewayClientDisconnected(uint16_t a_ReferenceNbr);
+    void GatewayClientError       (uint16_t a_ReferenceNbr, uint16_t a_ErrorCode);
     
     // Methods to be called by a HDLCd client entity
     void HdlcdClientCreated    (uint16_t a_SerialPortNbr);
