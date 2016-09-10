@@ -1,33 +1,9 @@
-set(Boost_USE_STATIC_LIBS OFF) 
-set(Boost_USE_MULTITHREADED ON)  
-set(Boost_USE_STATIC_RUNTIME OFF) 
-find_package(Boost REQUIRED COMPONENTS system signals program_options)
-include_directories(${Boost_INCLUDE_DIR})
+cmake_minimum_required(VERSION 2.6)
 
-find_package(Threads)
-
-add_executable(satellite-gateway
-main-satellite-gateway.cpp
-ConfigServer/ConfigServer.cpp
-ConfigServer/ConfigServerHandler.cpp
-ConfigServer/ConfigServerHandlerCollection.cpp
-GatewayClient/GatewayClient.cpp
-GatewayClient/GatewayClientHandler.cpp
-GatewayClient/GatewayClientHandlerCollection.cpp
-HdlcdClient/HdlcdClientHandler.cpp
-HdlcdClient/HdlcdClientHandlerCollection.cpp
+include_directories(
+    "shared/ConfigFrames"
+    "shared/GatewayFrames"
 )
 
-if(WIN32)
-    set(ADDITIONAL_LIBRARIES wsock32 ws2_32)
-else()
-    set(ADDITIONAL_LIBRARIES "")
-endif()
-
-target_link_libraries(satellite-gateway
-${Boost_LIBRARIES}
-${CMAKE_THREAD_LIBS_INIT}
-${ADDITIONAL_LIBRARIES}
-)
-
-install(TARGETS satellite-gateway RUNTIME DESTINATION bin)
+add_subdirectory(satellite-gateway)
+add_subdirectory(tests)
