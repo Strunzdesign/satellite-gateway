@@ -32,67 +32,62 @@ public:
     static GatewayFrameData Create(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Payload) {
         GatewayFrameData l_GatewayFrameData;
         l_GatewayFrameData.m_SerialPortNbr = a_SerialPortNbr;
-        l_GatewayFrameData.m_Payload = std::move(a_Payload);
+        l_GatewayFrameData.m_Buffer = std::move(a_Payload);
         return l_GatewayFrameData;
     }
-    
+
     static std::shared_ptr<GatewayFrameData> CreateDeserializedFrame() {
         auto l_GatewayFrameData(std::shared_ptr<GatewayFrameData>(new GatewayFrameData));
         l_GatewayFrameData->m_eDeserialize = DESERIALIZE_HEADER;
         l_GatewayFrameData->m_BytesRemaining = 4; // Next: read length field and serial port number
         return l_GatewayFrameData;
     }
-    
+
     // Getter
     uint16_t GetSerialPortNbr() const {
         assert(m_eDeserialize == DESERIALIZE_FULL);
         return m_SerialPortNbr;
     }
-    
+
     const std::vector<unsigned char>& GetPayload() const {
         assert(m_eDeserialize == DESERIALIZE_FULL);
-        return m_Payload;
+        return m_Buffer;
     }
-    
+
 private:
     // Private CTOR
     GatewayFrameData(): m_SerialPortNbr(0), m_eDeserialize(DESERIALIZE_FULL) {
     }
-    
+
     // Internal helpers
     E_GATEWAY_FRAME GetGatewayFrameType() const { return GATEWAY_FRAME_DATA; }
-    
+
     // Serializer
     const std::vector<unsigned char> Serialize() const {
         assert(m_eDeserialize == DESERIALIZE_FULL);
         std::vector<unsigned char> l_Buffer;
-        
+
         // Prepare length field, serial port number, and payload
-        uint16_t l_NbrOfBytes = (2 + m_Payload.size());
+        uint16_t l_NbrOfBytes = (2 + m_Buffer.size());
         l_Buffer.emplace_back((l_NbrOfBytes    >> 8) & 0xFF);
         l_Buffer.emplace_back((l_NbrOfBytes    >> 0) & 0xFF);
         l_Buffer.emplace_back((m_SerialPortNbr >> 8) & 0xFF);
         l_Buffer.emplace_back((m_SerialPortNbr >> 0) & 0xFF);
-        l_Buffer.insert(l_Buffer.end(), m_Payload.begin(), m_Payload.end());
+        l_Buffer.insert(l_Buffer.end(), m_Buffer.begin(), m_Buffer.end());
         return l_Buffer;
     }
 
     // Deserializer
-    bool ParseBytes(const unsigned char *a_ReadBuffer, size_t &a_ReadBufferOffset, size_t &a_BytesAvailable) {
-        if (Frame::ParseBytes(a_ReadBuffer, a_ReadBufferOffset, a_BytesAvailable)) {
-            // Subsequent bytes are required
-            return true; // no error (yet)
-        } // if
-        
+    bool Deserialize() {
         // All requested bytes are available
         switch (m_eDeserialize) {
         case DESERIALIZE_HEADER: {
             // Deserialize the header
-            assert(m_Payload.size() == 4);
-            m_BytesRemaining = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Payload[0])));
-            m_SerialPortNbr  = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Payload[2])));
-            m_Payload.clear();
-            
+            assert(m_Buffer.size() == 4);
+            m_BytesRemaining = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Buffer[0])));
+            m_SerialPortNbr  = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Buffer[2])));
+            m_Buffer.clear();
+
             // Check length of payload
             if (m_BytesRemaining < 2) {
                 // Error!
@@ -119,16 +114,11 @@ private:
         default:
             assert(false);
         } // switch
-        
-        // Maybe subsequent bytes are required?
-        if ((m_BytesRemaining) && (a_BytesAvailable)) {
-            return (this->ParseBytes(a_ReadBuffer, a_ReadBufferOffset, a_BytesAvailable));
-        } else {        
-            // No error, but maybe subsequent bytes are still required
-            return true;
-        } // else
+
+        // No error
+        return true;
     }
-    
+
     // Members
     uint16_t m_SerialPortNbr;
     typedef enum {

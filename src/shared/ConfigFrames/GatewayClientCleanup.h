@@ -58,18 +58,13 @@ private:
     }
 
     // Deserializer
-    bool ParseBytes(const unsigned char *a_ReadBuffer, size_t &a_ReadBufferOffset, size_t &a_BytesAvailable) {
-        if (Frame::ParseBytes(a_ReadBuffer, a_ReadBufferOffset, a_BytesAvailable)) {
-            // Subsequent bytes are required
-            return true; // no error (yet)
-        } // if
-
+    bool Deserialize() {
         // All requested bytes are available
         switch (m_eDeserialize) {
         case DESERIALIZE_BODY: {
             // Deserialize the frame type byte
-            assert(m_Payload.size() == 1);
-            assert(m_Payload[0] == CONFIG_FRAME_GATEWAY_CLIENT_CLEANUP);
+            assert(m_Buffer.size() == 1);
+            assert(m_Buffer[0] == CONFIG_FRAME_GATEWAY_CLIENT_CLEANUP);
             m_eDeserialize = DESERIALIZE_FULL;
             break;
         }
@@ -79,13 +74,8 @@ private:
             assert(false);
         } // switch
 
-        // Maybe subsequent bytes are required?
-        if ((m_BytesRemaining) && (a_BytesAvailable)) {
-            return (this->ParseBytes(a_ReadBuffer, a_ReadBufferOffset, a_BytesAvailable));
-        } else {        
-            // No error, but maybe subsequent bytes are still required
-            return true;
-        } // else
+        // No error
+        return true;
     }
 
     // Members

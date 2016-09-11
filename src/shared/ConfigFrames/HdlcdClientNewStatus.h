@@ -89,20 +89,15 @@ private:
     }
 
     // Deserializer
-    bool ParseBytes(const unsigned char *a_ReadBuffer, size_t &a_ReadBufferOffset, size_t &a_BytesAvailable) {
-        if (Frame::ParseBytes(a_ReadBuffer, a_ReadBufferOffset, a_BytesAvailable)) {
-            // Subsequent bytes are required
-            return true; // no error (yet)
-        } // if
-
+    bool Deserialize() {
         // All requested bytes are available
         switch (m_eDeserialize) {
         case DESERIALIZE_BODY: {
             // Deserialize the body including the frame type byte
-            assert(m_Payload.size() == 4);
-            assert(m_Payload[0] == CONFIG_FRAME_HDLCD_CLIENT_NEW_STATUS);
-            m_SerialPortNbr = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Payload[1])));            
-            const unsigned char &l_Status = m_Payload[3];
+            assert(m_Buffer.size() == 4);
+            assert(m_Buffer[0] == CONFIG_FRAME_HDLCD_CLIENT_NEW_STATUS);
+            m_SerialPortNbr = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Buffer[1])));            
+            const unsigned char &l_Status = m_Buffer[3];
             m_bIsResumed = (l_Status & 0x01);
             m_bIsAlive   = (l_Status & 0x02);
             m_eDeserialize = DESERIALIZE_FULL;
@@ -114,13 +109,8 @@ private:
             assert(false);
         } // switch
 
-        // Maybe subsequent bytes are required?
-        if ((m_BytesRemaining) && (a_BytesAvailable)) {
-            return (this->ParseBytes(a_ReadBuffer, a_ReadBufferOffset, a_BytesAvailable));
-        } else {        
-            // No error, but maybe subsequent bytes are still required
-            return true;
-        } // else
+        // No error
+        return true;
     }
 
     // Members
