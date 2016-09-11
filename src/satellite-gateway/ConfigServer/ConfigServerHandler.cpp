@@ -56,11 +56,13 @@ void ConfigServerHandler::Start(std::shared_ptr<ConfigServerHandlerCollection> a
 }
 
 void ConfigServerHandler::Close() {
+    // Keep this object alive
+    auto self(shared_from_this());
     if (m_ConfigServer) {
         m_ConfigServer->Close();
         m_ConfigServer.reset();
     } // if
-    
+
     // Deregister from the collection
     if ((m_ConfigServerHandlerCollection) && (m_Registered)) {
         m_ConfigServerHandlerCollection->DeregisterConfigServerHandler(shared_from_this());
