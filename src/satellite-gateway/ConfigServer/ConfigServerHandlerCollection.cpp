@@ -43,6 +43,9 @@ void ConfigServerHandlerCollection::Initialize(std::shared_ptr<GatewayClientHand
 }
 
 void ConfigServerHandlerCollection::SystemShutdown() {
+    // Stop accepting subsequent TCP connections
+    m_TcpAcceptor.close();
+
     // Drop all shared pointers
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->Close();
