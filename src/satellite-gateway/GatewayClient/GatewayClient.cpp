@@ -38,7 +38,7 @@ GatewayClient::GatewayClient(boost::asio::io_service& a_IOService, boost::asio::
     // Configure the frame end point
     m_FrameEndpoint = std::make_shared<FrameEndpoint>(a_IOService, m_TcpSocket, 0x00); // 0x00: unset the filter mask as there is no preceeding type byte
     m_FrameEndpoint->RegisterFrameFactory(GATEWAY_FRAME_DATA, []()->std::shared_ptr<Frame>{ return GatewayFrameData::CreateDeserializedFrame (); });
-    m_FrameEndpoint->SetOnFrameCallback  ([this](std::shared_ptr<Frame> a_Frame)->bool{ OnFrame(a_Frame); });
+    m_FrameEndpoint->SetOnFrameCallback  ([this](std::shared_ptr<Frame> a_Frame)->bool{ return OnFrame(a_Frame); });
     m_FrameEndpoint->SetOnClosedCallback ([this](){ OnClosed(); });
     
     // Connect the TCP socket

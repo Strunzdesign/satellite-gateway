@@ -50,7 +50,7 @@ ConfigServer::ConfigServer(boost::asio::io_service& a_IOService, boost::asio::ip
     m_FrameEndpoint->RegisterFrameFactory(CONFIG_FRAME_HDLCD_CLIENT_DESTROY,   []()->std::shared_ptr<Frame>{ return HdlcdClientDestroy::CreateDeserializedFrame  (); });
     m_FrameEndpoint->RegisterFrameFactory(CONFIG_FRAME_HDLCD_CLIENT_SUSPEND,   []()->std::shared_ptr<Frame>{ return HdlcdClientSuspend::CreateDeserializedFrame  (); });
     m_FrameEndpoint->RegisterFrameFactory(CONFIG_FRAME_HDLCD_CLIENT_RESUME,    []()->std::shared_ptr<Frame>{ return HdlcdClientResume::CreateDeserializedFrame   (); });
-    m_FrameEndpoint->SetOnFrameCallback  ([this](std::shared_ptr<Frame> a_Frame)->bool{ OnFrame(a_Frame); });
+    m_FrameEndpoint->SetOnFrameCallback  ([this](std::shared_ptr<Frame> a_Frame)->bool{ return OnFrame(a_Frame); });
     m_FrameEndpoint->SetOnClosedCallback ([this](){ OnClosed(); });
 }
 
