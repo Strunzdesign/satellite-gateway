@@ -89,16 +89,10 @@ void HdlcdClientHandler::ResolveDestination() {
                 } // if
             }); // async_wait
         } else {
-            // Start the HDLCd access client
+            // Start the HDLCd access client. On any error, restart after a short delay
             std::stringstream l_OStream;
             l_OStream << "/dev/ttyUSB" << m_SerialPortNbr;
-            m_HdlcdClient = std::make_shared<HdlcdClient>(m_IOService, a_EndpointIterator, l_OStream.str(), 0x01);
-            if (m_bSuspendSerialPort) {
-                // Immediately send a serial porst suspend request message to the HDLC daemon
-                m_HdlcdClient->Send(std::move(HdlcdPacketCtrl::CreatePortStatusRequest(true)));
-            } // if
-            
-            // On any error, restart after a short delay
+            m_HdlcdClient = std::make_shared<HdlcdClient>(m_IOService, l_OStream.str(), 0x01);
             m_HdlcdClient->SetOnClosedCallback([this]() {
                 m_ConnectionRetryTimer.expires_from_now(boost::posix_time::seconds(2));
                 m_ConnectionRetryTimer.async_wait([this](const boost::system::error_code& a_ErrorCode) {
@@ -121,6 +115,25 @@ void HdlcdClientHandler::ResolveDestination() {
                                                                         a_PacketCtrl.GetIsAlive());
                 } // if
             }); // SetOnCtrlCallback
+            
+            // Connect
+            m_HdlcdClient->AsyncConnect(a_EndpointIterator, [this](bool a_bSuccess) {
+                if (a_bSuccess) {
+                    if (m_bSuspendSerialPort) {
+                        // Immediately send a serial port suspend request message to the HDLC daemon
+                        m_HdlcdClient->Send(HdlcdPacketCtrl::CreatePortStatusRequest(true));
+                    } // if
+                } else {
+                    std::cout << "Failed to connect to the HDLC Daemon!" << std::endl;
+                    m_ConnectionRetryTimer.expires_from_now(boost::posix_time::seconds(2));
+                    m_ConnectionRetryTimer.async_wait([this](const boost::system::error_code& a_ErrorCode) {
+                        if (!a_ErrorCode) {
+                            // Reestablish the connection to the HDLC Daemon
+                            ResolveDestination();
+                        } // if
+                    }); // async_wait
+                } // else
+            }); // AsyncConnect
         } // else
     }); // async_resolve
 }
