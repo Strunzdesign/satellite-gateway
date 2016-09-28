@@ -1,0 +1,5 @@
+<map id="GatewayClient::Close" name="GatewayClient::Close">
+<area shape="rect" id="node2" href="$classGatewayClient.html#ac899025d6115729fea8dd68bdab28a4a" title="GatewayClient::GatewayClient" alt="" coords="213,5,425,32"/>
+<area shape="rect" id="node3" href="$classGatewayClient.html#abfb2fae39ac96772b753b163befc8b32" title="GatewayClient::~GatewayClient" alt="" coords="209,56,429,83"/>
+<area shape="rect" id="node4" href="$classGatewayClient.html#a72b3b1fdc641ab15e4e3976daf4e8275" title="GatewayClient::SetOnClosed\lCallback" alt="" coords="217,107,421,149"/>
+</map>
