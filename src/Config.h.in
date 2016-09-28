@@ -1,5 +1,0 @@
-// The configured options and settings for the s-net(r) satellite gateway
-#include "HdlcdConfig.h"
-#include "SnetConfig.h"
-#define SATELLITE_GATEWAY_VERSION_MAJOR @SATELLITE_GATEWAY_VERSION_MAJOR@
-#define SATELLITE_GATEWAY_VERSION_MINOR @SATELLITE_GATEWAY_VERSION_MINOR@
