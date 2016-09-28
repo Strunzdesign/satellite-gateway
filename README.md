@@ -17,7 +17,7 @@ Stable releases of the s-net(r) gateway software:
 
 Current state:
 - v1.0pre (git master branch)
-  - Works well with s-net(r) BASE release 3.6
+  - This software is currently EXPERIMENTAL and UNTESTED! It is just a shell for further development!
   - Works well with each version of the HDLC Daemon (HDLCd)
   - Requires the header files from https://github.com/Strunzdesign/hdlcd-devel for compilation!
   - Requires the header files from https://github.com/Strunzdesign/snet-devel for compilation!
