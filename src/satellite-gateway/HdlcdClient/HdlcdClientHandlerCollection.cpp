@@ -69,7 +69,7 @@ void HdlcdClientHandlerCollection::CreateHdlcdClient(const std::string &a_Remote
         m_HdlcdClientHandlerMap[a_SerialPortNbr] = l_NewHdlcdClientHandler;
     } else {
         // The client handler already existed
-        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, HDLCD_CLIENT_ALREADY_EXISTED);
+        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, HDLCD_CLIENT_ERROR_ALREADY_EXISTED);
     } // else
     
     // Deliver the "created" message in each case
@@ -81,7 +81,7 @@ void HdlcdClientHandlerCollection::DestroyHdlcdClient(uint16_t a_SerialPortNbr) 
     auto l_HandlerIterator = m_HdlcdClientHandlerMap.find(a_SerialPortNbr);
     if (l_HandlerIterator == m_HdlcdClientHandlerMap.end()) {
         // The element did not exist
-        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, HDLCD_CLIENT_NOT_EXISTED);
+        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, HDLCD_CLIENT_ERROR_NOT_EXISTED);
     } else {
         // The client handler exists
         l_HandlerIterator->second->Close();
@@ -98,7 +98,7 @@ void HdlcdClientHandlerCollection::SuspendHdlcdClient(uint16_t a_SerialPortNbr) 
     auto l_HandlerIterator = m_HdlcdClientHandlerMap.find(a_SerialPortNbr);
     if (l_HandlerIterator == m_HdlcdClientHandlerMap.end()) {
         // The element did not exist
-        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, HDLCD_CLIENT_NOT_EXISTED);
+        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, HDLCD_CLIENT_ERROR_NOT_EXISTED);
     } else {
         // The client handler exists
         l_HandlerIterator->second->Suspend();
@@ -110,7 +110,7 @@ void HdlcdClientHandlerCollection::ResumeHdlcdClient(uint16_t a_SerialPortNbr) {
     auto l_HandlerIterator = m_HdlcdClientHandlerMap.find(a_SerialPortNbr);
     if (l_HandlerIterator == m_HdlcdClientHandlerMap.end()) {
         // The element did not exist
-        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, HDLCD_CLIENT_NOT_EXISTED);
+        m_ConfigServerHandlerCollection->HdlcdClientError(a_SerialPortNbr, HDLCD_CLIENT_ERROR_NOT_EXISTED);
     } else {
         // The client handler exists
         l_HandlerIterator->second->Resume();
