@@ -103,7 +103,7 @@ void ConfigServerHandler::GatewayClientDisconnected(uint16_t a_ReferenceNbr) {
     } // if
 }
 
-void ConfigServerHandler::GatewayClientError(uint16_t a_ReferenceNbr, uint16_t a_ErrorCode) {
+void ConfigServerHandler::GatewayClientError(uint16_t a_ReferenceNbr, E_GATEWAY_CLIENT_ERROR a_ErrorCode) {
     if (m_ConfigServer) {
         // Relay the call to the config server entity
         m_ConfigServer->GatewayClientError(a_ReferenceNbr, a_ErrorCode);
@@ -131,7 +131,7 @@ void ConfigServerHandler::HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_
     } // if
 }
 
-void ConfigServerHandler::HdlcdClientError(uint16_t a_SerialPortNbr, uint16_t a_ErrorCode) {
+void ConfigServerHandler::HdlcdClientError(uint16_t a_SerialPortNbr, E_HDLCD_CLIENT_ERROR a_ErrorCode) {
     if (m_ConfigServer) {
         // Relay the call to the config server entity
         m_ConfigServer->HdlcdClientError(a_SerialPortNbr, a_ErrorCode);

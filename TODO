@@ -1,7 +1,6 @@
 Issues to be resolved before a first release:
-- Doxygen
+- Doxygen (STARTED)
 - Fix all the TODOs in the source code
-- Currently none of the ErrorCode values are specified. Put an enum somewhere.
 - It is not clear if a session header is required or desired in order to connect to a master gateway
 - Not a single test was perfomed yet together with a master gateway
 - Due to the "clean room" approach, the config protocol may require changes
@@ -14,4 +13,4 @@ Issues to be resolved after the first release:
 
 
 // DONE
-- None yet
+- Currently none of the ErrorCode values are specified. Put an enum somewhere (DONE)

@@ -28,6 +28,8 @@
 #include <boost/asio.hpp>
 #include "ConfigFrame.h"
 #include "FrameEndpoint.h"
+#include "GatewayClientErrorCodes.h"
+#include "HdlcdClientErrorCodes.h"
 class GatewayClientHandlerCollection;
 class HdlcdClientHandlerCollection;
 
@@ -44,13 +46,13 @@ public:
     void GatewayClientDestroyed   (uint16_t a_ReferenceNbr);
     void GatewayClientConnected   (uint16_t a_ReferenceNbr);
     void GatewayClientDisconnected(uint16_t a_ReferenceNbr);
-    void GatewayClientError       (uint16_t a_ReferenceNbr, uint16_t a_ErrorCode);
+    void GatewayClientError       (uint16_t a_ReferenceNbr, E_GATEWAY_CLIENT_ERROR a_ErrorCode);
     
     // Methods to be called by a HDLCd client entity
     void HdlcdClientCreated    (uint16_t a_SerialPortNbr);
     void HdlcdClientDestroyed  (uint16_t a_SerialPortNbr);
     void HdlcdClientNewStatus  (uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive);
-    void HdlcdClientError      (uint16_t a_SerialPortNbr, uint16_t a_ErrorCode);
+    void HdlcdClientError      (uint16_t a_SerialPortNbr, E_HDLCD_CLIENT_ERROR a_ErrorCode);
 
 private:
     // Internal helpers

@@ -88,7 +88,7 @@ void ConfigServer::GatewayClientDisconnected(uint16_t a_ReferenceNbr) {
     m_FrameEndpoint->SendFrame(GatewayClientDisconnected::Create(a_ReferenceNbr));
 }
 
-void ConfigServer::GatewayClientError(uint16_t a_ReferenceNbr, uint16_t a_ErrorCode) {
+void ConfigServer::GatewayClientError(uint16_t a_ReferenceNbr, E_GATEWAY_CLIENT_ERROR a_ErrorCode) {
     // Prepare and send control packet
     m_FrameEndpoint->SendFrame(GatewayClientError::Create(a_ReferenceNbr, a_ErrorCode));
 }
@@ -108,7 +108,7 @@ void ConfigServer::HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_bIsResu
     m_FrameEndpoint->SendFrame(HdlcdClientNewStatus::Create(a_SerialPortNbr, a_bIsResumed, a_bIsAlive));
 }
 
-void ConfigServer::HdlcdClientError(uint16_t a_SerialPortNbr, uint16_t a_ErrorCode) {
+void ConfigServer::HdlcdClientError(uint16_t a_SerialPortNbr, E_HDLCD_CLIENT_ERROR a_ErrorCode) {
     // Prepare and send control packet
     m_FrameEndpoint->SendFrame(HdlcdClientError::Create(a_SerialPortNbr, a_ErrorCode));
 }
