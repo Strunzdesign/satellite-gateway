@@ -38,8 +38,6 @@ int main(int argc, char* argv[]) {
             ("version,v", "show version information")
             ("port,p",    boost::program_options::value<uint16_t>(),
                           "the TCP port to accept control connections on")
-            ("daemon,d",  boost::program_options::value<uint16_t>(),
-                          "the TCP port of the HDLC daemon at localhost")
             ("trace,t",   "each relayed packet is dissected and printed")
         ;
 
@@ -62,12 +60,6 @@ int main(int argc, char* argv[]) {
                 
         if (!l_VariablesMap.count("port")) {
             std::cout << "satellite-gateway: you have to specify the TCP listener port to accept control connections on" << std::endl;
-            std::cout << "satellite-gateway: Use --help for more information." << std::endl;
-            return 1;
-        } // if
-        
-        if (!l_VariablesMap.count("daemon")) {
-            std::cout << "satellite-gateway: you have to specify the TCP listener port of the HDLC daemon at localhost" << std::endl;
             std::cout << "satellite-gateway: Use --help for more information." << std::endl;
             return 1;
         } // if
