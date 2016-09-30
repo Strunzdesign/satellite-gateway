@@ -6,6 +6,7 @@ var searchData=
   ['hdlcdclientdestroy_2eh',['HdlcdClientDestroy.h',['../HdlcdClientDestroy_8h.html',1,'']]],
   ['hdlcdclientdestroyed_2eh',['HdlcdClientDestroyed.h',['../HdlcdClientDestroyed_8h.html',1,'']]],
   ['hdlcdclienterror_2eh',['HdlcdClientError.h',['../HdlcdClientError_8h.html',1,'']]],
+  ['hdlcdclienterrorcodes_2eh',['HdlcdClientErrorCodes.h',['../HdlcdClientErrorCodes_8h.html',1,'']]],
   ['hdlcdclienthandler_2ecpp',['HdlcdClientHandler.cpp',['../HdlcdClientHandler_8cpp.html',1,'']]],
   ['hdlcdclienthandler_2eh',['HdlcdClientHandler.h',['../HdlcdClientHandler_8h.html',1,'']]],
   ['hdlcdclienthandlercollection_2ecpp',['HdlcdClientHandlerCollection.cpp',['../HdlcdClientHandlerCollection_8cpp.html',1,'']]],

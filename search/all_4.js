@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['hdlcd_5fclient_5ferror_5falready_5fexisted',['HDLCD_CLIENT_ERROR_ALREADY_EXISTED',['../HdlcdClientErrorCodes_8h.html#a04453502ac72dcf0c8cd5e3f52c54008a460e4c669a3fbef365d725eb6b5eb3b4',1,'HdlcdClientErrorCodes.h']]],
+  ['hdlcd_5fclient_5ferror_5fnot_5fexisted',['HDLCD_CLIENT_ERROR_NOT_EXISTED',['../HdlcdClientErrorCodes_8h.html#a04453502ac72dcf0c8cd5e3f52c54008af40779491f40ab1a02a697216413e423',1,'HdlcdClientErrorCodes.h']]],
   ['hdlcdclientcleanup',['HdlcdClientCleanup',['../classHdlcdClientCleanup.html',1,'']]],
   ['hdlcdclientcleanup_2eh',['HdlcdClientCleanup.h',['../HdlcdClientCleanup_8h.html',1,'']]],
   ['hdlcdclientcreate',['HdlcdClientCreate',['../classHdlcdClientCreate.html',1,'']]],
@@ -10,8 +12,9 @@ var searchData=
   ['hdlcdclientdestroy_2eh',['HdlcdClientDestroy.h',['../HdlcdClientDestroy_8h.html',1,'']]],
   ['hdlcdclientdestroyed',['HdlcdClientDestroyed',['../classHdlcdClientDestroyed.html',1,'HdlcdClientDestroyed'],['../classConfigServer.html#a94507ba0aeeb8e91678016f49e7dd618',1,'ConfigServer::HdlcdClientDestroyed()'],['../classConfigServerHandler.html#aac8078ad86bd8d6c960fbd6379388b37',1,'ConfigServerHandler::HdlcdClientDestroyed()'],['../classConfigServerHandlerCollection.html#a67240d2ed968388a722917f484504b8e',1,'ConfigServerHandlerCollection::HdlcdClientDestroyed()']]],
   ['hdlcdclientdestroyed_2eh',['HdlcdClientDestroyed.h',['../HdlcdClientDestroyed_8h.html',1,'']]],
-  ['hdlcdclienterror',['HdlcdClientError',['../classHdlcdClientError.html',1,'HdlcdClientError'],['../classConfigServer.html#ae46d9da8b4c730295cd185a7e8d2f03a',1,'ConfigServer::HdlcdClientError()'],['../classConfigServerHandler.html#a9ffdd9acdb41fff8a13971885c8ba0ad',1,'ConfigServerHandler::HdlcdClientError()'],['../classConfigServerHandlerCollection.html#ad85c46fbcf5c2badfe1c2b38ed75c854',1,'ConfigServerHandlerCollection::HdlcdClientError()']]],
+  ['hdlcdclienterror',['HdlcdClientError',['../classHdlcdClientError.html',1,'HdlcdClientError'],['../classConfigServer.html#a55435d65e0fa978c2d4cce2a5ed92639',1,'ConfigServer::HdlcdClientError()'],['../classConfigServerHandler.html#a20eefff8d9846ba6d518a777428eef17',1,'ConfigServerHandler::HdlcdClientError()'],['../classConfigServerHandlerCollection.html#ada7509f31385014972dea800c3c49fbb',1,'ConfigServerHandlerCollection::HdlcdClientError()']]],
   ['hdlcdclienterror_2eh',['HdlcdClientError.h',['../HdlcdClientError_8h.html',1,'']]],
+  ['hdlcdclienterrorcodes_2eh',['HdlcdClientErrorCodes.h',['../HdlcdClientErrorCodes_8h.html',1,'']]],
   ['hdlcdclienthandler',['HdlcdClientHandler',['../classHdlcdClientHandler.html',1,'HdlcdClientHandler'],['../classHdlcdClientHandler.html#aa424541f45c9e0c64a0f72777fa718c9',1,'HdlcdClientHandler::HdlcdClientHandler()']]],
   ['hdlcdclienthandler_2ecpp',['HdlcdClientHandler.cpp',['../HdlcdClientHandler_8cpp.html',1,'']]],
   ['hdlcdclienthandler_2eh',['HdlcdClientHandler.h',['../HdlcdClientHandler_8h.html',1,'']]],

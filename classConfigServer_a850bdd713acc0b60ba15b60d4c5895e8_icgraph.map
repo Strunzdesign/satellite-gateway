@@ -1,3 +1,4 @@
 <map id="ConfigServer::Close" name="ConfigServer::Close">
-<area shape="rect" id="node2" href="$classConfigServer.html#ae46d9da8b4c730295cd185a7e8d2f03a" title="ConfigServer::HdlcdClient\lError" alt="" coords="200,5,383,47"/>
+<area shape="rect" id="node2" href="$classConfigServer.html#a55435d65e0fa978c2d4cce2a5ed92639" title="ConfigServer::HdlcdClient\lError" alt="" coords="200,5,383,47"/>
+<area shape="rect" id="node3" href="$classConfigServer.html#a5744242701d53f2695a53e3d85f004ac" title="ConfigServer::SetOnClosed\lCallback" alt="" coords="431,35,625,76"/>
 </map>

@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['gateway_5fclient_5ferror_5falready_5fexisted',['GATEWAY_CLIENT_ERROR_ALREADY_EXISTED',['../GatewayClientErrorCodes_8h.html#a762e13d8e37b9e628c6af0ff0bb90a14a472d8c3d2aec971ee6cda7fd1add5afd',1,'GatewayClientErrorCodes.h']]],
+  ['gateway_5fclient_5ferror_5fno_5fmatch',['GATEWAY_CLIENT_ERROR_NO_MATCH',['../GatewayClientErrorCodes_8h.html#a762e13d8e37b9e628c6af0ff0bb90a14ac625b22c0b20caf54450bb6ca6ed9fbd',1,'GatewayClientErrorCodes.h']]],
+  ['gateway_5fclient_5ferror_5fnot_5fexisted',['GATEWAY_CLIENT_ERROR_NOT_EXISTED',['../GatewayClientErrorCodes_8h.html#a762e13d8e37b9e628c6af0ff0bb90a14a819d619264f5d131030f1faeeedec332',1,'GatewayClientErrorCodes.h']]],
   ['gateway_5fframe_5fdata',['GATEWAY_FRAME_DATA',['../GatewayFrame_8h.html#acd28830be4497911097303c2a2849813a00fcdcd3fe12d6e965e7a8c3db0d7d0f',1,'GatewayFrame.h']]],
   ['gateway_5fframe_5funknown',['GATEWAY_FRAME_UNKNOWN',['../GatewayFrame_8h.html#acd28830be4497911097303c2a2849813a062c2e64ef7ff31d6b5431ea73153f2b',1,'GatewayFrame.h']]],
   ['gatewayclient',['GatewayClient',['../classGatewayClient.html',1,'GatewayClient'],['../classGatewayClient.html#ac899025d6115729fea8dd68bdab28a4a',1,'GatewayClient::GatewayClient()']]],
@@ -19,8 +22,9 @@ var searchData=
   ['gatewayclientdestroyed_2eh',['GatewayClientDestroyed.h',['../GatewayClientDestroyed_8h.html',1,'']]],
   ['gatewayclientdisconnected',['GatewayClientDisconnected',['../classGatewayClientDisconnected.html',1,'GatewayClientDisconnected'],['../classConfigServer.html#a48fbaabc7746b9b1b98ab36c564fbda7',1,'ConfigServer::GatewayClientDisconnected()'],['../classConfigServerHandler.html#a7e96dc67c1bff975f56b8938a57c3ea8',1,'ConfigServerHandler::GatewayClientDisconnected()'],['../classConfigServerHandlerCollection.html#a3548f19cf244d053f392fff46449e955',1,'ConfigServerHandlerCollection::GatewayClientDisconnected()']]],
   ['gatewayclientdisconnected_2eh',['GatewayClientDisconnected.h',['../GatewayClientDisconnected_8h.html',1,'']]],
-  ['gatewayclienterror',['GatewayClientError',['../classGatewayClientError.html',1,'GatewayClientError'],['../classConfigServer.html#ab86f19f919ec80e76ebb57b3a3934177',1,'ConfigServer::GatewayClientError()'],['../classConfigServerHandler.html#a3cb0776a6c26adc34a24d0b01ba94052',1,'ConfigServerHandler::GatewayClientError()'],['../classConfigServerHandlerCollection.html#a64d428ae8733257cf6c2debd21e89ad6',1,'ConfigServerHandlerCollection::GatewayClientError()']]],
+  ['gatewayclienterror',['GatewayClientError',['../classGatewayClientError.html',1,'GatewayClientError'],['../classConfigServer.html#ae72d6cb81b441ec7d9b7be2df6db96d4',1,'ConfigServer::GatewayClientError()'],['../classConfigServerHandler.html#aef5cc868fd4390ad4a8f6d2c7318238b',1,'ConfigServerHandler::GatewayClientError()'],['../classConfigServerHandlerCollection.html#a56379249b00cc1e480740f6b8d857410',1,'ConfigServerHandlerCollection::GatewayClientError()']]],
   ['gatewayclienterror_2eh',['GatewayClientError.h',['../GatewayClientError_8h.html',1,'']]],
+  ['gatewayclienterrorcodes_2eh',['GatewayClientErrorCodes.h',['../GatewayClientErrorCodes_8h.html',1,'']]],
   ['gatewayclienthandler',['GatewayClientHandler',['../classGatewayClientHandler.html',1,'GatewayClientHandler'],['../classGatewayClientHandler.html#a7e181fa41912f4969c4bba0183c733de',1,'GatewayClientHandler::GatewayClientHandler()']]],
   ['gatewayclienthandler_2ecpp',['GatewayClientHandler.cpp',['../GatewayClientHandler_8cpp.html',1,'']]],
   ['gatewayclienthandler_2eh',['GatewayClientHandler.h',['../GatewayClientHandler_8h.html',1,'']]],

@@ -128,8 +128,6 @@ Collaboration diagram for ConfigServerHandler:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a10b375b4f53f224e15af9f814bc4ffae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#a10b375b4f53f224e15af9f814bc4ffae">ConfigServerHandler</a> (boost::asio::io_service &amp;a_IOService, boost::asio::ip::tcp::tcp::socket &amp;a_TcpSocket, std::shared_ptr&lt; <a class="el" href="classGatewayClientHandlerCollection.html">GatewayClientHandlerCollection</a> &gt; a_GatewayClientHandlerCollection, std::shared_ptr&lt; <a class="el" href="classHdlcdClientHandlerCollection.html">HdlcdClientHandlerCollection</a> &gt; a_HdlcdClientHandlerCollection)</td></tr>
 <tr class="separator:a10b375b4f53f224e15af9f814bc4ffae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a9d03d6c3691ecf47216bc48c6645f0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#a3a9d03d6c3691ecf47216bc48c6645f0">~ConfigServerHandler</a> ()</td></tr>
-<tr class="separator:a3a9d03d6c3691ecf47216bc48c6645f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1d7a08ce8d14aac362449412399c264"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#af1d7a08ce8d14aac362449412399c264">Start</a> (std::shared_ptr&lt; <a class="el" href="classConfigServerHandlerCollection.html">ConfigServerHandlerCollection</a> &gt; a_ConfigServerHandlerCollection)</td></tr>
 <tr class="separator:af1d7a08ce8d14aac362449412399c264"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c05fae242f399fe033b55e071a614be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#a2c05fae242f399fe033b55e071a614be">Close</a> ()</td></tr>
@@ -142,20 +140,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8fad64922a6d08424a232e9a96d4f357"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e96dc67c1bff975f56b8938a57c3ea8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#a7e96dc67c1bff975f56b8938a57c3ea8">GatewayClientDisconnected</a> (uint16_t a_ReferenceNbr)</td></tr>
 <tr class="separator:a7e96dc67c1bff975f56b8938a57c3ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cb0776a6c26adc34a24d0b01ba94052"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#a3cb0776a6c26adc34a24d0b01ba94052">GatewayClientError</a> (uint16_t a_ReferenceNbr, uint16_t a_ErrorCode)</td></tr>
-<tr class="separator:a3cb0776a6c26adc34a24d0b01ba94052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef5cc868fd4390ad4a8f6d2c7318238b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#aef5cc868fd4390ad4a8f6d2c7318238b">GatewayClientError</a> (uint16_t a_ReferenceNbr, <a class="el" href="GatewayClientErrorCodes_8h.html#a762e13d8e37b9e628c6af0ff0bb90a14">E_GATEWAY_CLIENT_ERROR</a> a_ErrorCode)</td></tr>
+<tr class="separator:aef5cc868fd4390ad4a8f6d2c7318238b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27d69f48a4f8b5f739254f6291fb33b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#a27d69f48a4f8b5f739254f6291fb33b4">HdlcdClientCreated</a> (uint16_t a_SerialPortNbr)</td></tr>
 <tr class="separator:a27d69f48a4f8b5f739254f6291fb33b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac8078ad86bd8d6c960fbd6379388b37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#aac8078ad86bd8d6c960fbd6379388b37">HdlcdClientDestroyed</a> (uint16_t a_SerialPortNbr)</td></tr>
 <tr class="separator:aac8078ad86bd8d6c960fbd6379388b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55c4586daf75da2c2da7e4c3f16a9e0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#a55c4586daf75da2c2da7e4c3f16a9e0d">HdlcdClientNewStatus</a> (uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive)</td></tr>
 <tr class="separator:a55c4586daf75da2c2da7e4c3f16a9e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ffdd9acdb41fff8a13971885c8ba0ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#a9ffdd9acdb41fff8a13971885c8ba0ad">HdlcdClientError</a> (uint16_t a_SerialPortNbr, uint16_t a_ErrorCode)</td></tr>
-<tr class="separator:a9ffdd9acdb41fff8a13971885c8ba0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20eefff8d9846ba6d518a777428eef17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigServerHandler.html#a20eefff8d9846ba6d518a777428eef17">HdlcdClientError</a> (uint16_t a_SerialPortNbr, <a class="el" href="HdlcdClientErrorCodes_8h.html#a04453502ac72dcf0c8cd5e3f52c54008">E_HDLCD_CLIENT_ERROR</a> a_ErrorCode)</td></tr>
+<tr class="separator:a20eefff8d9846ba6d518a777428eef17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="ConfigServerHandler_8h_source.html#l00035">35</a> of file <a class="el" href="ConfigServerHandler_8h_source.html">ConfigServerHandler.h</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8h_source.html#l00037">37</a> of file <a class="el" href="ConfigServerHandler_8h_source.html">ConfigServerHandler.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a10b375b4f53f224e15af9f814bc4ffae"></a>
 <div class="memitem">
@@ -197,33 +195,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a3a9d03d6c3691ecf47216bc48c6645f0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ConfigServerHandler::~ConfigServerHandler </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00038">38</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
-
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classConfigServerHandler_a3a9d03d6c3691ecf47216bc48c6645f0_cgraph.png" border="0" usemap="#classConfigServerHandler_a3a9d03d6c3691ecf47216bc48c6645f0_cgraph" alt=""/></div>
-<map name="classConfigServerHandler_a3a9d03d6c3691ecf47216bc48c6645f0_cgraph" id="classConfigServerHandler_a3a9d03d6c3691ecf47216bc48c6645f0_cgraph">
-<area shape="rect" id="node2" href="classConfigServerHandler.html#a2c05fae242f399fe033b55e071a614be" title="ConfigServerHandler\l::Close" alt="" coords="223,5,377,47"/>
-</map>
-</div>
-</p>
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a2c05fae242f399fe033b55e071a614be"></a>
 <div class="memitem">
@@ -238,14 +209,14 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00058">58</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00054">54</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classConfigServerHandler_a2c05fae242f399fe033b55e071a614be_icgraph.png" border="0" usemap="#classConfigServerHandler_a2c05fae242f399fe033b55e071a614be_icgraph" alt=""/></div>
 <map name="classConfigServerHandler_a2c05fae242f399fe033b55e071a614be_icgraph" id="classConfigServerHandler_a2c05fae242f399fe033b55e071a614be_icgraph">
-<area shape="rect" id="node2" href="classConfigServerHandler.html#a3a9d03d6c3691ecf47216bc48c6645f0" title="ConfigServerHandler\l::~ConfigServerHandler" alt="" coords="208,5,377,47"/>
+<area shape="rect" id="node2" href="classConfigServerHandler.html#af1d7a08ce8d14aac362449412399c264" title="ConfigServerHandler\l::Start" alt="" coords="208,5,363,47"/>
 </map>
 </div>
 </p>
@@ -266,7 +237,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00092">92</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00088">88</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
 
 </div>
 </div>
@@ -284,7 +255,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00078">78</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00074">74</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
 
 </div>
 </div>
@@ -302,7 +273,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00085">85</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00081">81</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
 
 </div>
 </div>
@@ -320,11 +291,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00099">99</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00095">95</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3cb0776a6c26adc34a24d0b01ba94052"></a>
+<a class="anchor" id="aef5cc868fd4390ad4a8f6d2c7318238b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -337,7 +308,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramtype"><a class="el" href="GatewayClientErrorCodes_8h.html#a762e13d8e37b9e628c6af0ff0bb90a14">E_GATEWAY_CLIENT_ERROR</a>&#160;</td>
           <td class="paramname"><em>a_ErrorCode</em>&#160;</td>
         </tr>
         <tr>
@@ -348,7 +319,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00106">106</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00102">102</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
 
 </div>
 </div>
@@ -366,7 +337,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00113">113</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00109">109</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
 
 </div>
 </div>
@@ -384,11 +355,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00120">120</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00116">116</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9ffdd9acdb41fff8a13971885c8ba0ad"></a>
+<a class="anchor" id="a20eefff8d9846ba6d518a777428eef17"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -401,7 +372,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramtype"><a class="el" href="HdlcdClientErrorCodes_8h.html#a04453502ac72dcf0c8cd5e3f52c54008">E_HDLCD_CLIENT_ERROR</a>&#160;</td>
           <td class="paramname"><em>a_ErrorCode</em>&#160;</td>
         </tr>
         <tr>
@@ -412,7 +383,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00134">134</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00130">130</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
 
 </div>
 </div>
@@ -446,7 +417,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00127">127</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00123">123</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
 
 </div>
 </div>
@@ -464,7 +435,17 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00042">42</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ConfigServerHandler_8cpp_source.html#l00038">38</a> of file <a class="el" href="ConfigServerHandler_8cpp_source.html">ConfigServerHandler.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classConfigServerHandler_af1d7a08ce8d14aac362449412399c264_cgraph.png" border="0" usemap="#classConfigServerHandler_af1d7a08ce8d14aac362449412399c264_cgraph" alt=""/></div>
+<map name="classConfigServerHandler_af1d7a08ce8d14aac362449412399c264_cgraph" id="classConfigServerHandler_af1d7a08ce8d14aac362449412399c264_cgraph">
+<area shape="rect" id="node2" href="classConfigServerHandler.html#a2c05fae242f399fe033b55e071a614be" title="ConfigServerHandler\l::Close" alt="" coords="208,5,363,47"/>
+</map>
+</div>
+</p>
 
 </div>
 </div>

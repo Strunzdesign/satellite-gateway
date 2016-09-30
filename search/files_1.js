@@ -10,6 +10,7 @@ var searchData=
   ['gatewayclientdestroyed_2eh',['GatewayClientDestroyed.h',['../GatewayClientDestroyed_8h.html',1,'']]],
   ['gatewayclientdisconnected_2eh',['GatewayClientDisconnected.h',['../GatewayClientDisconnected_8h.html',1,'']]],
   ['gatewayclienterror_2eh',['GatewayClientError.h',['../GatewayClientError_8h.html',1,'']]],
+  ['gatewayclienterrorcodes_2eh',['GatewayClientErrorCodes.h',['../GatewayClientErrorCodes_8h.html',1,'']]],
   ['gatewayclienthandler_2ecpp',['GatewayClientHandler.cpp',['../GatewayClientHandler_8cpp.html',1,'']]],
   ['gatewayclienthandler_2eh',['GatewayClientHandler.h',['../GatewayClientHandler_8h.html',1,'']]],
   ['gatewayclienthandlercollection_2ecpp',['GatewayClientHandlerCollection.cpp',['../GatewayClientHandlerCollection_8cpp.html',1,'']]],

@@ -1,5 +1,7 @@
 <map id="src/satellite&#45;gateway/HdlcdClient/HdlcdClientHandler.cpp" name="src/satellite&#45;gateway/HdlcdClient/HdlcdClientHandler.cpp">
-<area shape="rect" id="node2" href="$HdlcdClientHandler_8h.html" title="HdlcdClientHandler.h" alt="" coords="519,95,674,121"/>
-<area shape="rect" id="node7" href="$ConfigServerHandlerCollection_8h.html" title="ConfigServerHandlerCollection.h" alt="" coords="5,95,233,121"/>
-<area shape="rect" id="node8" href="$GatewayClientHandlerCollection_8h.html" title="GatewayClientHandlerCollection.h" alt="" coords="258,95,495,121"/>
+<area shape="rect" id="node2" href="$HdlcdClientHandler_8h.html" title="HdlcdClientHandler.h" alt="" coords="5,95,160,121"/>
+<area shape="rect" id="node7" href="$ConfigServerHandlerCollection_8h.html" title="ConfigServerHandlerCollection.h" alt="" coords="446,95,674,121"/>
+<area shape="rect" id="node10" href="$GatewayClientHandlerCollection_8h.html" title="GatewayClientHandlerCollection.h" alt="" coords="184,95,421,121"/>
+<area shape="rect" id="node8" href="$GatewayClientErrorCodes_8h.html" title="GatewayClientErrorCodes.h" alt="" coords="459,169,658,196"/>
+<area shape="rect" id="node9" href="$HdlcdClientErrorCodes_8h.html" title="HdlcdClientErrorCodes.h" alt="" coords="683,169,861,196"/>
 </map>

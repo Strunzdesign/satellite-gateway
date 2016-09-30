@@ -1,3 +1,4 @@
 <map id="GatewayClientDestroyed::Create" name="GatewayClientDestroyed::Create">
 <area shape="rect" id="node2" href="$classConfigServer.html#a759a8d878cb0ddeee64e3bf00a36eaa4" title="ConfigServer::GatewayClient\lDestroyed" alt="" coords="232,5,435,47"/>
+<area shape="rect" id="node3" href="$classConfigServer.html#a5744242701d53f2695a53e3d85f004ac" title="ConfigServer::SetOnClosed\lCallback" alt="" coords="483,5,677,47"/>
 </map>

@@ -1,3 +1,4 @@
 <map id="HdlcdClientNewStatus::Create" name="HdlcdClientNewStatus::Create">
 <area shape="rect" id="node2" href="$classConfigServer.html#a6130831eeb0a6f4a1240288c1d79977a" title="ConfigServer::HdlcdClient\lNewStatus" alt="" coords="215,5,397,47"/>
+<area shape="rect" id="node3" href="$classConfigServer.html#a5744242701d53f2695a53e3d85f004ac" title="ConfigServer::SetOnClosed\lCallback" alt="" coords="445,5,640,47"/>
 </map>

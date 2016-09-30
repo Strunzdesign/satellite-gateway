@@ -1,0 +1,14 @@
+<map id="src/shared/ConfigFrames/HdlcdClientErrorCodes.h" name="src/shared/ConfigFrames/HdlcdClientErrorCodes.h">
+<area shape="rect" id="node2" href="$ConfigServer_8h.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServer.h" alt="" coords="284,102,491,143"/>
+<area shape="rect" id="node5" href="$ConfigServerHandler_8h.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServerHandler.h" alt="" coords="541,102,799,143"/>
+<area shape="rect" id="node7" href="$ConfigServerHandlerCollection_8h.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServerHandler\lCollection.h" alt="" coords="1059,95,1305,151"/>
+<area shape="rect" id="node12" href="$HdlcdClientHandlerCollection_8cpp.html" title="src/satellite&#45;gateway\l/HdlcdClient/HdlcdClientHandler\lCollection.cpp" alt="" coords="2051,199,2275,255"/>
+<area shape="rect" id="node3" href="$ConfigServer_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServer.cpp" alt="" coords="5,206,228,247"/>
+<area shape="rect" id="node4" href="$ConfigServerHandler_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServerHandler.cpp" alt="" coords="251,206,523,247"/>
+<area shape="rect" id="node6" href="$ConfigServerHandlerCollection_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServerHandler\lCollection.cpp" alt="" coords="547,199,793,255"/>
+<area shape="rect" id="node8" href="$GatewayClient_8cpp.html" title="src/satellite&#45;gateway\l/GatewayClient/GatewayClient.cpp" alt="" coords="1547,206,1787,247"/>
+<area shape="rect" id="node9" href="$GatewayClientHandler_8cpp.html" title="src/satellite&#45;gateway\l/GatewayClient/GatewayClient\lHandler.cpp" alt="" coords="1812,199,2027,255"/>
+<area shape="rect" id="node10" href="$GatewayClientHandlerCollection_8cpp.html" title="src/satellite&#45;gateway\l/GatewayClient/GatewayClient\lHandlerCollection.cpp" alt="" coords="817,199,1032,255"/>
+<area shape="rect" id="node11" href="$HdlcdClientHandler_8cpp.html" title="src/satellite&#45;gateway\l/HdlcdClient/HdlcdClientHandler.cpp" alt="" coords="1057,206,1307,247"/>
+<area shape="rect" id="node13" href="$main-satellite-gateway_8cpp.html" title="src/satellite&#45;gateway\l/main&#45;satellite&#45;gateway.cpp" alt="" coords="1332,206,1523,247"/>
+</map>

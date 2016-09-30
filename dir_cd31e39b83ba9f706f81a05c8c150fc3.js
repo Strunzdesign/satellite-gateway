@@ -25,6 +25,7 @@ var dir_cd31e39b83ba9f706f81a05c8c150fc3 =
     [ "GatewayClientError.h", "GatewayClientError_8h.html", [
       [ "GatewayClientError", "classGatewayClientError.html", "classGatewayClientError" ]
     ] ],
+    [ "GatewayClientErrorCodes.h", "GatewayClientErrorCodes_8h.html", "GatewayClientErrorCodes_8h" ],
     [ "HdlcdClientCleanup.h", "HdlcdClientCleanup_8h.html", [
       [ "HdlcdClientCleanup", "classHdlcdClientCleanup.html", null ]
     ] ],
@@ -43,6 +44,7 @@ var dir_cd31e39b83ba9f706f81a05c8c150fc3 =
     [ "HdlcdClientError.h", "HdlcdClientError_8h.html", [
       [ "HdlcdClientError", "classHdlcdClientError.html", "classHdlcdClientError" ]
     ] ],
+    [ "HdlcdClientErrorCodes.h", "HdlcdClientErrorCodes_8h.html", "HdlcdClientErrorCodes_8h" ],
     [ "HdlcdClientNewStatus.h", "HdlcdClientNewStatus_8h.html", [
       [ "HdlcdClientNewStatus", "classHdlcdClientNewStatus.html", "classHdlcdClientNewStatus" ]
     ] ],

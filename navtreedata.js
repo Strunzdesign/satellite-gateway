@@ -24,7 +24,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"ConfigFrame_8h.html"
+"ConfigFrame_8h.html",
+"main-satellite-gateway_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
