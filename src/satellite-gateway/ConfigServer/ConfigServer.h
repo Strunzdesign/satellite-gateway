@@ -37,6 +37,10 @@ class ConfigServer {
 public:
     // CTOR, initializer, and resetter
     ConfigServer(boost::asio::io_service& a_IOService, boost::asio::ip::tcp::tcp::socket& a_TcpSocket);
+    void SetOnClosedCallback(std::function<void()> a_OnClosedCallback) {
+        m_OnClosedCallback = a_OnClosedCallback;
+    }
+    
     void Start(std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection,
                std::shared_ptr<HdlcdClientHandlerCollection>   a_HdlcdClientHandlerCollection);
     void Close();
@@ -66,6 +70,7 @@ private:
 
     // The communication end point
     std::shared_ptr<FrameEndpoint> m_FrameEndpoint;
+    std::function<void()> m_OnClosedCallback;
 };
 
 #endif // CONFIG_SERVER_H

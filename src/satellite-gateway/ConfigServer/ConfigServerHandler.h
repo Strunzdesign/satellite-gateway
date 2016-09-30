@@ -36,10 +36,9 @@ class ConfigServer;
 
 class ConfigServerHandler: public std::enable_shared_from_this<ConfigServerHandler> {
 public:
-    // CTOR, DTOR, initializer, and resetter
+    // CTOR, initializer, and resetter
     ConfigServerHandler(boost::asio::io_service& a_IOService, boost::asio::ip::tcp::tcp::socket& a_TcpSocket, std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection,
                         std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
-    ~ConfigServerHandler();
     void Start(std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection);
     void Close();
     

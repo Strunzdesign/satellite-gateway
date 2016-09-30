@@ -60,12 +60,19 @@ void ConfigServer::Start(std::shared_ptr<GatewayClientHandlerCollection> a_Gatew
     assert(a_HdlcdClientHandlerCollection);
     m_GatewayClientHandlerCollection = a_GatewayClientHandlerCollection;
     m_HdlcdClientHandlerCollection   = a_HdlcdClientHandlerCollection;
+    m_FrameEndpoint->Start();
 }
 
 void ConfigServer::Close() {
     // Drop all shared pointers
     m_GatewayClientHandlerCollection.reset();
     m_HdlcdClientHandlerCollection.reset();
+
+    // Close entities
+    m_FrameEndpoint->Close();
+    if (m_OnClosedCallback) {
+        m_OnClosedCallback();
+    } // if
 }
 
 void ConfigServer::GatewayClientCreated(uint16_t a_ReferenceNbr) {

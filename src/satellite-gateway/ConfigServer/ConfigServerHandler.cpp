@@ -35,10 +35,6 @@ ConfigServerHandler::ConfigServerHandler(boost::asio::io_service& a_IOService, b
     m_ConfigServer = std::make_shared<ConfigServer>(m_IOService, a_TcpSocket);
 }
 
-ConfigServerHandler::~ConfigServerHandler() {
-    Close();
-}
-
 void ConfigServerHandler::Start(std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection) {
     // Checks
     assert(a_ConfigServerHandlerCollection);
@@ -51,28 +47,28 @@ void ConfigServerHandler::Start(std::shared_ptr<ConfigServerHandlerCollection> a
 
     // Trigger activity
     assert(m_ConfigServer);
+    m_ConfigServer->SetOnClosedCallback([this](){ Close(); });
     m_ConfigServer->Start(m_GatewayClientHandlerCollection, m_HdlcdClientHandlerCollection);
-    
 }
 
 void ConfigServerHandler::Close() {
     // Keep this object alive
     auto self(shared_from_this());
-    if (m_ConfigServer) {
-        m_ConfigServer->Close();
-        m_ConfigServer.reset();
-    } // if
-
-    // Deregister from the collection
-    if ((m_ConfigServerHandlerCollection) && (m_Registered)) {
-        m_ConfigServerHandlerCollection->DeregisterConfigServerHandler(shared_from_this());
+    if (m_Registered) {
         m_Registered = false;
-    } // if
+        if (m_ConfigServer) {
+            m_ConfigServer->Close();
+            m_ConfigServer.reset();
+        } // if
 
-    // Drop all shared pointers
-    m_GatewayClientHandlerCollection.reset();
-    m_HdlcdClientHandlerCollection.reset();
-    m_ConfigServerHandlerCollection.reset();
+        // Deregister from the collection
+        m_ConfigServerHandlerCollection->DeregisterConfigServerHandler(self);
+        
+        // Drop all shared pointers
+        m_GatewayClientHandlerCollection.reset();
+        m_HdlcdClientHandlerCollection.reset();
+        m_ConfigServerHandlerCollection.reset();
+    } // if
 }
 
 void ConfigServerHandler::GatewayClientCreated(uint16_t a_ReferenceNbr) {
