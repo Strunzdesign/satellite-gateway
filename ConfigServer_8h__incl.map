@@ -1,5 +1,7 @@
 <map id="src/satellite&#45;gateway/ConfigServer/ConfigServer.h" name="src/satellite&#45;gateway/ConfigServer/ConfigServer.h">
-<area shape="rect" id="node4" href="$ConfigFrame_8h.html" title="ConfigFrame.h" alt="" coords="240,95,355,121"/>
-<area shape="rect" id="node7" href="$GatewayClientErrorCodes_8h.html" title="GatewayClientErrorCodes.h" alt="" coords="533,95,731,121"/>
-<area shape="rect" id="node8" href="$HdlcdClientErrorCodes_8h.html" title="HdlcdClientErrorCodes.h" alt="" coords="756,95,935,121"/>
+<area shape="rect" id="node4" href="$ConfigFrame_8h.html" title="ConfigFrame.h" alt="" coords="183,95,297,121"/>
+<area shape="rect" id="node9" href="$FrameEndpoint_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="322,95,451,121"/>
+<area shape="rect" id="node13" href="$GatewayClientErrorCodes_8h.html" title="GatewayClientErrorCodes.h" alt="" coords="475,95,674,121"/>
+<area shape="rect" id="node14" href="$HdlcdClientErrorCodes_8h.html" title="HdlcdClientErrorCodes.h" alt="" coords="699,95,877,121"/>
+<area shape="rect" id="node5" href="$Frame_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="239,169,313,196"/>
 </map>

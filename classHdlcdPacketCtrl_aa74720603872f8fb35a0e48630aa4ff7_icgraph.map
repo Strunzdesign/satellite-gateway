@@ -1,0 +1,5 @@
+<map id="HdlcdPacketCtrl::CreatePortStatusRequest" name="HdlcdPacketCtrl::CreatePortStatusRequest">
+<area shape="rect" id="node2" href="$classHdlcdClientHandler.html#a08507d701660f6f83b42bb8ea8630d9e" title="HdlcdClientHandler\l::Suspend" alt="" coords="252,5,396,47"/>
+<area shape="rect" id="node3" href="$classHdlcdClientHandler.html#a9630adffb3dbd48a7c197ff5d1006ca5" title="HdlcdClientHandler\l::Resume" alt="" coords="252,71,396,112"/>
+<area shape="rect" id="node4" href="$classHdlcdClientHandler.html#a723d98e7d410f84afd47ec34a7863ca0" title="HdlcdClientHandler\l::SendPacket" alt="" coords="252,136,396,177"/>
+</map>

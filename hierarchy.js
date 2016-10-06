@@ -3,9 +3,11 @@ var hierarchy =
     [ "ConfigServer", "classConfigServer.html", null ],
     [ "enable_shared_from_this", null, [
       [ "ConfigServerHandler", "classConfigServerHandler.html", null ],
-      [ "ConfigServerHandlerCollection", "classConfigServerHandlerCollection.html", null ]
+      [ "ConfigServerHandlerCollection", "classConfigServerHandlerCollection.html", null ],
+      [ "FrameEndpoint", "classFrameEndpoint.html", null ],
+      [ "HdlcdPacketEndpoint", "classHdlcdPacketEndpoint.html", null ]
     ] ],
-    [ "Frame", null, [
+    [ "Frame", "classFrame.html", [
       [ "ConfigFrame", "classConfigFrame.html", [
         [ "GatewayClientCleanup", "classGatewayClientCleanup.html", null ],
         [ "GatewayClientConnected", "classGatewayClientConnected.html", null ],
@@ -27,11 +29,23 @@ var hierarchy =
       ] ],
       [ "GatewayFrame", "classGatewayFrame.html", [
         [ "GatewayFrameData", "classGatewayFrameData.html", null ]
-      ] ]
+      ] ],
+      [ "HdlcdPacket", "classHdlcdPacket.html", [
+        [ "HdlcdPacketCtrl", "classHdlcdPacketCtrl.html", null ],
+        [ "HdlcdPacketData", "classHdlcdPacketData.html", null ]
+      ] ],
+      [ "HdlcdSessionHeader", "classHdlcdSessionHeader.html", null ]
     ] ],
     [ "GatewayClient", "classGatewayClient.html", null ],
     [ "GatewayClientHandler", "classGatewayClientHandler.html", null ],
     [ "GatewayClientHandlerCollection", "classGatewayClientHandlerCollection.html", null ],
+    [ "HdlcdClient", "classHdlcdClient.html", null ],
     [ "HdlcdClientHandler", "classHdlcdClientHandler.html", null ],
-    [ "HdlcdClientHandlerCollection", "classHdlcdClientHandlerCollection.html", null ]
+    [ "HdlcdClientHandlerCollection", "classHdlcdClientHandlerCollection.html", null ],
+    [ "HdlcdSessionDescriptor", "classHdlcdSessionDescriptor.html", null ],
+    [ "SnetPacket", "classSnetPacket.html", [
+      [ "SnetAppMessage", "classSnetAppMessage.html", [
+        [ "SnetServiceMessage", "classSnetServiceMessage.html", null ]
+      ] ]
+    ] ]
 ];

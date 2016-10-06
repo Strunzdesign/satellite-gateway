@@ -4,6 +4,8 @@ var annotated_dup =
     [ "ConfigServer", "classConfigServer.html", "classConfigServer" ],
     [ "ConfigServerHandler", "classConfigServerHandler.html", "classConfigServerHandler" ],
     [ "ConfigServerHandlerCollection", "classConfigServerHandlerCollection.html", "classConfigServerHandlerCollection" ],
+    [ "Frame", "classFrame.html", "classFrame" ],
+    [ "FrameEndpoint", "classFrameEndpoint.html", "classFrameEndpoint" ],
     [ "GatewayClient", "classGatewayClient.html", "classGatewayClient" ],
     [ "GatewayClientCleanup", "classGatewayClientCleanup.html", null ],
     [ "GatewayClientConnected", "classGatewayClientConnected.html", "classGatewayClientConnected" ],
@@ -17,6 +19,7 @@ var annotated_dup =
     [ "GatewayClientHandlerCollection", "classGatewayClientHandlerCollection.html", "classGatewayClientHandlerCollection" ],
     [ "GatewayFrame", "classGatewayFrame.html", "classGatewayFrame" ],
     [ "GatewayFrameData", "classGatewayFrameData.html", "classGatewayFrameData" ],
+    [ "HdlcdClient", "classHdlcdClient.html", "classHdlcdClient" ],
     [ "HdlcdClientCleanup", "classHdlcdClientCleanup.html", null ],
     [ "HdlcdClientCreate", "classHdlcdClientCreate.html", "classHdlcdClientCreate" ],
     [ "HdlcdClientCreated", "classHdlcdClientCreated.html", "classHdlcdClientCreated" ],
@@ -27,5 +30,14 @@ var annotated_dup =
     [ "HdlcdClientHandlerCollection", "classHdlcdClientHandlerCollection.html", "classHdlcdClientHandlerCollection" ],
     [ "HdlcdClientNewStatus", "classHdlcdClientNewStatus.html", "classHdlcdClientNewStatus" ],
     [ "HdlcdClientResume", "classHdlcdClientResume.html", "classHdlcdClientResume" ],
-    [ "HdlcdClientSuspend", "classHdlcdClientSuspend.html", "classHdlcdClientSuspend" ]
+    [ "HdlcdClientSuspend", "classHdlcdClientSuspend.html", "classHdlcdClientSuspend" ],
+    [ "HdlcdPacket", "classHdlcdPacket.html", "classHdlcdPacket" ],
+    [ "HdlcdPacketCtrl", "classHdlcdPacketCtrl.html", "classHdlcdPacketCtrl" ],
+    [ "HdlcdPacketData", "classHdlcdPacketData.html", "classHdlcdPacketData" ],
+    [ "HdlcdPacketEndpoint", "classHdlcdPacketEndpoint.html", "classHdlcdPacketEndpoint" ],
+    [ "HdlcdSessionDescriptor", "classHdlcdSessionDescriptor.html", "classHdlcdSessionDescriptor" ],
+    [ "HdlcdSessionHeader", "classHdlcdSessionHeader.html", "classHdlcdSessionHeader" ],
+    [ "SnetAppMessage", "classSnetAppMessage.html", "classSnetAppMessage" ],
+    [ "SnetPacket", "classSnetPacket.html", "classSnetPacket" ],
+    [ "SnetServiceMessage", "classSnetServiceMessage.html", "classSnetServiceMessage" ]
 ];

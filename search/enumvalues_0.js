@@ -17,5 +17,10 @@ var searchData=
   ['config_5fframe_5fhdlcd_5fclient_5fnew_5fstatus',['CONFIG_FRAME_HDLCD_CLIENT_NEW_STATUS',['../ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103a7133902e7fe4dc9711351a0bf1a57b34',1,'ConfigFrame.h']]],
   ['config_5fframe_5fhdlcd_5fclient_5fresume',['CONFIG_FRAME_HDLCD_CLIENT_RESUME',['../ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103a3595db482c664bb9deeee5b28c78e743',1,'ConfigFrame.h']]],
   ['config_5fframe_5fhdlcd_5fclient_5fsuspend',['CONFIG_FRAME_HDLCD_CLIENT_SUSPEND',['../ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103a336dc796842be1f404cf823c52b85af8',1,'ConfigFrame.h']]],
-  ['config_5fframe_5funknown',['CONFIG_FRAME_UNKNOWN',['../ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103adfad71a74ac0317f6ed6313ce1f66acb',1,'ConfigFrame.h']]]
+  ['config_5fframe_5funknown',['CONFIG_FRAME_UNKNOWN',['../ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103adfad71a74ac0317f6ed6313ce1f66acb',1,'ConfigFrame.h']]],
+  ['ctrl_5ftype_5fecho',['CTRL_TYPE_ECHO',['../classHdlcdPacketCtrl.html#afa47366958528933dd31c326728f2866aac48353e8df9a4662a49b72b76997231',1,'HdlcdPacketCtrl']]],
+  ['ctrl_5ftype_5fkeep_5falive',['CTRL_TYPE_KEEP_ALIVE',['../classHdlcdPacketCtrl.html#afa47366958528933dd31c326728f2866a9308d8ec0f47b89b1b28f1ae088a5e4b',1,'HdlcdPacketCtrl']]],
+  ['ctrl_5ftype_5fport_5fkill',['CTRL_TYPE_PORT_KILL',['../classHdlcdPacketCtrl.html#afa47366958528933dd31c326728f2866aedc8c91653c461d957c464de27cc827f',1,'HdlcdPacketCtrl']]],
+  ['ctrl_5ftype_5fport_5fstatus',['CTRL_TYPE_PORT_STATUS',['../classHdlcdPacketCtrl.html#afa47366958528933dd31c326728f2866a805644300aff46f90516a93b09a5d3b5',1,'HdlcdPacketCtrl']]],
+  ['ctrl_5ftype_5funset',['CTRL_TYPE_UNSET',['../classHdlcdPacketCtrl.html#afa47366958528933dd31c326728f2866a595ad171f6105232306d13f3ffd5265e',1,'HdlcdPacketCtrl']]]
 ];

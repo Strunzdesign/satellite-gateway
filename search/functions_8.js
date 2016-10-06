@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7egatewayclient',['~GatewayClient',['../classGatewayClient.html#abfb2fae39ac96772b753b163befc8b32',1,'GatewayClient']]]
+  ['main',['main',['../main-satellite-gateway_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main-satellite-gateway.cpp']]]
 ];

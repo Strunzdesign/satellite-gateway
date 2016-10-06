@@ -1,0 +1,11 @@
+<map id="libs/framing/src/FrameEndpoint.h" name="libs/framing/src/FrameEndpoint.h">
+<area shape="rect" id="node2" href="$ConfigServer_8h.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServer.h" alt="" coords="284,80,491,121"/>
+<area shape="rect" id="node5" href="$GatewayClient_8h.html" title="src/satellite&#45;gateway\l/GatewayClient/GatewayClient.h" alt="" coords="663,80,888,121"/>
+<area shape="rect" id="node8" href="$HdlcdPacketEndpoint_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="912,80,1084,121"/>
+<area shape="rect" id="node9" href="$HdlcdClient_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="1051,177,1193,218"/>
+<area shape="rect" id="node3" href="$ConfigServer_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServer.cpp" alt="" coords="5,177,228,218"/>
+<area shape="rect" id="node4" href="$ConfigServerHandler_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServerHandler.cpp" alt="" coords="251,177,523,218"/>
+<area shape="rect" id="node6" href="$GatewayClient_8cpp.html" title="src/satellite&#45;gateway\l/GatewayClient/GatewayClient.cpp" alt="" coords="547,177,787,218"/>
+<area shape="rect" id="node7" href="$GatewayClientHandler_8cpp.html" title="src/satellite&#45;gateway\l/GatewayClient/GatewayClient\lHandler.cpp" alt="" coords="812,169,1027,225"/>
+<area shape="rect" id="node10" href="$HdlcdClientHandler_8cpp.html" title="src/satellite&#45;gateway\l/HdlcdClient/HdlcdClientHandler.cpp" alt="" coords="997,273,1247,315"/>
+</map>

@@ -1,14 +1,16 @@
 var searchData=
 [
-  ['hdlcdclientcleanup',['HdlcdClientCleanup',['../classHdlcdClientCleanup.html',1,'']]],
-  ['hdlcdclientcreate',['HdlcdClientCreate',['../classHdlcdClientCreate.html',1,'']]],
-  ['hdlcdclientcreated',['HdlcdClientCreated',['../classHdlcdClientCreated.html',1,'']]],
-  ['hdlcdclientdestroy',['HdlcdClientDestroy',['../classHdlcdClientDestroy.html',1,'']]],
-  ['hdlcdclientdestroyed',['HdlcdClientDestroyed',['../classHdlcdClientDestroyed.html',1,'']]],
-  ['hdlcdclienterror',['HdlcdClientError',['../classHdlcdClientError.html',1,'']]],
-  ['hdlcdclienthandler',['HdlcdClientHandler',['../classHdlcdClientHandler.html',1,'']]],
-  ['hdlcdclienthandlercollection',['HdlcdClientHandlerCollection',['../classHdlcdClientHandlerCollection.html',1,'']]],
-  ['hdlcdclientnewstatus',['HdlcdClientNewStatus',['../classHdlcdClientNewStatus.html',1,'']]],
-  ['hdlcdclientresume',['HdlcdClientResume',['../classHdlcdClientResume.html',1,'']]],
-  ['hdlcdclientsuspend',['HdlcdClientSuspend',['../classHdlcdClientSuspend.html',1,'']]]
+  ['gatewayclient',['GatewayClient',['../classGatewayClient.html',1,'']]],
+  ['gatewayclientcleanup',['GatewayClientCleanup',['../classGatewayClientCleanup.html',1,'']]],
+  ['gatewayclientconnected',['GatewayClientConnected',['../classGatewayClientConnected.html',1,'']]],
+  ['gatewayclientcreate',['GatewayClientCreate',['../classGatewayClientCreate.html',1,'']]],
+  ['gatewayclientcreated',['GatewayClientCreated',['../classGatewayClientCreated.html',1,'']]],
+  ['gatewayclientdestroy',['GatewayClientDestroy',['../classGatewayClientDestroy.html',1,'']]],
+  ['gatewayclientdestroyed',['GatewayClientDestroyed',['../classGatewayClientDestroyed.html',1,'']]],
+  ['gatewayclientdisconnected',['GatewayClientDisconnected',['../classGatewayClientDisconnected.html',1,'']]],
+  ['gatewayclienterror',['GatewayClientError',['../classGatewayClientError.html',1,'']]],
+  ['gatewayclienthandler',['GatewayClientHandler',['../classGatewayClientHandler.html',1,'']]],
+  ['gatewayclienthandlercollection',['GatewayClientHandlerCollection',['../classGatewayClientHandlerCollection.html',1,'']]],
+  ['gatewayframe',['GatewayFrame',['../classGatewayFrame.html',1,'']]],
+  ['gatewayframedata',['GatewayFrameData',['../classGatewayFrameData.html',1,'']]]
 ];
