@@ -34,21 +34,21 @@ GatewayClient::GatewayClient(boost::asio::io_service& a_IOService, boost::asio::
     // Checks
     assert(m_ConfigServerHandlerCollection);
     assert(m_HdlcdClientHandlerCollection);
-    
-    // Configure the frame end point
-    m_FrameEndpoint = std::make_shared<FrameEndpoint>(a_IOService, m_TcpSocket, 0x00); // 0x00: unset the filter mask as there is no preceeding type byte
-    m_FrameEndpoint->RegisterFrameFactory(GATEWAY_FRAME_DATA, []()->std::shared_ptr<Frame>{ return GatewayFrameData::CreateDeserializedFrame (); });
-    m_FrameEndpoint->SetOnFrameCallback  ([this](std::shared_ptr<Frame> a_Frame)->bool{ return OnFrame(a_Frame); });
-    m_FrameEndpoint->SetOnClosedCallback ([this](){ OnClosed(); });
-    
+
     // Connect the TCP socket
-    boost::asio::async_connect(m_TcpSocket, a_EndpointIterator, [this](boost::system::error_code a_ErrorCode, boost::asio::ip::tcp::resolver::iterator) {
+    boost::asio::async_connect(m_TcpSocket, a_EndpointIterator, [this, &a_IOService](boost::system::error_code a_ErrorCode, boost::asio::ip::tcp::resolver::iterator) {
         if (a_ErrorCode == boost::asio::error::operation_aborted) return;
         if (a_ErrorCode) {
             std::cerr << "Connection to the master gateway was not established, error = " << a_ErrorCode << std::endl;
             Close();
         } else {
             std::cerr << "Connection to the master gateway was established" << std::endl;
+            
+            // Configure the frame end point
+            m_FrameEndpoint = std::make_shared<FrameEndpoint>(a_IOService, m_TcpSocket, 0x00); // 0x00: unset the filter mask as there is no preceeding type byte
+            m_FrameEndpoint->RegisterFrameFactory(GATEWAY_FRAME_DATA, []()->std::shared_ptr<Frame>{ return GatewayFrameData::CreateDeserializedFrame (); });
+            m_FrameEndpoint->SetOnFrameCallback  ([this](std::shared_ptr<Frame> a_Frame)->bool{ return OnFrame(a_Frame); });
+            m_FrameEndpoint->SetOnClosedCallback ([this](){ OnClosed(); });
             m_FrameEndpoint->Start();
         } // else
     }); // async_connect
@@ -65,7 +65,10 @@ void GatewayClient::Shutdown() {
 void GatewayClient::Close() {
     if (m_bClosed == false) {
         m_bClosed = true;
-        m_FrameEndpoint->Close();
+        if (m_FrameEndpoint) {
+            m_FrameEndpoint->Close();
+        } // if
+
         if (m_OnClosedCallback) {
             m_OnClosedCallback();
         } // if
