@@ -24,6 +24,7 @@
 #include "ConfigServer.h"
 #include "GatewayClientHandlerCollection.h"
 #include "HdlcdClientHandlerCollection.h"
+#include "GatewayClientCleanup.h"
 #include "GatewayClientCreate.h"
 #include "GatewayClientCreated.h"
 #include "GatewayClientDestroy.h"
@@ -31,6 +32,7 @@
 #include "GatewayClientConnected.h"
 #include "GatewayClientDisconnected.h"
 #include "GatewayClientError.h"
+#include "HdlcdClientCleanup.h"
 #include "HdlcdClientCreate.h"
 #include "HdlcdClientCreated.h"
 #include "HdlcdClientDestroy.h"
@@ -44,8 +46,10 @@
 ConfigServer::ConfigServer(boost::asio::io_service& a_IOService, boost::asio::ip::tcp::tcp::socket& a_TcpSocket): m_IOService(a_IOService) {
     // Init the frame endpoint
     m_FrameEndpoint = std::make_shared<FrameEndpoint>(a_IOService, a_TcpSocket);
+    m_FrameEndpoint->RegisterFrameFactory(CONFIG_FRAME_GATEWAY_CLIENT_CLEANUP, []()->std::shared_ptr<Frame>{ return GatewayClientCleanup::CreateDeserializedFrame(); });
     m_FrameEndpoint->RegisterFrameFactory(CONFIG_FRAME_GATEWAY_CLIENT_CREATE,  []()->std::shared_ptr<Frame>{ return GatewayClientCreate::CreateDeserializedFrame (); });
     m_FrameEndpoint->RegisterFrameFactory(CONFIG_FRAME_GATEWAY_CLIENT_DESTROY, []()->std::shared_ptr<Frame>{ return GatewayClientDestroy::CreateDeserializedFrame(); });
+    m_FrameEndpoint->RegisterFrameFactory(CONFIG_FRAME_HDLCD_CLIENT_CLEANUP,   []()->std::shared_ptr<Frame>{ return HdlcdClientCleanup::CreateDeserializedFrame  (); });
     m_FrameEndpoint->RegisterFrameFactory(CONFIG_FRAME_HDLCD_CLIENT_CREATE,    []()->std::shared_ptr<Frame>{ return HdlcdClientCreate::CreateDeserializedFrame   (); });
     m_FrameEndpoint->RegisterFrameFactory(CONFIG_FRAME_HDLCD_CLIENT_DESTROY,   []()->std::shared_ptr<Frame>{ return HdlcdClientDestroy::CreateDeserializedFrame  (); });
     m_FrameEndpoint->RegisterFrameFactory(CONFIG_FRAME_HDLCD_CLIENT_SUSPEND,   []()->std::shared_ptr<Frame>{ return HdlcdClientSuspend::CreateDeserializedFrame  (); });
