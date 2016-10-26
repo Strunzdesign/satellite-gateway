@@ -156,8 +156,8 @@ bool ConfigServer::OnFrame(std::shared_ptr<Frame> a_Frame) {
             break;
         }
         case CONFIG_FRAME_HDLCD_CLIENT_DESTROY: {
-            auto l_HdlcdClientCreate = std::dynamic_pointer_cast<HdlcdClientCreate>(l_ConfigFrame);
-            m_HdlcdClientHandlerCollection->DestroyHdlcdClient(l_HdlcdClientCreate->GetSerialPortNbr());
+            auto l_HdlcdClientDestroy = std::dynamic_pointer_cast<HdlcdClientDestroy>(l_ConfigFrame);
+            m_HdlcdClientHandlerCollection->DestroyHdlcdClient(l_HdlcdClientDestroy->GetSerialPortNbr());
             break;
         }
         case CONFIG_FRAME_HDLCD_CLIENT_SUSPEND: {
