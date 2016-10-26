@@ -111,8 +111,7 @@ void HdlcdClientHandler::ResolveDestination() {
             m_HdlcdClient->SetOnCtrlCallback([this](const HdlcdPacketCtrl& a_PacketCtrl) {
                 if (a_PacketCtrl.GetPacketType() == HdlcdPacketCtrl::CTRL_TYPE_PORT_STATUS) {
                     // Update the state of the serial port
-                    m_ConfigServerHandlerCollection->HdlcdClientNewStatus(m_SerialPortNbr, (!a_PacketCtrl.GetIsLockedBySelf() || !a_PacketCtrl.GetIsLockedByOthers()),
-                                                                        a_PacketCtrl.GetIsAlive());
+                    m_ConfigServerHandlerCollection->HdlcdClientNewStatus(m_SerialPortNbr, ((!a_PacketCtrl.GetIsLockedBySelf()) && (!a_PacketCtrl.GetIsLockedByOthers())), a_PacketCtrl.GetIsAlive());
                 } // if
             }); // SetOnCtrlCallback
             
