@@ -1,5 +1,5 @@
 <map id="src/satellite&#45;gateway/HdlcdClient/HdlcdClientHandlerCollection.h" name="src/satellite&#45;gateway/HdlcdClient/HdlcdClientHandlerCollection.h">
 <area shape="rect" id="node7" href="$HdlcdPacketData_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="346,109,489,136"/>
-<area shape="rect" id="node8" href="$HdlcdPacket_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="295,184,407,211"/>
-<area shape="rect" id="node9" href="$Frame_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="251,259,325,285"/>
+<area shape="rect" id="node8" href="$HdlcdPacket_8h.html" title="This file contains the header declaration of class HdlcdPacket. " alt="" coords="295,184,407,211"/>
+<area shape="rect" id="node9" href="$Frame_8h.html" title="This file contains the header declaration of class Frame. " alt="" coords="251,259,325,285"/>
 </map>

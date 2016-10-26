@@ -4,10 +4,10 @@
 <area shape="rect" id="node17" href="$HdlcdClientHandlerCollection_8h.html" title="HdlcdClientHandlerCollection.h" alt="" coords="509,95,726,121"/>
 <area shape="rect" id="node21" href="$GatewayFrameData_8h.html" title="GatewayFrameData.h" alt="" coords="169,95,327,121"/>
 <area shape="rect" id="node5" href="$GatewayFrame_8h.html" title="GatewayFrame.h" alt="" coords="43,169,173,196"/>
-<area shape="rect" id="node10" href="$FrameEndpoint_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="197,169,326,196"/>
-<area shape="rect" id="node6" href="$Frame_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="334,319,407,345"/>
+<area shape="rect" id="node10" href="$FrameEndpoint_8h.html" title="This file contains the header declaration of class FrameEndpoint. " alt="" coords="197,169,326,196"/>
+<area shape="rect" id="node6" href="$Frame_8h.html" title="This file contains the header declaration of class Frame. " alt="" coords="334,319,407,345"/>
 <area shape="rect" id="node15" href="$GatewayClientErrorCodes_8h.html" title="GatewayClientErrorCodes.h" alt="" coords="1170,244,1369,271"/>
 <area shape="rect" id="node16" href="$HdlcdClientErrorCodes_8h.html" title="HdlcdClientErrorCodes.h" alt="" coords="967,244,1145,271"/>
 <area shape="rect" id="node19" href="$HdlcdPacketData_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="737,169,879,196"/>
-<area shape="rect" id="node20" href="$HdlcdPacket_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="747,244,859,271"/>
+<area shape="rect" id="node20" href="$HdlcdPacket_8h.html" title="This file contains the header declaration of class HdlcdPacket. " alt="" coords="747,244,859,271"/>
 </map>

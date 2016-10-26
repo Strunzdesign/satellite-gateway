@@ -1,7 +1,7 @@
 <map id="libs/hdlcd&#45;devel/src/HdlcdPacketData.h" name="libs/hdlcd&#45;devel/src/HdlcdPacketData.h">
 <area shape="rect" id="node2" href="$HdlcdClientHandlerCollection_8h.html" title="src/satellite&#45;gateway\l/HdlcdClient/HdlcdClientHandler\lCollection.h" alt="" coords="902,95,1126,151"/>
 <area shape="rect" id="node10" href="$HdlcdPacketEndpoint_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="1591,102,1763,143"/>
-<area shape="rect" id="node11" href="$HdlcdClient_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="1730,206,1871,247"/>
+<area shape="rect" id="node11" href="$HdlcdClient_8h.html" title="This file contains the header declaration of class HdlcdClient. " alt="" coords="1730,206,1871,247"/>
 <area shape="rect" id="node3" href="$ConfigServer_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServer.cpp" alt="" coords="5,206,228,247"/>
 <area shape="rect" id="node4" href="$ConfigServerHandlerCollection_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServerHandler\lCollection.cpp" alt="" coords="252,199,499,255"/>
 <area shape="rect" id="node5" href="$GatewayClient_8cpp.html" title="src/satellite&#45;gateway\l/GatewayClient/GatewayClient.cpp" alt="" coords="523,206,763,247"/>

@@ -1,8 +1,10 @@
 <map id="ConfigServer::ConfigServer" name="ConfigServer::ConfigServer">
-<area shape="rect" id="node2" href="$classGatewayClientCreate.html#a85b1cdf4d8eb242ecc7a085be4855f61" title="GatewayClientCreate\l::CreateDeserializedFrame" alt="" coords="248,5,437,47"/>
-<area shape="rect" id="node3" href="$classGatewayClientDestroy.html#aadd9ffc0e22b19f0976e4c2d3e6754b5" title="GatewayClientDestroy\l::CreateDeserializedFrame" alt="" coords="248,71,437,112"/>
-<area shape="rect" id="node4" href="$classHdlcdClientCreate.html#a0f38234c8f7886a21681f460539f363b" title="HdlcdClientCreate::\lCreateDeserializedFrame" alt="" coords="251,136,434,177"/>
-<area shape="rect" id="node5" href="$classHdlcdClientDestroy.html#aa9aca04572fcae75557550870c5d7969" title="HdlcdClientDestroy\l::CreateDeserializedFrame" alt="" coords="248,201,437,243"/>
-<area shape="rect" id="node6" href="$classHdlcdClientSuspend.html#a56e1f692f9eb512c99be1bc55f57bad5" title="HdlcdClientSuspend\l::CreateDeserializedFrame" alt="" coords="248,267,437,308"/>
-<area shape="rect" id="node7" href="$classHdlcdClientResume.html#a279370f4d9d37bc1cb20d707c0d5a0c2" title="HdlcdClientResume::\lCreateDeserializedFrame" alt="" coords="251,332,434,373"/>
+<area shape="rect" id="node2" href="$classGatewayClientCleanup.html#a8972433adcb7db23a89c5a2f81a74326" title="GatewayClientCleanup\l::CreateDeserializedFrame" alt="" coords="248,5,437,47"/>
+<area shape="rect" id="node3" href="$classGatewayClientCreate.html#a85b1cdf4d8eb242ecc7a085be4855f61" title="GatewayClientCreate\l::CreateDeserializedFrame" alt="" coords="248,71,437,112"/>
+<area shape="rect" id="node4" href="$classGatewayClientDestroy.html#aadd9ffc0e22b19f0976e4c2d3e6754b5" title="GatewayClientDestroy\l::CreateDeserializedFrame" alt="" coords="248,136,437,177"/>
+<area shape="rect" id="node5" href="$classHdlcdClientCleanup.html#a01af0f1fe88ab093936ab1947fafbe62" title="HdlcdClientCleanup\l::CreateDeserializedFrame" alt="" coords="248,201,437,243"/>
+<area shape="rect" id="node6" href="$classHdlcdClientCreate.html#a0f38234c8f7886a21681f460539f363b" title="HdlcdClientCreate::\lCreateDeserializedFrame" alt="" coords="251,267,434,308"/>
+<area shape="rect" id="node7" href="$classHdlcdClientDestroy.html#aa9aca04572fcae75557550870c5d7969" title="HdlcdClientDestroy\l::CreateDeserializedFrame" alt="" coords="248,332,437,373"/>
+<area shape="rect" id="node8" href="$classHdlcdClientSuspend.html#a56e1f692f9eb512c99be1bc55f57bad5" title="HdlcdClientSuspend\l::CreateDeserializedFrame" alt="" coords="248,397,437,439"/>
+<area shape="rect" id="node9" href="$classHdlcdClientResume.html#a279370f4d9d37bc1cb20d707c0d5a0c2" title="HdlcdClientResume::\lCreateDeserializedFrame" alt="" coords="251,463,434,504"/>
 </map>

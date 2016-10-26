@@ -5,6 +5,6 @@
 <area shape="rect" id="node8" href="$GatewayClientErrorCodes_8h.html" title="GatewayClientErrorCodes.h" alt="" coords="786,169,985,196"/>
 <area shape="rect" id="node9" href="$HdlcdClientErrorCodes_8h.html" title="HdlcdClientErrorCodes.h" alt="" coords="1009,169,1188,196"/>
 <area shape="rect" id="node15" href="$HdlcdPacketData_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="246,169,389,196"/>
-<area shape="rect" id="node16" href="$HdlcdPacket_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="216,244,328,271"/>
-<area shape="rect" id="node17" href="$Frame_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="229,319,302,345"/>
+<area shape="rect" id="node16" href="$HdlcdPacket_8h.html" title="This file contains the header declaration of class HdlcdPacket. " alt="" coords="216,244,328,271"/>
+<area shape="rect" id="node17" href="$Frame_8h.html" title="This file contains the header declaration of class Frame. " alt="" coords="229,319,302,345"/>
 </map>

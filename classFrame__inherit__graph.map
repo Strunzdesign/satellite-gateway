@@ -1,8 +1,8 @@
 <map id="Frame" name="Frame">
 <area shape="rect" id="node2" href="$classConfigFrame.html" title="ConfigFrame" alt="" coords="142,436,245,463"/>
 <area shape="rect" id="node20" href="$classGatewayFrame.html" title="GatewayFrame" alt="" coords="134,867,253,893"/>
-<area shape="rect" id="node22" href="$classHdlcdPacket.html" title="HdlcdPacket" alt="" coords="143,917,244,944"/>
-<area shape="rect" id="node25" href="$classHdlcdSessionHeader.html" title="HdlcdSessionHeader" alt="" coords="116,968,271,995"/>
+<area shape="rect" id="node22" href="$classHdlcdPacket.html" title="Class HdlcdPacket. " alt="" coords="143,917,244,944"/>
+<area shape="rect" id="node25" href="$classHdlcdSessionHeader.html" title="Class HdlcdSessionHeader. " alt="" coords="116,968,271,995"/>
 <area shape="rect" id="node3" href="$classGatewayClientCleanup.html" title="GatewayClientCleanup" alt="" coords="335,5,502,32"/>
 <area shape="rect" id="node4" href="$classGatewayClientConnected.html" title="GatewayClientConnected" alt="" coords="327,56,510,83"/>
 <area shape="rect" id="node5" href="$classGatewayClientCreate.html" title="GatewayClientCreate" alt="" coords="340,107,497,133"/>

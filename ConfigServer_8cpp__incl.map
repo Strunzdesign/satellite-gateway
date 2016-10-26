@@ -1,27 +1,29 @@
 <map id="src/satellite&#45;gateway/ConfigServer/ConfigServer.cpp" name="src/satellite&#45;gateway/ConfigServer/ConfigServer.cpp">
-<area shape="rect" id="node2" href="$ConfigServer_8h.html" title="ConfigServer.h" alt="" coords="438,95,554,121"/>
-<area shape="rect" id="node16" href="$GatewayClientHandlerCollection_8h.html" title="GatewayClientHandlerCollection.h" alt="" coords="820,95,1057,121"/>
-<area shape="rect" id="node18" href="$HdlcdClientHandlerCollection_8h.html" title="HdlcdClientHandlerCollection.h" alt="" coords="578,95,795,121"/>
-<area shape="rect" id="node21" href="$GatewayClientCreate_8h.html" title="GatewayClientCreate.h" alt="" coords="1081,95,1249,121"/>
-<area shape="rect" id="node22" href="$GatewayClientCreated_8h.html" title="GatewayClientCreated.h" alt="" coords="2907,95,3083,121"/>
-<area shape="rect" id="node23" href="$GatewayClientDestroy_8h.html" title="GatewayClientDestroy.h" alt="" coords="3107,95,3282,121"/>
-<area shape="rect" id="node24" href="$GatewayClientDestroyed_8h.html" title="GatewayClientDestroyed.h" alt="" coords="3306,95,3497,121"/>
-<area shape="rect" id="node25" href="$GatewayClientConnected_8h.html" title="GatewayClientConnected.h" alt="" coords="3521,95,3716,121"/>
-<area shape="rect" id="node26" href="$GatewayClientDisconnected_8h.html" title="GatewayClientDisconnected.h" alt="" coords="3740,95,3951,121"/>
-<area shape="rect" id="node27" href="$GatewayClientError_8h.html" title="GatewayClientError.h" alt="" coords="1447,95,1604,121"/>
-<area shape="rect" id="node28" href="$HdlcdClientCreate_8h.html" title="HdlcdClientCreate.h" alt="" coords="1274,95,1422,121"/>
-<area shape="rect" id="node29" href="$HdlcdClientCreated_8h.html" title="HdlcdClientCreated.h" alt="" coords="1629,95,1785,121"/>
-<area shape="rect" id="node30" href="$HdlcdClientDestroy_8h.html" title="HdlcdClientDestroy.h" alt="" coords="1809,95,1964,121"/>
-<area shape="rect" id="node31" href="$HdlcdClientDestroyed_8h.html" title="HdlcdClientDestroyed.h" alt="" coords="1988,95,2159,121"/>
-<area shape="rect" id="node32" href="$HdlcdClientNewStatus_8h.html" title="HdlcdClientNewStatus.h" alt="" coords="2183,95,2355,121"/>
-<area shape="rect" id="node33" href="$HdlcdClientSuspend_8h.html" title="HdlcdClientSuspend.h" alt="" coords="2380,95,2540,121"/>
-<area shape="rect" id="node34" href="$HdlcdClientResume_8h.html" title="HdlcdClientResume.h" alt="" coords="2565,95,2721,121"/>
-<area shape="rect" id="node35" href="$HdlcdClientError_8h.html" title="HdlcdClientError.h" alt="" coords="2745,95,2882,121"/>
-<area shape="rect" id="node5" href="$ConfigFrame_8h.html" title="ConfigFrame.h" alt="" coords="2212,169,2327,196"/>
-<area shape="rect" id="node10" href="$FrameEndpoint_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="469,169,598,196"/>
+<area shape="rect" id="node2" href="$ConfigServer_8h.html" title="ConfigServer.h" alt="" coords="389,95,505,121"/>
+<area shape="rect" id="node16" href="$GatewayClientHandlerCollection_8h.html" title="GatewayClientHandlerCollection.h" alt="" coords="771,95,1008,121"/>
+<area shape="rect" id="node18" href="$HdlcdClientHandlerCollection_8h.html" title="HdlcdClientHandlerCollection.h" alt="" coords="529,95,746,121"/>
+<area shape="rect" id="node21" href="$GatewayClientCleanup_8h.html" title="GatewayClientCleanup.h" alt="" coords="2855,95,3033,121"/>
+<area shape="rect" id="node22" href="$GatewayClientCreate_8h.html" title="GatewayClientCreate.h" alt="" coords="1204,95,1372,121"/>
+<area shape="rect" id="node23" href="$GatewayClientCreated_8h.html" title="GatewayClientCreated.h" alt="" coords="3057,95,3233,121"/>
+<area shape="rect" id="node24" href="$GatewayClientDestroy_8h.html" title="GatewayClientDestroy.h" alt="" coords="3258,95,3433,121"/>
+<area shape="rect" id="node25" href="$GatewayClientDestroyed_8h.html" title="GatewayClientDestroyed.h" alt="" coords="3457,95,3647,121"/>
+<area shape="rect" id="node26" href="$GatewayClientConnected_8h.html" title="GatewayClientConnected.h" alt="" coords="3672,95,3867,121"/>
+<area shape="rect" id="node27" href="$GatewayClientDisconnected_8h.html" title="GatewayClientDisconnected.h" alt="" coords="3891,95,4101,121"/>
+<area shape="rect" id="node28" href="$GatewayClientError_8h.html" title="GatewayClientError.h" alt="" coords="4125,95,4283,121"/>
+<area shape="rect" id="node29" href="$HdlcdClientCleanup_8h.html" title="HdlcdClientCleanup.h" alt="" coords="1396,95,1553,121"/>
+<area shape="rect" id="node30" href="$HdlcdClientCreate_8h.html" title="HdlcdClientCreate.h" alt="" coords="1031,95,1179,121"/>
+<area shape="rect" id="node31" href="$HdlcdClientCreated_8h.html" title="HdlcdClientCreated.h" alt="" coords="1578,95,1734,121"/>
+<area shape="rect" id="node32" href="$HdlcdClientDestroy_8h.html" title="HdlcdClientDestroy.h" alt="" coords="1759,95,1913,121"/>
+<area shape="rect" id="node33" href="$HdlcdClientDestroyed_8h.html" title="HdlcdClientDestroyed.h" alt="" coords="1937,95,2108,121"/>
+<area shape="rect" id="node34" href="$HdlcdClientNewStatus_8h.html" title="HdlcdClientNewStatus.h" alt="" coords="2133,95,2305,121"/>
+<area shape="rect" id="node35" href="$HdlcdClientSuspend_8h.html" title="HdlcdClientSuspend.h" alt="" coords="2329,95,2489,121"/>
+<area shape="rect" id="node36" href="$HdlcdClientResume_8h.html" title="HdlcdClientResume.h" alt="" coords="2514,95,2670,121"/>
+<area shape="rect" id="node37" href="$HdlcdClientError_8h.html" title="HdlcdClientError.h" alt="" coords="2694,95,2831,121"/>
+<area shape="rect" id="node5" href="$ConfigFrame_8h.html" title="ConfigFrame.h" alt="" coords="2352,169,2467,196"/>
+<area shape="rect" id="node10" href="$FrameEndpoint_8h.html" title="This file contains the header declaration of class FrameEndpoint. " alt="" coords="469,169,598,196"/>
 <area shape="rect" id="node14" href="$GatewayClientErrorCodes_8h.html" title="GatewayClientErrorCodes.h" alt="" coords="42,169,241,196"/>
 <area shape="rect" id="node15" href="$HdlcdClientErrorCodes_8h.html" title="HdlcdClientErrorCodes.h" alt="" coords="265,169,444,196"/>
-<area shape="rect" id="node6" href="$Frame_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="842,319,915,345"/>
-<area shape="rect" id="node19" href="$HdlcdPacketData_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="931,169,1074,196"/>
-<area shape="rect" id="node20" href="$HdlcdPacket_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="888,244,1000,271"/>
+<area shape="rect" id="node6" href="$Frame_8h.html" title="This file contains the header declaration of class Frame. " alt="" coords="885,319,958,345"/>
+<area shape="rect" id="node19" href="$HdlcdPacketData_8h.html" title="Copyright (c) 2016, Florian Evers, florian&#45;evers@gmx.de All rights reserved. " alt="" coords="927,169,1070,196"/>
+<area shape="rect" id="node20" href="$HdlcdPacket_8h.html" title="This file contains the header declaration of class HdlcdPacket. " alt="" coords="909,244,1021,271"/>
 </map>
