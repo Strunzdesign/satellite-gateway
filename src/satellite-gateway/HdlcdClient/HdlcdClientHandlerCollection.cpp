@@ -58,6 +58,9 @@ void HdlcdClientHandlerCollection::CleanAll() {
         l_Handler->Close();
         l_Handler.reset();
     } // for
+    
+    // Finally clean the map to drop all entries
+    m_HdlcdClientHandlerMap.clear();
 }
 
 void HdlcdClientHandlerCollection::CreateHdlcdClient(const std::string &a_RemoteAddress, uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr) {
