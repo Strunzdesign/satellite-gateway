@@ -79,12 +79,6 @@ int main(int argc, char* argv[]) {
         l_GatewayClientHandlerCollection->Initialize(l_ConfigServerHandlerCollection, l_HdlcdClientHandlerCollection);
         l_HdlcdClientHandlerCollection->Initialize  (l_ConfigServerHandlerCollection, l_GatewayClientHandlerCollection);
 
-        
-        
-        l_HdlcdClientHandlerCollection->CreateHdlcdClient("localhost", 4999, 0);
-        
-        
-        
         // Start event processing
         l_IoService.run();
         
