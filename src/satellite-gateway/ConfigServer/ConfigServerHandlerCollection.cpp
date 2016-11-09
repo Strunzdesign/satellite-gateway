@@ -25,6 +25,7 @@
 #include "GatewayClientHandlerCollection.h"
 #include "HdlcdClientHandlerCollection.h"
 #include "ConfigServerHandler.h"
+#include <iostream>
 #include <assert.h>
 using boost::asio::ip::tcp;
 
@@ -90,6 +91,7 @@ void ConfigServerHandlerCollection::DoAccept() {
 
 void ConfigServerHandlerCollection::GatewayClientCreated(uint16_t a_ReferenceNbr) {
     // There is only one config server handler entity
+    std::cerr << "Gateway client entity was created, RefNbr=" << a_ReferenceNbr << std::endl;
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientCreated(a_ReferenceNbr);
     } // if
@@ -97,6 +99,7 @@ void ConfigServerHandlerCollection::GatewayClientCreated(uint16_t a_ReferenceNbr
 
 void ConfigServerHandlerCollection::GatewayClientDestroyed(uint16_t a_ReferenceNbr) {
     // There is only one config server handler entity
+    std::cerr << "Gateway client entity was destroyed, RefNbr=" << a_ReferenceNbr << std::endl;
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientDestroyed(a_ReferenceNbr);
     } // if
@@ -104,6 +107,7 @@ void ConfigServerHandlerCollection::GatewayClientDestroyed(uint16_t a_ReferenceN
 
 void ConfigServerHandlerCollection::GatewayClientConnected(uint16_t a_ReferenceNbr) {
     // There is only one config server handler entity
+    std::cerr << "Gateway client entity was connected, RefNbr=" << a_ReferenceNbr << std::endl;
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientConnected(a_ReferenceNbr);
     } // if
@@ -111,6 +115,7 @@ void ConfigServerHandlerCollection::GatewayClientConnected(uint16_t a_ReferenceN
 
 void ConfigServerHandlerCollection::GatewayClientDisconnected(uint16_t a_ReferenceNbr) {
     // There is only one config server handler entity
+    std::cerr << "Gateway client entity was disconnected, RefNbr=" << a_ReferenceNbr << std::endl;
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientDisconnected(a_ReferenceNbr);
     } // if
@@ -118,6 +123,7 @@ void ConfigServerHandlerCollection::GatewayClientDisconnected(uint16_t a_Referen
 
 void ConfigServerHandlerCollection::GatewayClientError(uint16_t a_ReferenceNbr, E_GATEWAY_CLIENT_ERROR a_ErrorCode) {
     // There is only one config server handler entity
+    std::cerr << "Gateway client entity error, RefNbr=" << a_ReferenceNbr << ", ErrorCode=" << std::hex << uint8_t(a_ErrorCode) << std::dec << std::endl;
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->GatewayClientError(a_ReferenceNbr, a_ErrorCode);
     } // if
@@ -125,6 +131,7 @@ void ConfigServerHandlerCollection::GatewayClientError(uint16_t a_ReferenceNbr, 
 
 void ConfigServerHandlerCollection::HdlcdClientCreated(uint16_t a_SerialPortNbr) {
     // There is only one config server handler entity
+    std::cerr << "HDLCd client entity was created, PortNbr=" << a_SerialPortNbr << std::endl;
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->HdlcdClientCreated(a_SerialPortNbr);
     } // if
@@ -132,13 +139,31 @@ void ConfigServerHandlerCollection::HdlcdClientCreated(uint16_t a_SerialPortNbr)
 
 void ConfigServerHandlerCollection::HdlcdClientDestroyed(uint16_t a_SerialPortNbr) {
     // There is only one config server handler entity
+    std::cerr << "HDLCd client entity was destroyed, PortNbr=" << a_SerialPortNbr << std::endl;
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->HdlcdClientDestroyed(a_SerialPortNbr);
     } // if
 }
 
+void ConfigServerHandlerCollection::HdlcdClientConnected(uint16_t a_SerialPortNbr) {
+    // There is only one config server handler entity
+    std::cerr << "HDLCd client entity was connected, PortNbr=" << a_SerialPortNbr << std::endl;
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->HdlcdClientConnected(a_SerialPortNbr);
+    } // if
+}
+
+void ConfigServerHandlerCollection::HdlcdClientDisconnected(uint16_t a_SerialPortNbr) {
+    // There is only one config server handler entity
+    std::cerr << "HDLCd client entity was disconnected, PortNbr=" << a_SerialPortNbr << std::endl;
+    if (m_ConfigServerHandler) {
+        m_ConfigServerHandler->HdlcdClientDisconnected(a_SerialPortNbr);
+    } // if
+}
+
 void ConfigServerHandlerCollection::HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive) {
     // There is only one config server handler entity
+    std::cerr << "HDLCd client entity status update, PortNbr=" << a_SerialPortNbr << ", IsResumed=" << a_bIsResumed << ", IsAlive=" << a_bIsAlive << std::endl;
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->HdlcdClientNewStatus(a_SerialPortNbr, a_bIsResumed, a_bIsAlive);
     } // if
@@ -146,6 +171,7 @@ void ConfigServerHandlerCollection::HdlcdClientNewStatus(uint16_t a_SerialPortNb
 
 void ConfigServerHandlerCollection::HdlcdClientError(uint16_t a_SerialPortNbr, E_HDLCD_CLIENT_ERROR a_ErrorCode) {
     // There is only one config server handler entity
+    std::cerr << "HDLCd client entity error, PortNbr=" << a_SerialPortNbr << ", ErrorCode=" << std::hex << uint8_t(a_ErrorCode) << std::dec << std::endl;
     if (m_ConfigServerHandler) {
         m_ConfigServerHandler->HdlcdClientError(a_SerialPortNbr, a_ErrorCode);
     } // if

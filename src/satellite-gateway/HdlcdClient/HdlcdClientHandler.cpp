@@ -94,6 +94,7 @@ void HdlcdClientHandler::ResolveDestination() {
             l_OStream << "/dev/ttyUSB" << m_SerialPortNbr;
             m_HdlcdClient = std::make_shared<HdlcdClient>(m_IOService, l_OStream.str(), HdlcdSessionDescriptor(SESSION_TYPE_TRX_ALL, SESSION_FLAGS_DELIVER_RCVD));
             m_HdlcdClient->SetOnClosedCallback([this]() {
+                m_ConfigServerHandlerCollection->HdlcdClientDisconnected(m_SerialPortNbr);
                 m_ConnectionRetryTimer.expires_from_now(boost::posix_time::seconds(2));
                 m_ConnectionRetryTimer.async_wait([this](const boost::system::error_code& a_ErrorCode) {
                     if (!a_ErrorCode) {
@@ -118,12 +119,14 @@ void HdlcdClientHandler::ResolveDestination() {
             // Connect
             m_HdlcdClient->AsyncConnect(a_EndpointIterator, [this](bool a_bSuccess) {
                 if (a_bSuccess) {
+                    m_ConfigServerHandlerCollection->HdlcdClientConnected(m_SerialPortNbr);
                     if (m_bSuspendSerialPort) {
                         // Immediately send a serial port suspend request message to the HDLC daemon
                         m_HdlcdClient->Send(HdlcdPacketCtrl::CreatePortStatusRequest(true));
                     } // if
                 } else {
-                    std::cout << "Failed to connect to the HDLC Daemon!" << std::endl;
+                    // Failed to connect to the HDLCd
+                    m_ConfigServerHandlerCollection->HdlcdClientDisconnected(m_SerialPortNbr);
                     m_ConnectionRetryTimer.expires_from_now(boost::posix_time::seconds(2));
                     m_ConnectionRetryTimer.async_wait([this](const boost::system::error_code& a_ErrorCode) {
                         if (!a_ErrorCode) {

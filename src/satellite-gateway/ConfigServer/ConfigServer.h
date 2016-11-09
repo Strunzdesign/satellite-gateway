@@ -53,10 +53,12 @@ public:
     void GatewayClientError       (uint16_t a_ReferenceNbr, E_GATEWAY_CLIENT_ERROR a_ErrorCode);
     
     // Methods to be called by a HDLCd client entity
-    void HdlcdClientCreated    (uint16_t a_SerialPortNbr);
-    void HdlcdClientDestroyed  (uint16_t a_SerialPortNbr);
-    void HdlcdClientNewStatus  (uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive);
-    void HdlcdClientError      (uint16_t a_SerialPortNbr, E_HDLCD_CLIENT_ERROR a_ErrorCode);
+    void HdlcdClientCreated     (uint16_t a_SerialPortNbr);
+    void HdlcdClientDestroyed   (uint16_t a_SerialPortNbr);
+    void HdlcdClientConnected   (uint16_t a_SerialPortNbr);
+    void HdlcdClientDisconnected(uint16_t a_SerialPortNbr);
+    void HdlcdClientNewStatus   (uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive);
+    void HdlcdClientError       (uint16_t a_SerialPortNbr, E_HDLCD_CLIENT_ERROR a_ErrorCode);
 
 private:
     // Internal helpers

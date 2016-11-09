@@ -35,7 +35,7 @@ class GatewayClient {
 public:
     // CTOR and DTOR
     GatewayClient(boost::asio::io_service& a_IOService, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                  std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection);
+                  std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint16_t a_ReferenceNbr);
     ~GatewayClient();
 
     void Shutdown();
@@ -59,6 +59,7 @@ private:
     // The communication end point
     boost::asio::ip::tcp::socket m_TcpSocket;
     std::shared_ptr<FrameEndpoint> m_FrameEndpoint;
+    uint16_t m_ReferenceNbr;
     bool m_bClosed;
     
     std::function<void()> m_OnClosedCallback;

@@ -37,6 +37,8 @@
 #include "HdlcdClientCreated.h"
 #include "HdlcdClientDestroy.h"
 #include "HdlcdClientDestroyed.h"
+#include "HdlcdClientConnected.h"
+#include "HdlcdClientDisconnected.h"
 #include "HdlcdClientNewStatus.h"
 #include "HdlcdClientSuspend.h"
 #include "HdlcdClientResume.h"
@@ -112,6 +114,16 @@ void ConfigServer::HdlcdClientCreated(uint16_t a_SerialPortNbr) {
 void ConfigServer::HdlcdClientDestroyed(uint16_t a_SerialPortNbr) {
     // Prepare and send control packet
     m_FrameEndpoint->SendFrame(HdlcdClientDestroyed::Create(a_SerialPortNbr));
+}
+
+void ConfigServer::HdlcdClientConnected(uint16_t a_SerialPortNbr) {
+    // Prepare and send control packet
+    m_FrameEndpoint->SendFrame(HdlcdClientConnected::Create(a_SerialPortNbr));
+}
+
+void ConfigServer::HdlcdClientDisconnected(uint16_t a_SerialPortNbr) {
+    // Prepare and send control packet
+    m_FrameEndpoint->SendFrame(HdlcdClientDisconnected::Create(a_SerialPortNbr));
 }
 
 void ConfigServer::HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive) {

@@ -120,6 +120,20 @@ void ConfigServerHandler::HdlcdClientDestroyed(uint16_t a_SerialPortNbr) {
     } // if
 }
 
+void ConfigServerHandler::HdlcdClientConnected(uint16_t a_SerialPortNbr) {
+    if (m_ConfigServer) {
+        // Relay the call to the config server entity
+        m_ConfigServer->HdlcdClientConnected(a_SerialPortNbr);
+    } // if
+}
+
+void ConfigServerHandler::HdlcdClientDisconnected(uint16_t a_SerialPortNbr) {
+    if (m_ConfigServer) {
+        // Relay the call to the config server entity
+        m_ConfigServer->HdlcdClientDisconnected(a_SerialPortNbr);
+    } // if
+}
+
 void ConfigServerHandler::HdlcdClientNewStatus(uint16_t a_SerialPortNbr, bool a_bIsResumed, bool a_bIsAlive) {
     if (m_ConfigServer) {
         // Relay the call to the config server entity

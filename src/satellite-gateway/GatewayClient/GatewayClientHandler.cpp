@@ -74,7 +74,7 @@ void GatewayClientHandler::ResolveDestination() {
             }); // async_wait
         } else {
             // Start the HDLCd access client
-            m_GatewayClient = std::make_shared<GatewayClient>(m_IOService, a_EndpointIterator, m_ConfigServerHandlerCollection, m_HdlcdClientHandlerCollection);
+            m_GatewayClient = std::make_shared<GatewayClient>(m_IOService, a_EndpointIterator, m_ConfigServerHandlerCollection, m_HdlcdClientHandlerCollection, m_ReferenceNbr);
             
             // On any error, restart after a short delay
             m_GatewayClient->SetOnClosedCallback([this]() {

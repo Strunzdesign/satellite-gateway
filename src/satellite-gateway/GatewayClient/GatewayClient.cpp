@@ -28,9 +28,9 @@
 #include <assert.h>
 
 GatewayClient::GatewayClient(boost::asio::io_service& a_IOService, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator, std::shared_ptr<ConfigServerHandlerCollection>
-                             a_ConfigServerHandlerCollection, std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection):
+                             a_ConfigServerHandlerCollection, std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint16_t a_ReferenceNbr):
                              m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection), m_HdlcdClientHandlerCollection(a_HdlcdClientHandlerCollection),
-                             m_TcpSocket(a_IOService), m_bClosed(false) {
+                             m_TcpSocket(a_IOService), m_ReferenceNbr(a_ReferenceNbr), m_bClosed(false) {
     // Checks
     assert(m_ConfigServerHandlerCollection);
     assert(m_HdlcdClientHandlerCollection);
@@ -39,10 +39,9 @@ GatewayClient::GatewayClient(boost::asio::io_service& a_IOService, boost::asio::
     boost::asio::async_connect(m_TcpSocket, a_EndpointIterator, [this, &a_IOService](boost::system::error_code a_ErrorCode, boost::asio::ip::tcp::resolver::iterator) {
         if (a_ErrorCode == boost::asio::error::operation_aborted) return;
         if (a_ErrorCode) {
-            std::cerr << "Connection to the master gateway was not established, error = " << a_ErrorCode << std::endl;
             Close();
         } else {
-            std::cerr << "Connection to the master gateway was established" << std::endl;
+            m_ConfigServerHandlerCollection->GatewayClientConnected(m_ReferenceNbr);
             
             // Configure the frame end point
             m_FrameEndpoint = std::make_shared<FrameEndpoint>(a_IOService, m_TcpSocket, 0x00); // 0x00: unset the filter mask as there is no preceeding type byte
@@ -65,6 +64,10 @@ void GatewayClient::Shutdown() {
 void GatewayClient::Close() {
     if (m_bClosed == false) {
         m_bClosed = true;
+        if (m_ConfigServerHandlerCollection) {
+            m_ConfigServerHandlerCollection->GatewayClientDisconnected(m_ReferenceNbr);
+        } // if
+
         if (m_FrameEndpoint) {
             m_FrameEndpoint->Close();
         } // if
