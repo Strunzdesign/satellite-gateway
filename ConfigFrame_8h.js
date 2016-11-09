@@ -17,6 +17,8 @@ var ConfigFrame_8h =
       [ "CONFIG_FRAME_HDLCD_CLIENT_CREATED", "ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103a17b1084a32c3b20197446c3b394691ee", null ],
       [ "CONFIG_FRAME_HDLCD_CLIENT_DESTROY", "ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103aca543fc0a776a2dfdc8462b0b2797648", null ],
       [ "CONFIG_FRAME_HDLCD_CLIENT_DESTROYED", "ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103a587268d817f9ef5af79ef5779a9a8ea3", null ],
+      [ "CONFIG_FRAME_HDLCD_CLIENT_CONNECTED", "ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103a2f7c92ec12ae9a023e637c7bbb3c8dea", null ],
+      [ "CONFIG_FRAME_HDLCD_CLIENT_DISCONNECTED", "ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103af8692707279b261f8406e04d8aeb0b55", null ],
       [ "CONFIG_FRAME_HDLCD_CLIENT_SUSPEND", "ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103a336dc796842be1f404cf823c52b85af8", null ],
       [ "CONFIG_FRAME_HDLCD_CLIENT_RESUME", "ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103a3595db482c664bb9deeee5b28c78e743", null ],
       [ "CONFIG_FRAME_HDLCD_CLIENT_NEW_STATUS", "ConfigFrame_8h.html#a35185f7738a871be9fd0a64ec7dfa103a7133902e7fe4dc9711351a0bf1a57b34", null ]

@@ -1,5 +1,5 @@
 <map id="src/shared/ConfigFrames/ConfigFrame.h" name="src/shared/ConfigFrames/ConfigFrame.h">
-<area shape="rect" id="node2" href="$ConfigServer_8h.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServer.h" alt="" coords="3563,95,3770,136"/>
+<area shape="rect" id="node2" href="$ConfigServer_8h.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServer.h" alt="" coords="3987,95,4194,136"/>
 <area shape="rect" id="node5" href="$GatewayClientCleanup_8h.html" title="src/shared/ConfigFrames\l/GatewayClientCleanup.h" alt="" coords="5,95,187,136"/>
 <area shape="rect" id="node6" href="$GatewayClientConnected_8h.html" title="src/shared/ConfigFrames\l/GatewayClientConnected.h" alt="" coords="211,95,410,136"/>
 <area shape="rect" id="node7" href="$GatewayClientCreate_8h.html" title="src/shared/ConfigFrames\l/GatewayClientCreate.h" alt="" coords="435,95,616,136"/>
@@ -9,14 +9,16 @@
 <area shape="rect" id="node11" href="$GatewayClientDisconnected_8h.html" title="src/shared/ConfigFrames\l/GatewayClientDisconnected.h" alt="" coords="1270,95,1485,136"/>
 <area shape="rect" id="node12" href="$GatewayClientError_8h.html" title="src/shared/ConfigFrames\l/GatewayClientError.h" alt="" coords="1509,95,1691,136"/>
 <area shape="rect" id="node13" href="$HdlcdClientCleanup_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientCleanup.h" alt="" coords="1715,95,1896,136"/>
-<area shape="rect" id="node14" href="$HdlcdClientCreate_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientCreate.h" alt="" coords="1920,95,2101,136"/>
-<area shape="rect" id="node15" href="$HdlcdClientCreated_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientCreated.h" alt="" coords="2125,95,2307,136"/>
-<area shape="rect" id="node16" href="$HdlcdClientDestroy_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientDestroy.h" alt="" coords="2331,95,2512,136"/>
-<area shape="rect" id="node17" href="$HdlcdClientDestroyed_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientDestroyed.h" alt="" coords="2536,95,2717,136"/>
-<area shape="rect" id="node18" href="$HdlcdClientError_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientError.h" alt="" coords="2741,95,2923,136"/>
-<area shape="rect" id="node19" href="$HdlcdClientNewStatus_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientNewStatus.h" alt="" coords="2947,95,3128,136"/>
-<area shape="rect" id="node20" href="$HdlcdClientResume_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientResume.h" alt="" coords="3152,95,3333,136"/>
-<area shape="rect" id="node21" href="$HdlcdClientSuspend_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientSuspend.h" alt="" coords="3357,95,3539,136"/>
-<area shape="rect" id="node3" href="$ConfigServer_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServer.cpp" alt="" coords="1797,184,2019,225"/>
-<area shape="rect" id="node4" href="$ConfigServerHandler_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServerHandler.cpp" alt="" coords="3531,184,3803,225"/>
+<area shape="rect" id="node14" href="$HdlcdClientConnected_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientConnected.h" alt="" coords="1920,95,2101,136"/>
+<area shape="rect" id="node15" href="$HdlcdClientCreate_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientCreate.h" alt="" coords="2125,95,2307,136"/>
+<area shape="rect" id="node16" href="$HdlcdClientCreated_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientCreated.h" alt="" coords="2331,95,2512,136"/>
+<area shape="rect" id="node17" href="$HdlcdClientDestroy_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientDestroy.h" alt="" coords="2536,95,2717,136"/>
+<area shape="rect" id="node18" href="$HdlcdClientDestroyed_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientDestroyed.h" alt="" coords="2741,95,2923,136"/>
+<area shape="rect" id="node19" href="$HdlcdClientDisconnected_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientDisconnected.h" alt="" coords="2947,95,3141,136"/>
+<area shape="rect" id="node20" href="$HdlcdClientError_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientError.h" alt="" coords="3165,95,3347,136"/>
+<area shape="rect" id="node21" href="$HdlcdClientNewStatus_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientNewStatus.h" alt="" coords="3371,95,3552,136"/>
+<area shape="rect" id="node22" href="$HdlcdClientResume_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientResume.h" alt="" coords="3576,95,3757,136"/>
+<area shape="rect" id="node23" href="$HdlcdClientSuspend_8h.html" title="src/shared/ConfigFrames\l/HdlcdClientSuspend.h" alt="" coords="3781,95,3963,136"/>
+<area shape="rect" id="node3" href="$ConfigServer_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServer.cpp" alt="" coords="2002,184,2225,225"/>
+<area shape="rect" id="node4" href="$ConfigServerHandler_8cpp.html" title="src/satellite&#45;gateway\l/ConfigServer/ConfigServerHandler.cpp" alt="" coords="3955,184,4227,225"/>
 </map>

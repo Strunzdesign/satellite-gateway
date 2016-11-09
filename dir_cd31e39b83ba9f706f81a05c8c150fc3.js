@@ -29,6 +29,9 @@ var dir_cd31e39b83ba9f706f81a05c8c150fc3 =
     [ "HdlcdClientCleanup.h", "HdlcdClientCleanup_8h.html", [
       [ "HdlcdClientCleanup", "classHdlcdClientCleanup.html", null ]
     ] ],
+    [ "HdlcdClientConnected.h", "HdlcdClientConnected_8h.html", [
+      [ "HdlcdClientConnected", "classHdlcdClientConnected.html", "classHdlcdClientConnected" ]
+    ] ],
     [ "HdlcdClientCreate.h", "HdlcdClientCreate_8h.html", [
       [ "HdlcdClientCreate", "classHdlcdClientCreate.html", "classHdlcdClientCreate" ]
     ] ],
@@ -40,6 +43,9 @@ var dir_cd31e39b83ba9f706f81a05c8c150fc3 =
     ] ],
     [ "HdlcdClientDestroyed.h", "HdlcdClientDestroyed_8h.html", [
       [ "HdlcdClientDestroyed", "classHdlcdClientDestroyed.html", "classHdlcdClientDestroyed" ]
+    ] ],
+    [ "HdlcdClientDisconnected.h", "HdlcdClientDisconnected_8h.html", [
+      [ "HdlcdClientDisconnected", "classHdlcdClientDisconnected.html", "classHdlcdClientDisconnected" ]
     ] ],
     [ "HdlcdClientError.h", "HdlcdClientError_8h.html", [
       [ "HdlcdClientError", "classHdlcdClientError.html", "classHdlcdClientError" ]

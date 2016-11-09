@@ -7,8 +7,10 @@ var classConfigServerHandler =
     [ "GatewayClientDestroyed", "classConfigServerHandler.html#aed144710860d4efd85dc5748f0ec71bc", null ],
     [ "GatewayClientDisconnected", "classConfigServerHandler.html#a7e96dc67c1bff975f56b8938a57c3ea8", null ],
     [ "GatewayClientError", "classConfigServerHandler.html#aef5cc868fd4390ad4a8f6d2c7318238b", null ],
+    [ "HdlcdClientConnected", "classConfigServerHandler.html#a22f8139b5e8041ab4f8d80887a34968d", null ],
     [ "HdlcdClientCreated", "classConfigServerHandler.html#a27d69f48a4f8b5f739254f6291fb33b4", null ],
     [ "HdlcdClientDestroyed", "classConfigServerHandler.html#aac8078ad86bd8d6c960fbd6379388b37", null ],
+    [ "HdlcdClientDisconnected", "classConfigServerHandler.html#a5fa7f2b72f7ed11b2124ce269f3d23df", null ],
     [ "HdlcdClientError", "classConfigServerHandler.html#a20eefff8d9846ba6d518a777428eef17", null ],
     [ "HdlcdClientNewStatus", "classConfigServerHandler.html#a55c4586daf75da2c2da7e4c3f16a9e0d", null ],
     [ "Start", "classConfigServerHandler.html#af1d7a08ce8d14aac362449412399c264", null ]

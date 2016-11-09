@@ -116,8 +116,8 @@ $(document).ready(function(){initNavTree('classGatewayClient.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac899025d6115729fea8dd68bdab28a4a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGatewayClient.html#ac899025d6115729fea8dd68bdab28a4a">GatewayClient</a> (boost::asio::io_service &amp;a_IOService, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator, std::shared_ptr&lt; <a class="el" href="classConfigServerHandlerCollection.html">ConfigServerHandlerCollection</a> &gt; a_ConfigServerHandlerCollection, std::shared_ptr&lt; <a class="el" href="classHdlcdClientHandlerCollection.html">HdlcdClientHandlerCollection</a> &gt; a_HdlcdClientHandlerCollection)</td></tr>
-<tr class="separator:ac899025d6115729fea8dd68bdab28a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02daab0a0dff5f1d725339d95b24c114"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGatewayClient.html#a02daab0a0dff5f1d725339d95b24c114">GatewayClient</a> (boost::asio::io_service &amp;a_IOService, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator, std::shared_ptr&lt; <a class="el" href="classConfigServerHandlerCollection.html">ConfigServerHandlerCollection</a> &gt; a_ConfigServerHandlerCollection, std::shared_ptr&lt; <a class="el" href="classHdlcdClientHandlerCollection.html">HdlcdClientHandlerCollection</a> &gt; a_HdlcdClientHandlerCollection, uint16_t a_ReferenceNbr)</td></tr>
+<tr class="separator:a02daab0a0dff5f1d725339d95b24c114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfb2fae39ac96772b753b163befc8b32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGatewayClient.html#abfb2fae39ac96772b753b163befc8b32">~GatewayClient</a> ()</td></tr>
 <tr class="separator:abfb2fae39ac96772b753b163befc8b32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1ad5edff821558c2bd95e7e279b8053"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGatewayClient.html#ad1ad5edff821558c2bd95e7e279b8053">Shutdown</a> ()</td></tr>
@@ -133,7 +133,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock">
 <p>Definition at line <a class="el" href="GatewayClient_8h_source.html#l00034">34</a> of file <a class="el" href="GatewayClient_8h_source.html">GatewayClient.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ac899025d6115729fea8dd68bdab28a4a"></a>
+<a class="anchor" id="a02daab0a0dff5f1d725339d95b24c114"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -159,7 +159,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classHdlcdClientHandlerCollection.html">HdlcdClientHandlerCollection</a> &gt;&#160;</td>
-          <td class="paramname"><em>a_HdlcdClientHandlerCollection</em>&#160;</td>
+          <td class="paramname"><em>a_HdlcdClientHandlerCollection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>a_ReferenceNbr</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -174,8 +180,8 @@ Public Member Functions</h2></td></tr>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classGatewayClient_ac899025d6115729fea8dd68bdab28a4a_cgraph.png" border="0" usemap="#classGatewayClient_ac899025d6115729fea8dd68bdab28a4a_cgraph" alt=""/></div>
-<map name="classGatewayClient_ac899025d6115729fea8dd68bdab28a4a_cgraph" id="classGatewayClient_ac899025d6115729fea8dd68bdab28a4a_cgraph">
+<div class="center"><img src="classGatewayClient_a02daab0a0dff5f1d725339d95b24c114_cgraph.png" border="0" usemap="#classGatewayClient_a02daab0a0dff5f1d725339d95b24c114_cgraph" alt=""/></div>
+<map name="classGatewayClient_a02daab0a0dff5f1d725339d95b24c114_cgraph" id="classGatewayClient_a02daab0a0dff5f1d725339d95b24c114_cgraph">
 <area shape="rect" id="node2" href="classGatewayClient.html#abe4c2feb4bd520dd68612fc7557c70f6" title="GatewayClient::Close" alt="" coords="286,5,442,32"/>
 <area shape="rect" id="node3" href="classGatewayFrameData.html#a3032b1c3d96968f90b8558e1d9b78775" title="GatewayFrameData::Create\lDeserializedFrame" alt="" coords="265,57,463,98"/>
 </map>
@@ -197,7 +203,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="GatewayClient_8cpp_source.html#l00057">57</a> of file <a class="el" href="GatewayClient_8cpp_source.html">GatewayClient.cpp</a>.</p>
+<p>Definition at line <a class="el" href="GatewayClient_8cpp_source.html#l00056">56</a> of file <a class="el" href="GatewayClient_8cpp_source.html">GatewayClient.cpp</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -225,14 +231,14 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="GatewayClient_8cpp_source.html#l00065">65</a> of file <a class="el" href="GatewayClient_8cpp_source.html">GatewayClient.cpp</a>.</p>
+<p>Definition at line <a class="el" href="GatewayClient_8cpp_source.html#l00064">64</a> of file <a class="el" href="GatewayClient_8cpp_source.html">GatewayClient.cpp</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGatewayClient_abe4c2feb4bd520dd68612fc7557c70f6_icgraph.png" border="0" usemap="#classGatewayClient_abe4c2feb4bd520dd68612fc7557c70f6_icgraph" alt=""/></div>
 <map name="classGatewayClient_abe4c2feb4bd520dd68612fc7557c70f6_icgraph" id="classGatewayClient_abe4c2feb4bd520dd68612fc7557c70f6_icgraph">
-<area shape="rect" id="node2" href="classGatewayClient.html#ac899025d6115729fea8dd68bdab28a4a" title="GatewayClient::GatewayClient" alt="" coords="213,5,425,32"/>
+<area shape="rect" id="node2" href="classGatewayClient.html#a02daab0a0dff5f1d725339d95b24c114" title="GatewayClient::GatewayClient" alt="" coords="213,5,425,32"/>
 <area shape="rect" id="node3" href="classGatewayClient.html#abfb2fae39ac96772b753b163befc8b32" title="GatewayClient::~GatewayClient" alt="" coords="209,56,429,83"/>
 <area shape="rect" id="node4" href="classGatewayClient.html#a72b3b1fdc641ab15e4e3976daf4e8275" title="GatewayClient::SetOnClosed\lCallback" alt="" coords="217,107,421,149"/>
 </map>
@@ -265,7 +271,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="GatewayClient_8cpp_source.html#l00082">82</a> of file <a class="el" href="GatewayClient_8cpp_source.html">GatewayClient.cpp</a>.</p>
+<p>Definition at line <a class="el" href="GatewayClient_8cpp_source.html#l00085">85</a> of file <a class="el" href="GatewayClient_8cpp_source.html">GatewayClient.cpp</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -293,7 +299,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="GatewayClient_8cpp_source.html#l00087">87</a> of file <a class="el" href="GatewayClient_8cpp_source.html">GatewayClient.cpp</a>.</p>
+<p>Definition at line <a class="el" href="GatewayClient_8cpp_source.html#l00090">90</a> of file <a class="el" href="GatewayClient_8cpp_source.html">GatewayClient.cpp</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -320,7 +326,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="GatewayClient_8cpp_source.html#l00061">61</a> of file <a class="el" href="GatewayClient_8cpp_source.html">GatewayClient.cpp</a>.</p>
+<p>Definition at line <a class="el" href="GatewayClient_8cpp_source.html#l00060">60</a> of file <a class="el" href="GatewayClient_8cpp_source.html">GatewayClient.cpp</a>.</p>
 
 </div>
 </div>

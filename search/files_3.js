@@ -2,10 +2,12 @@ var searchData=
 [
   ['hdlcdclient_2eh',['HdlcdClient.h',['../HdlcdClient_8h.html',1,'']]],
   ['hdlcdclientcleanup_2eh',['HdlcdClientCleanup.h',['../HdlcdClientCleanup_8h.html',1,'']]],
+  ['hdlcdclientconnected_2eh',['HdlcdClientConnected.h',['../HdlcdClientConnected_8h.html',1,'']]],
   ['hdlcdclientcreate_2eh',['HdlcdClientCreate.h',['../HdlcdClientCreate_8h.html',1,'']]],
   ['hdlcdclientcreated_2eh',['HdlcdClientCreated.h',['../HdlcdClientCreated_8h.html',1,'']]],
   ['hdlcdclientdestroy_2eh',['HdlcdClientDestroy.h',['../HdlcdClientDestroy_8h.html',1,'']]],
   ['hdlcdclientdestroyed_2eh',['HdlcdClientDestroyed.h',['../HdlcdClientDestroyed_8h.html',1,'']]],
+  ['hdlcdclientdisconnected_2eh',['HdlcdClientDisconnected.h',['../HdlcdClientDisconnected_8h.html',1,'']]],
   ['hdlcdclienterror_2eh',['HdlcdClientError.h',['../HdlcdClientError_8h.html',1,'']]],
   ['hdlcdclienterrorcodes_2eh',['HdlcdClientErrorCodes.h',['../HdlcdClientErrorCodes_8h.html',1,'']]],
   ['hdlcdclienthandler_2ecpp',['HdlcdClientHandler.cpp',['../HdlcdClientHandler_8cpp.html',1,'']]],
