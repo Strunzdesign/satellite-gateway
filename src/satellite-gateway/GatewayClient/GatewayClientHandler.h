@@ -27,6 +27,7 @@
 #include <memory>
 #include <boost/asio.hpp>
 #include <string>
+#include "GatewayClientConnectGuard.h"
 class ConfigServerHandlerCollection;
 class HdlcdClientHandlerCollection;
 class GatewayFrame;
@@ -52,6 +53,7 @@ private:
     boost::asio::io_service& m_IOService;
     std::shared_ptr<ConfigServerHandlerCollection> m_ConfigServerHandlerCollection;
     std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
+    GatewayClientConnectGuard m_GatewayClientConnectGuard;
     std::string m_RemoteAddress;
     uint16_t m_RemotePortNbr;
 

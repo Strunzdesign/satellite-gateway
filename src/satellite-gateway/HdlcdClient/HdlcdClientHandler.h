@@ -28,6 +28,7 @@
 #include <vector>
 #include <string>
 #include <boost/asio.hpp>
+#include "HdlcdClientConnectGuard.h"
 class ConfigServerHandlerCollection;
 class GatewayClientHandlerCollection;
 class HdlcdClient;
@@ -49,6 +50,7 @@ private:
     boost::asio::io_service& m_IOService;
     std::shared_ptr<ConfigServerHandlerCollection>  m_ConfigServerHandlerCollection;
     std::shared_ptr<GatewayClientHandlerCollection> m_GatewayClientHandlerCollection;
+    HdlcdClientConnectGuard m_HdlcdClientConnectGuard;
     
     const std::string m_RemoteAddress;
     const uint16_t m_TcpPortNbr;

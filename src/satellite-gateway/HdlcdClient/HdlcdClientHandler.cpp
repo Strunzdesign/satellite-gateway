@@ -30,8 +30,8 @@
 HdlcdClientHandler::HdlcdClientHandler(boost::asio::io_service& a_IOService, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
                                        std::shared_ptr<GatewayClientHandlerCollection> a_GatewayClientHandlerCollection, const std::string& a_RemoteAddress,
                                        uint16_t a_TcpPortNbr, uint16_t a_SerialPortNbr): m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection),
-                                       m_GatewayClientHandlerCollection(a_GatewayClientHandlerCollection), m_RemoteAddress(a_RemoteAddress), m_TcpPortNbr(a_TcpPortNbr),
-                                       m_SerialPortNbr(a_SerialPortNbr), m_Resolver(a_IOService), m_ConnectionRetryTimer(a_IOService) {
+                                       m_GatewayClientHandlerCollection(a_GatewayClientHandlerCollection), m_HdlcdClientConnectGuard(a_ConfigServerHandlerCollection, a_SerialPortNbr),
+                                       m_RemoteAddress(a_RemoteAddress), m_TcpPortNbr(a_TcpPortNbr), m_SerialPortNbr(a_SerialPortNbr), m_Resolver(a_IOService), m_ConnectionRetryTimer(a_IOService) {
     // Checks
     assert(m_ConfigServerHandlerCollection);
     assert(m_GatewayClientHandlerCollection);
@@ -94,7 +94,7 @@ void HdlcdClientHandler::ResolveDestination() {
             l_OStream << "/dev/ttyUSB" << m_SerialPortNbr;
             m_HdlcdClient = std::make_shared<HdlcdClient>(m_IOService, l_OStream.str(), HdlcdSessionDescriptor(SESSION_TYPE_TRX_ALL, SESSION_FLAGS_DELIVER_RCVD));
             m_HdlcdClient->SetOnClosedCallback([this]() {
-                m_ConfigServerHandlerCollection->HdlcdClientDisconnected(m_SerialPortNbr);
+                m_HdlcdClientConnectGuard.IsDisconnected();
                 m_ConnectionRetryTimer.expires_from_now(boost::posix_time::seconds(2));
                 m_ConnectionRetryTimer.async_wait([this](const boost::system::error_code& a_ErrorCode) {
                     if (!a_ErrorCode) {
@@ -112,6 +112,7 @@ void HdlcdClientHandler::ResolveDestination() {
             m_HdlcdClient->SetOnCtrlCallback([this](const HdlcdPacketCtrl& a_PacketCtrl) {
                 if (a_PacketCtrl.GetPacketType() == HdlcdPacketCtrl::CTRL_TYPE_PORT_STATUS) {
                     // Update the state of the serial port
+                    m_HdlcdClientConnectGuard.IsConnected();
                     m_ConfigServerHandlerCollection->HdlcdClientNewStatus(m_SerialPortNbr, ((!a_PacketCtrl.GetIsLockedBySelf()) && (!a_PacketCtrl.GetIsLockedByOthers())), a_PacketCtrl.GetIsAlive());
                 } // if
             }); // SetOnCtrlCallback
@@ -119,14 +120,13 @@ void HdlcdClientHandler::ResolveDestination() {
             // Connect
             m_HdlcdClient->AsyncConnect(a_EndpointIterator, [this](bool a_bSuccess) {
                 if (a_bSuccess) {
-                    m_ConfigServerHandlerCollection->HdlcdClientConnected(m_SerialPortNbr);
                     if (m_bSuspendSerialPort) {
                         // Immediately send a serial port suspend request message to the HDLC daemon
                         m_HdlcdClient->Send(HdlcdPacketCtrl::CreatePortStatusRequest(true));
                     } // if
                 } else {
                     // Failed to connect to the HDLCd
-                    m_ConfigServerHandlerCollection->HdlcdClientDisconnected(m_SerialPortNbr);
+                    m_HdlcdClientConnectGuard.IsDisconnected();
                     m_ConnectionRetryTimer.expires_from_now(boost::posix_time::seconds(2));
                     m_ConnectionRetryTimer.async_wait([this](const boost::system::error_code& a_ErrorCode) {
                         if (!a_ErrorCode) {

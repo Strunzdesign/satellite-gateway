@@ -32,8 +32,8 @@ GatewayClientHandler::GatewayClientHandler(boost::asio::io_service& a_IOService,
                                            std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint16_t a_ReferenceNbr,
                                            std::string a_RemoteAddress, uint16_t a_RemotePortNbr):
                                            m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection),
-                                           m_HdlcdClientHandlerCollection(a_HdlcdClientHandlerCollection), m_RemoteAddress(a_RemoteAddress),
-                                           m_RemotePortNbr(a_RemotePortNbr), m_ReferenceNbr(a_ReferenceNbr), m_Resolver(a_IOService), m_ConnectionRetryTimer(a_IOService) {
+                                           m_HdlcdClientHandlerCollection(a_HdlcdClientHandlerCollection), m_GatewayClientConnectGuard(a_ConfigServerHandlerCollection, a_ReferenceNbr),
+                                           m_RemoteAddress(a_RemoteAddress), m_RemotePortNbr(a_RemotePortNbr), m_ReferenceNbr(a_ReferenceNbr), m_Resolver(a_IOService), m_ConnectionRetryTimer(a_IOService) {
     // Checks
     assert(m_ConfigServerHandlerCollection);
     assert(m_HdlcdClientHandlerCollection);
@@ -74,7 +74,7 @@ void GatewayClientHandler::ResolveDestination() {
             }); // async_wait
         } else {
             // Start the HDLCd access client
-            m_GatewayClient = std::make_shared<GatewayClient>(m_IOService, a_EndpointIterator, m_ConfigServerHandlerCollection, m_HdlcdClientHandlerCollection, m_ReferenceNbr);
+            m_GatewayClient = std::make_shared<GatewayClient>(m_IOService, a_EndpointIterator, m_ConfigServerHandlerCollection, m_HdlcdClientHandlerCollection, m_GatewayClientConnectGuard, m_ReferenceNbr);
             
             // On any error, restart after a short delay
             m_GatewayClient->SetOnClosedCallback([this]() {

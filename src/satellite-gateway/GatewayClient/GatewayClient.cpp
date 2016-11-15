@@ -28,9 +28,9 @@
 #include <assert.h>
 
 GatewayClient::GatewayClient(boost::asio::io_service& a_IOService, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator, std::shared_ptr<ConfigServerHandlerCollection>
-                             a_ConfigServerHandlerCollection, std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint16_t a_ReferenceNbr):
+                             a_ConfigServerHandlerCollection, std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, GatewayClientConnectGuard& a_GatewayClientConnectGuard, uint16_t a_ReferenceNbr):
                              m_IOService(a_IOService), m_ConfigServerHandlerCollection(a_ConfigServerHandlerCollection), m_HdlcdClientHandlerCollection(a_HdlcdClientHandlerCollection),
-                             m_TcpSocket(a_IOService), m_ReferenceNbr(a_ReferenceNbr), m_bClosed(false) {
+                             m_GatewayClientConnectGuard(a_GatewayClientConnectGuard), m_TcpSocket(a_IOService), m_ReferenceNbr(a_ReferenceNbr), m_bClosed(false) {
     // Checks
     assert(m_ConfigServerHandlerCollection);
     assert(m_HdlcdClientHandlerCollection);
@@ -41,9 +41,8 @@ GatewayClient::GatewayClient(boost::asio::io_service& a_IOService, boost::asio::
         if (a_ErrorCode) {
             Close();
         } else {
-            m_ConfigServerHandlerCollection->GatewayClientConnected(m_ReferenceNbr);
-            
             // Configure the frame end point
+            m_GatewayClientConnectGuard.IsConnected();
             m_FrameEndpoint = std::make_shared<FrameEndpoint>(a_IOService, m_TcpSocket, 0x00); // 0x00: unset the filter mask as there is no preceeding type byte
             m_FrameEndpoint->RegisterFrameFactory(GATEWAY_FRAME_DATA, []()->std::shared_ptr<Frame>{ return GatewayFrameData::CreateDeserializedFrame (); });
             m_FrameEndpoint->SetOnFrameCallback  ([this](std::shared_ptr<Frame> a_Frame)->bool{ return OnFrame(a_Frame); });
@@ -58,14 +57,16 @@ GatewayClient::~GatewayClient() {
 }
 
 void GatewayClient::Shutdown() {
-    m_FrameEndpoint->Shutdown();
+    if (m_FrameEndpoint) {
+        m_FrameEndpoint->Shutdown();
+    } // if
 }
 
 void GatewayClient::Close() {
     if (m_bClosed == false) {
         m_bClosed = true;
         if (m_ConfigServerHandlerCollection) {
-            m_ConfigServerHandlerCollection->GatewayClientDisconnected(m_ReferenceNbr);
+            m_GatewayClientConnectGuard.IsDisconnected();
         } // if
 
         if (m_FrameEndpoint) {
@@ -84,7 +85,9 @@ void GatewayClient::Close() {
 
 void GatewayClient::SendPacket(uint16_t a_SerialPortNbr, const std::vector<unsigned char> &a_Payload) {
     // Deliver the packet to the gateway client entity
-    m_FrameEndpoint->SendFrame(GatewayFrameData::Create(a_SerialPortNbr, a_Payload));
+    if (m_FrameEndpoint) {
+        m_FrameEndpoint->SendFrame(GatewayFrameData::Create(a_SerialPortNbr, a_Payload));
+    } // if
 }
 
 void GatewayClient::SetOnClosedCallback(std::function<void()> a_OnClosedCallback) {

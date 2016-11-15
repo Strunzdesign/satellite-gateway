@@ -28,6 +28,7 @@
 #include <boost/asio.hpp>
 #include "GatewayFrame.h"
 #include "FrameEndpoint.h"
+#include "GatewayClientConnectGuard.h"
 class ConfigServerHandlerCollection;
 class HdlcdClientHandlerCollection;
 
@@ -35,7 +36,7 @@ class GatewayClient {
 public:
     // CTOR and DTOR
     GatewayClient(boost::asio::io_service& a_IOService, boost::asio::ip::tcp::resolver::iterator a_EndpointIterator, std::shared_ptr<ConfigServerHandlerCollection> a_ConfigServerHandlerCollection,
-                  std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, uint16_t a_ReferenceNbr);
+                  std::shared_ptr<HdlcdClientHandlerCollection> a_HdlcdClientHandlerCollection, GatewayClientConnectGuard& a_GatewayClientConnectGuard, uint16_t a_ReferenceNbr);
     ~GatewayClient();
 
     void Shutdown();
@@ -55,6 +56,7 @@ private:
     boost::asio::io_service& m_IOService;
     std::shared_ptr<ConfigServerHandlerCollection> m_ConfigServerHandlerCollection;
     std::shared_ptr<HdlcdClientHandlerCollection> m_HdlcdClientHandlerCollection;
+    GatewayClientConnectGuard m_GatewayClientConnectGuard;
     
     // The communication end point
     boost::asio::ip::tcp::socket m_TcpSocket;
