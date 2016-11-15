@@ -1,3 +1,4 @@
 <map id="GatewayClient::~GatewayClient" name="GatewayClient::~GatewayClient">
-<area shape="rect" id="node2" href="$classGatewayClient.html#abe4c2feb4bd520dd68612fc7557c70f6" title="GatewayClient::Close" alt="" coords="273,5,429,32"/>
+<area shape="rect" id="node2" href="$classGatewayClient.html#abe4c2feb4bd520dd68612fc7557c70f6" title="GatewayClient::Close" alt="" coords="273,13,429,39"/>
+<area shape="rect" id="node3" href="$classGatewayClientConnectGuard.html#a12a1b98f843bc23c2068bcae7190c547" title="GatewayClientConnectGuard\l::IsDisconnected" alt="" coords="477,5,684,47"/>
 </map>

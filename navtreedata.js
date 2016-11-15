@@ -29,7 +29,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "ConfigFrame_8h.html",
-"classGatewayClientCreate.html"
+"classGatewayClient.html#ad1ad5edff821558c2bd95e7e279b8053"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

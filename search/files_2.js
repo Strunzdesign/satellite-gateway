@@ -4,6 +4,7 @@ var searchData=
   ['gatewayclient_2eh',['GatewayClient.h',['../GatewayClient_8h.html',1,'']]],
   ['gatewayclientcleanup_2eh',['GatewayClientCleanup.h',['../GatewayClientCleanup_8h.html',1,'']]],
   ['gatewayclientconnected_2eh',['GatewayClientConnected.h',['../GatewayClientConnected_8h.html',1,'']]],
+  ['gatewayclientconnectguard_2eh',['GatewayClientConnectGuard.h',['../GatewayClientConnectGuard_8h.html',1,'']]],
   ['gatewayclientcreate_2eh',['GatewayClientCreate.h',['../GatewayClientCreate_8h.html',1,'']]],
   ['gatewayclientcreated_2eh',['GatewayClientCreated.h',['../GatewayClientCreated_8h.html',1,'']]],
   ['gatewayclientdestroy_2eh',['GatewayClientDestroy.h',['../GatewayClientDestroy_8h.html',1,'']]],

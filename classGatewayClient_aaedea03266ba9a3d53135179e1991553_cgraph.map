@@ -1,0 +1,6 @@
+<map id="GatewayClient::GatewayClient" name="GatewayClient::GatewayClient">
+<area shape="rect" id="node2" href="$classGatewayClient.html#abe4c2feb4bd520dd68612fc7557c70f6" title="GatewayClient::Close" alt="" coords="291,13,447,39"/>
+<area shape="rect" id="node4" href="$classGatewayClientConnectGuard.html#a3bf4a086227177cf880dc037045c5ef0" title="GatewayClientConnectGuard\l::IsConnected" alt="" coords="265,64,472,105"/>
+<area shape="rect" id="node5" href="$classGatewayFrameData.html#a3032b1c3d96968f90b8558e1d9b78775" title="GatewayFrameData::Create\lDeserializedFrame" alt="" coords="270,129,467,171"/>
+<area shape="rect" id="node3" href="$classGatewayClientConnectGuard.html#a12a1b98f843bc23c2068bcae7190c547" title="GatewayClientConnectGuard\l::IsDisconnected" alt="" coords="520,5,727,47"/>
+</map>

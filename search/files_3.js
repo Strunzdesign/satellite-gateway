@@ -3,6 +3,7 @@ var searchData=
   ['hdlcdclient_2eh',['HdlcdClient.h',['../HdlcdClient_8h.html',1,'']]],
   ['hdlcdclientcleanup_2eh',['HdlcdClientCleanup.h',['../HdlcdClientCleanup_8h.html',1,'']]],
   ['hdlcdclientconnected_2eh',['HdlcdClientConnected.h',['../HdlcdClientConnected_8h.html',1,'']]],
+  ['hdlcdclientconnectguard_2eh',['HdlcdClientConnectGuard.h',['../HdlcdClientConnectGuard_8h.html',1,'']]],
   ['hdlcdclientcreate_2eh',['HdlcdClientCreate.h',['../HdlcdClientCreate_8h.html',1,'']]],
   ['hdlcdclientcreated_2eh',['HdlcdClientCreated.h',['../HdlcdClientCreated_8h.html',1,'']]],
   ['hdlcdclientdestroy_2eh',['HdlcdClientDestroy.h',['../HdlcdClientDestroy_8h.html',1,'']]],

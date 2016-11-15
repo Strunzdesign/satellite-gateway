@@ -3,6 +3,7 @@ var searchData=
   ['gatewayclient',['GatewayClient',['../classGatewayClient.html',1,'']]],
   ['gatewayclientcleanup',['GatewayClientCleanup',['../classGatewayClientCleanup.html',1,'']]],
   ['gatewayclientconnected',['GatewayClientConnected',['../classGatewayClientConnected.html',1,'']]],
+  ['gatewayclientconnectguard',['GatewayClientConnectGuard',['../classGatewayClientConnectGuard.html',1,'']]],
   ['gatewayclientcreate',['GatewayClientCreate',['../classGatewayClientCreate.html',1,'']]],
   ['gatewayclientcreated',['GatewayClientCreated',['../classGatewayClientCreated.html',1,'']]],
   ['gatewayclientdestroy',['GatewayClientDestroy',['../classGatewayClientDestroy.html',1,'']]],

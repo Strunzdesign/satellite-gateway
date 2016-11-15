@@ -1,2 +1,6 @@
 <map id="src/satellite&#45;gateway/HdlcdClient/HdlcdClientHandler.h" name="src/satellite&#45;gateway/HdlcdClient/HdlcdClientHandler.h">
+<area shape="rect" id="node6" href="$HdlcdClientConnectGuard_8h.html" title="HdlcdClientConnectGuard.h" alt="" coords="247,95,444,121"/>
+<area shape="rect" id="node7" href="$ConfigServerHandlerCollection_8h.html" title="ConfigServerHandlerCollection.h" alt="" coords="231,169,459,196"/>
+<area shape="rect" id="node8" href="$GatewayClientErrorCodes_8h.html" title="GatewayClientErrorCodes.h" alt="" coords="101,244,299,271"/>
+<area shape="rect" id="node9" href="$HdlcdClientErrorCodes_8h.html" title="HdlcdClientErrorCodes.h" alt="" coords="324,244,503,271"/>
 </map>

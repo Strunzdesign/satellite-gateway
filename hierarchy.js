@@ -39,9 +39,11 @@ var hierarchy =
       [ "HdlcdSessionHeader", "classHdlcdSessionHeader.html", null ]
     ] ],
     [ "GatewayClient", "classGatewayClient.html", null ],
+    [ "GatewayClientConnectGuard", "classGatewayClientConnectGuard.html", null ],
     [ "GatewayClientHandler", "classGatewayClientHandler.html", null ],
     [ "GatewayClientHandlerCollection", "classGatewayClientHandlerCollection.html", null ],
     [ "HdlcdClient", "classHdlcdClient.html", null ],
+    [ "HdlcdClientConnectGuard", "classHdlcdClientConnectGuard.html", null ],
     [ "HdlcdClientHandler", "classHdlcdClientHandler.html", null ],
     [ "HdlcdClientHandlerCollection", "classHdlcdClientHandlerCollection.html", null ],
     [ "HdlcdSessionDescriptor", "classHdlcdSessionDescriptor.html", null ],

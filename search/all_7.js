@@ -13,6 +13,8 @@ var searchData=
   ['hdlcdclientcleanup_2eh',['HdlcdClientCleanup.h',['../HdlcdClientCleanup_8h.html',1,'']]],
   ['hdlcdclientconnected',['HdlcdClientConnected',['../classHdlcdClientConnected.html',1,'HdlcdClientConnected'],['../classConfigServer.html#a62cb4552d9e8889c1e65da95b1c27b27',1,'ConfigServer::HdlcdClientConnected()'],['../classConfigServerHandler.html#a22f8139b5e8041ab4f8d80887a34968d',1,'ConfigServerHandler::HdlcdClientConnected()'],['../classConfigServerHandlerCollection.html#a256535003cfb07817a6de8a977d572bc',1,'ConfigServerHandlerCollection::HdlcdClientConnected()']]],
   ['hdlcdclientconnected_2eh',['HdlcdClientConnected.h',['../HdlcdClientConnected_8h.html',1,'']]],
+  ['hdlcdclientconnectguard',['HdlcdClientConnectGuard',['../classHdlcdClientConnectGuard.html',1,'HdlcdClientConnectGuard'],['../classHdlcdClientConnectGuard.html#a65ff0e47883a6cebb6ff2a775c9f5478',1,'HdlcdClientConnectGuard::HdlcdClientConnectGuard()']]],
+  ['hdlcdclientconnectguard_2eh',['HdlcdClientConnectGuard.h',['../HdlcdClientConnectGuard_8h.html',1,'']]],
   ['hdlcdclientcreate',['HdlcdClientCreate',['../classHdlcdClientCreate.html',1,'']]],
   ['hdlcdclientcreate_2eh',['HdlcdClientCreate.h',['../HdlcdClientCreate_8h.html',1,'']]],
   ['hdlcdclientcreated',['HdlcdClientCreated',['../classHdlcdClientCreated.html',1,'HdlcdClientCreated'],['../classConfigServer.html#a09d8a702c3a9eb157af84a08b82b97e6',1,'ConfigServer::HdlcdClientCreated()'],['../classConfigServerHandler.html#a27d69f48a4f8b5f739254f6291fb33b4',1,'ConfigServerHandler::HdlcdClientCreated()'],['../classConfigServerHandlerCollection.html#aae47f5d0fb43fb5345bc884e6409d33c',1,'ConfigServerHandlerCollection::HdlcdClientCreated()']]],

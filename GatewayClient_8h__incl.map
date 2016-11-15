@@ -1,5 +1,9 @@
 <map id="src/satellite&#45;gateway/GatewayClient/GatewayClient.h" name="src/satellite&#45;gateway/GatewayClient/GatewayClient.h">
-<area shape="rect" id="node4" href="$GatewayFrame_8h.html" title="GatewayFrame.h" alt="" coords="177,95,306,121"/>
-<area shape="rect" id="node9" href="$FrameEndpoint_8h.html" title="This file contains the header declaration of class FrameEndpoint. " alt="" coords="330,95,459,121"/>
-<area shape="rect" id="node5" href="$Frame_8h.html" title="This file contains the header declaration of class Frame. " alt="" coords="239,169,313,196"/>
+<area shape="rect" id="node4" href="$GatewayFrame_8h.html" title="GatewayFrame.h" alt="" coords="939,95,1069,121"/>
+<area shape="rect" id="node9" href="$FrameEndpoint_8h.html" title="This file contains the header declaration of class FrameEndpoint. " alt="" coords="701,95,830,121"/>
+<area shape="rect" id="node13" href="$GatewayClientConnectGuard_8h.html" title="GatewayClientConnectGuard.h" alt="" coords="255,95,473,121"/>
+<area shape="rect" id="node5" href="$Frame_8h.html" title="This file contains the header declaration of class Frame. " alt="" coords="1013,169,1086,196"/>
+<area shape="rect" id="node14" href="$ConfigServerHandlerCollection_8h.html" title="ConfigServerHandlerCollection.h" alt="" coords="194,169,422,196"/>
+<area shape="rect" id="node15" href="$GatewayClientErrorCodes_8h.html" title="GatewayClientErrorCodes.h" alt="" coords="209,244,407,271"/>
+<area shape="rect" id="node16" href="$HdlcdClientErrorCodes_8h.html" title="HdlcdClientErrorCodes.h" alt="" coords="5,244,184,271"/>
 </map>

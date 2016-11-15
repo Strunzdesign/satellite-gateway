@@ -1,0 +1,6 @@
+<map id="GatewayClientConnectGuard::IsDisconnected" name="GatewayClientConnectGuard::IsDisconnected">
+<area shape="rect" id="node2" href="$classGatewayClient.html#abe4c2feb4bd520dd68612fc7557c70f6" title="GatewayClient::Close" alt="" coords="260,56,416,83"/>
+<area shape="rect" id="node3" href="$classGatewayClient.html#aaedea03266ba9a3d53135179e1991553" title="GatewayClient::GatewayClient" alt="" coords="468,5,680,32"/>
+<area shape="rect" id="node4" href="$classGatewayClient.html#abfb2fae39ac96772b753b163befc8b32" title="GatewayClient::~GatewayClient" alt="" coords="464,56,684,83"/>
+<area shape="rect" id="node5" href="$classGatewayClient.html#a72b3b1fdc641ab15e4e3976daf4e8275" title="GatewayClient::SetOnClosed\lCallback" alt="" coords="472,107,676,149"/>
+</map>

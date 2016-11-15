@@ -1,6 +1,6 @@
 var classGatewayClient =
 [
-    [ "GatewayClient", "classGatewayClient.html#a02daab0a0dff5f1d725339d95b24c114", null ],
+    [ "GatewayClient", "classGatewayClient.html#aaedea03266ba9a3d53135179e1991553", null ],
     [ "~GatewayClient", "classGatewayClient.html#abfb2fae39ac96772b753b163befc8b32", null ],
     [ "Close", "classGatewayClient.html#abe4c2feb4bd520dd68612fc7557c70f6", null ],
     [ "SendPacket", "classGatewayClient.html#acc2e836469f79dbc5aaf6bd85fb77ad5", null ],
