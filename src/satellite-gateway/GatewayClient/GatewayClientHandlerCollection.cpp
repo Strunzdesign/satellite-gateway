@@ -63,8 +63,8 @@ void GatewayClientHandlerCollection::CreateClient(uint16_t a_ReferenceNbr, std::
     if (m_GatewayClientHandler) {
         // There was already a client entity! Replace it.
         m_ConfigServerHandlerCollection->GatewayClientError(a_ReferenceNbr, GATEWAY_CLIENT_ERROR_ALREADY_EXISTED);
-        m_ConfigServerHandlerCollection->GatewayClientDestroyed(m_GatewayClientHandler->GetReferenceNbr());
         m_GatewayClientHandler->Close();
+        m_ConfigServerHandlerCollection->GatewayClientDestroyed(m_GatewayClientHandler->GetReferenceNbr());
         m_GatewayClientHandler.reset();
     } // if
     
