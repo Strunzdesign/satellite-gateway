@@ -19,7 +19,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -Wextra")
 
 # Automatically set the version number
 set(SATELLITE_GATEWAY_VERSION_MAJOR \"1\")
-set(SATELLITE_GATEWAY_VERSION_MINOR \"1pre\")
+set(SATELLITE_GATEWAY_VERSION_MINOR \"0\")
 include_directories(
     "${PROJECT_BINARY_DIR}/src"
     "${PROJECT_SOURCE_DIR}/libs/framing/src"
