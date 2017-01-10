@@ -94,8 +94,13 @@ private:
             m_SerialPortNbr = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Buffer[1])));
             m_TcpPortNbr    = ntohs(*(reinterpret_cast<const uint16_t*>(&m_Buffer[3])));
             m_BytesRemaining = m_Buffer[5];
-            m_eDeserialize = DESERIALIZE_BODY;
             m_Buffer.clear();
+            if (m_BytesRemaining) {
+                m_eDeserialize = DESERIALIZE_BODY;
+            } else {
+                m_eDeserialize = DESERIALIZE_FULL;
+            } // else
+            
             break;
         }
         case DESERIALIZE_BODY: {
