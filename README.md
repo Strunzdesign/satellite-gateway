@@ -9,7 +9,7 @@ This software is intended to be portable and makes use of the boost libraries. I
 and Microsoft Windows (nuwen MinGW).
 
 ## Latest stable release of the s-net(r) satellite gateway software:
-- v1.0 from 07.12.2016 
+- v1.1 from 10.01.2017
 
 ## Required libraries and tools:
 - GCC, the only tested compiler collection thus far (tested: GCC 4.9.3, GCC 6.1)

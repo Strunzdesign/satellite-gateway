@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 - Nothing yet
 
 
+## [1.1] - 2017-01-10
+### Fixed
+- Fixed crash on deserialization of config frames containing zero bytes payload
+
+
 ## [1.0] - 2016-12-07
 ### Added
 - First tested version without any open issues
