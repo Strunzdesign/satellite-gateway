@@ -17,4 +17,5 @@ All notable changes to this project will be documented in this file.
 - Uses hdlcd-devel toolkit release v1.1
 - Uses snet-devel toolkit release v1.1
 
-[Unreleased]: https://github.com/Strunzdesign/satellite-gateway/compare/v1.0...HEAD
+[Unreleased]: https://github.com/Strunzdesign/satellite-gateway/compare/v1.1...HEAD
+[1.1]: https://github.com/Strunzdesign/satellite-gateway/compare/v1.0...v1.1
